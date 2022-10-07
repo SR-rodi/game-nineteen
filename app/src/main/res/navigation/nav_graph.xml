@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.nineteen_2_0.presentation.start.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_gameFieldFragment"
+            app:destination="@id/gameFieldFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFieldFragment"
+        android:name="com.example.nineteen_2_0.presentation.gamefield.GameFieldFragment"
+        android:label="fragment_game_field"
+        tools:layout="@layout/fragment_game_field" >
+        <argument
+            android:name="settingsGame"
+            app:argType="com.example.nineteen_2_0.data.gameitem.SettingGame" />
+        <action
+            android:id="@+id/action_gameFieldFragment_to_winFragment"
+            app:destination="@id/winFragment"
+            app:popUpTo="@id/gameFieldFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gameFieldFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingFragment"
+        android:name="com.example.nineteen_2_0.presentation.training.TrainingFragment"
+        android:label="TrainingFragment" >
+        <action
+            android:id="@+id/action_trainingFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/winFragment"
+        android:name="com.example.nineteen_2_0.presentation.win.WinFragment"
+        android:label="fragment_win"
+        tools:layout="@layout/fragment_win" >
+        <action
+            android:id="@+id/action_winFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+</navigation>

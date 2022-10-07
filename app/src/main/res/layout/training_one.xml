@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_500"
+    android:orientation="vertical"
+    tools:context=".presentation.training.TrainingFragment">
+
+    <TextView
+        android:id="@+id/training_text"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="@string/training"
+        android:textColor="@color/blue_100"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_gravity="center"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/blue_300"
+        app:cardCornerRadius="15dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/training_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="45dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="9"
+            tools:listitem="@layout/item_game_not_choice" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+       android:paddingBottom="15dp">
+
+        <Button
+            android:id="@+id/skip_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/skip"
+            android:layout_gravity="bottom"
+            android:textSize="15sp"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textColor="@color/blue_100" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:textSize="15sp"
+            android:textColor="@color/blue_100"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:text="@string/next"/>
+
+    </LinearLayout>
+</LinearLayout>

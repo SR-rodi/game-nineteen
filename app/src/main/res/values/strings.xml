@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NineTeen_2_0</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next"><![CDATA[Продолжить ->]]></string>
+    <string name="skip">Пропустить</string>
+    <string name="training">Обучение</string>
+    <string name="learn_one">Цель игры: избавитсья от всех цифр на игровом поле,
+        удаляя пары одинаковых цифр или пары дающие в сумме число 10</string>
+    <string name="learn_two">Можно удалять пары цифр, стоящие в соседних клетках по вертикали или горизонтали </string>
+    <string name="learn_three">Так же можно вычеркивать цифры, стоящие в одной строчке или в одном столбце,
+        если между ними находятся уже вычеркнутые клетки</string>
+    <string name="learn_four">Необходимо знать, что можно вычеркивать последнюю цифру одной строки и первую цифру следующей строки</string>
+    <string name="learn_five">Когда возникают трудности, всегда можно обратиться к помощнику</string>
+    <string name="learn_six">Ну и на последок, если комбинаций на поле больше нету, вам необходимо нажать на кнопку ДОБАВИТЬ.
+        Данная функция переписывает в конец текущего списка все незачеркнутые цифры, открывая новые ходы</string>
+    <string name="win">Победа</string>
+</resources>
