@@ -11,11 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nineteen_2_0.databinding.FragmentGameFieldBinding
-import com.example.nineteen_2_0.notifyLineRemove
-import com.example.nineteen_2_0.notifyTwoPosition
-import com.example.nineteen_2_0.presentation.adapter.GameAdapter
+import com.example.nineteen_2_0.utility.notifyLineRemove
+import com.example.nineteen_2_0.utility.notifyTwoPosition
+import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class GameFieldFragment : Fragment() {
@@ -53,7 +54,7 @@ class GameFieldFragment : Fragment() {
         }
         if (viewModel.isWin.value) {
             viewModel.deleteDatabase()
-            viewModel.addRatingDatabase()
+            viewModel.addRatingDatabase(args.settingsGame.gameMode)
             findNavController().navigate(GameFieldFragmentDirections.actionGameFieldFragmentToWinFragment())
         }
 
@@ -86,7 +87,7 @@ class GameFieldFragment : Fragment() {
             val pair = viewModel.help()
             if (pair.first != pair.second) {
                 adapter.notifyTwoPosition(pair.first, pair.second)
-                binding.gameField.scrollToPosition(pair.first)
+                binding.gameField.smoothScrollToPosition(pair.first)
                 helpList.add(pair.first)
                 helpList.add(pair.second)
             }
@@ -94,7 +95,7 @@ class GameFieldFragment : Fragment() {
     }
 
     override fun onPause() {
-        viewModel.addDatabase()
+        viewModel.addDatabase(args.settingsGame.gameMode)
         super.onPause()
     }
 
@@ -112,7 +113,8 @@ class GameFieldFragment : Fragment() {
         binding.addButton.setOnClickListener {
             val pairPosition = viewModel.addList()
             adapter.notifyItemRangeInserted(pairPosition.first + 1, pairPosition.second)
-            binding.gameField.scrollToPosition(pairPosition.second)
+            binding.gameField.smoothScrollToPosition(pairPosition.second)
         }
     }
 }
+

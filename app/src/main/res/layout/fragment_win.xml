@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/blue_300"
     tools:context=".presentation.win.WinFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/win"
-        android:textColor="@color/blue_400"
-        android:textSize="45dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <FrameLayout
+    <com.example.nineteen_2_0.CustomButtonView
+        android:id="@+id/win_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp">
+        app:textButtonGame="Начать заного"
+        android:paddingBottom="15dp"
+        app:textModeGame="Попеда"
+        app:backgroundButton="@color/blue_400"
+        app:backgroundCard="@color/blue_200"
+        />
 
-        <Button
-            android:id="@+id/button_get_new_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom" />
-
-    </FrameLayout>
-
-</LinearLayout>
+</FrameLayout>

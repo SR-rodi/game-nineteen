@@ -1,10 +1,10 @@
-package com.example.nineteen_2_0
+package com.example.nineteen_2_0.utility
 
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.gameitem.StatusItem
-import com.example.nineteen_2_0.presentation.adapter.GameAdapter
+import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 
 fun List<GameItem>.isChoice(first: Int, second: Int) {
     this[first].statusItem = StatusItem.CHOICE
@@ -54,4 +54,4 @@ fun List<GameItem>.checkNumberAndStatus(
     return a && b
 }
 
-fun GameListEntity.toSettingGame() = SettingGame(list,time,stepCount)
+fun GameListEntity.toSettingGame() = SettingGame(gameMode,list,time,stepCount)

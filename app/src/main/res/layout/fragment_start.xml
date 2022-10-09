@@ -1,50 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@color/blue_300"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".presentation.start.StartFragment">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/icon"/>
-
-    <Button
+    <com.example.nineteen_2_0.CustomButtonView
         android:id="@+id/next_game_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:enabled="false"
-        android:textSize="35sp"
-        android:text="Продолжить" />
+        android:layout_height="225dp"
+        app:backgroundButton="@color/blue_500"
+        app:backgroundCard="@color/blue_100"
+        app:textButtonGame="Играть"
+        app:image="@drawable/kitekat_2"
+        app:textModeGame="Продолжить" />
 
-    <Button
-        android:id="@+id/new_game_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="35sp"
-        android:text="Новая игра" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/help_game_button"
-        android:textSize="35sp"
+        <com.example.nineteen_2_0.CustomButtonView
+            android:id="@+id/new_game_button"
+            android:layout_width="0dp"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:textButtonGame="Играть"
+            app:backgroundButton="@color/blue_500"
+            app:backgroundCard="@color/blue_100"
+            app:image="@drawable/kitekat_3"
+            app:textModeGame="Классик" />
+
+        <com.example.nineteen_2_0.CustomButtonView
+            android:id="@+id/random_new_game"
+            android:layout_width="0dp"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:textButtonGame="Играть"
+            app:backgroundButton="@color/blue_500"
+            app:backgroundCard="@color/blue_100"
+            app:image="@drawable/kitekat_4"
+            app:textModeGame="Рандом" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Как играть" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginStart="5dp"
-        android:textSize="25sp"
-        android:text="Test" />
+        <com.example.nineteen_2_0.CustomButtonView
+            android:id="@+id/help_game_button"
+            android:layout_width="0dp"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:textButtonGame="Пройти"
+            app:backgroundButton="@color/blue_500"
+            app:backgroundCard="@color/blue_100"
+            app:image="@drawable/kitekat_2"
+            app:textModeGame="Обучение" />
+
+        <com.example.nineteen_2_0.CustomButtonView
+            android:id="@+id/ratting_button"
+            android:layout_width="0dp"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:textButtonGame="Перейти"
+            app:backgroundButton="@color/blue_500"
+            app:backgroundCard="@color/blue_100"
+            app:image="@drawable/kitekat_1"
+            app:textModeGame="рейтинг" />
+
+    </LinearLayout>
 
 </LinearLayout>
+
+<!--
+<Button
+android:id="@+id/next_game_button"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="10dp"
+android:enabled="false"
+android:text="Продолжить"
+android:textSize="35sp" />
+
+<Button
+android:id="@+id/new_game_button"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="10dp"
+android:text="Новая игра"
+android:textSize="35sp" />
+
+<Button
+android:id="@+id/help_game_button"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="10dp"
+android:text="Как играть"
+android:textSize="35sp" />
+
+<Button
+android:id="@+id/test_button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="bottom|center"
+android:layout_marginStart="5dp"
+android:text="Test"
+android:textSize="25sp" />
+-->

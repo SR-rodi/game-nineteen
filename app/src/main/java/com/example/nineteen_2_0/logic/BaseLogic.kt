@@ -1,6 +1,6 @@
 package com.example.nineteen_2_0.logic
 
-import com.example.nineteen_2_0.checkNumberAndStatus
+import com.example.nineteen_2_0.utility.checkNumberAndStatus
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.StatusItem
 import com.example.nineteen_2_0.logic.LocationStatus.*

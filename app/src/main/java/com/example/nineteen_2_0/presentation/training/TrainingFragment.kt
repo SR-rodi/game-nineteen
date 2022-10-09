@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.databinding.TrainingOneBinding
-import com.example.nineteen_2_0.presentation.adapter.GameAdapter
+import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 
 class TrainingFragment : Fragment() {
 
@@ -19,7 +19,6 @@ class TrainingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<TrainingViewModel>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,4 +1,4 @@
-package com.example.nineteen_2_0.presentation.adapter
+package com.example.nineteen_2_0.presentation.adapter.fieldadapter
 
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
@@ -8,7 +8,7 @@ import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.StatusItem
 import com.example.nineteen_2_0.databinding.ItemGameNotChoiceBinding
 
-class NotChoiceViewHolder(
+class GameViewHolder(
     private val binding: ItemGameNotChoiceBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 

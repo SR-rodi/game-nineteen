@@ -1,14 +1,12 @@
 package com.example.nineteen_2_0.logic
 
 
-import android.util.Log
-import com.example.nineteen_2_0.data.itemlist.ClassicItemList
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.StatusItem.*
-import com.example.nineteen_2_0.isChoice
-import com.example.nineteen_2_0.isHelp
-import com.example.nineteen_2_0.isNotChoice
-import com.example.nineteen_2_0.isSelect
+import com.example.nineteen_2_0.utility.isChoice
+import com.example.nineteen_2_0.utility.isHelp
+import com.example.nineteen_2_0.utility.isNotChoice
+import com.example.nineteen_2_0.utility.isSelect
 
 class ClassicGameLogic(
     private val itemList: MutableList<GameItem>
@@ -22,11 +20,6 @@ class ClassicGameLogic(
         helpPosition = helper.testHelper()
         itemList.isHelp(helpPosition)
         return helpPosition
-    }
-
-    fun startNewGame() {
-        itemList.clear()
-        itemList.addAll(ClassicItemList().create())
     }
 
     fun start(first: Int, second: Int): List<Int> {

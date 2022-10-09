@@ -7,6 +7,8 @@ import com.example.nineteen_2_0.data.gameitem.GameItem
 
 @Entity(tableName = "game_list")
 class GameListEntity(
+    @ColumnInfo(name = "gameMode")
+    val gameMode:String = "classic",
     @ColumnInfo(name = "list")
     val list :List<GameItem> = emptyList(),
     @ColumnInfo(name = "time")

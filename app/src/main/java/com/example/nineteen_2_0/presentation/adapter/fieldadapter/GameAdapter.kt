@@ -1,4 +1,4 @@
-package com.example.nineteen_2_0.presentation.adapter
+package com.example.nineteen_2_0.presentation.adapter.fieldadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +9,9 @@ import com.example.nineteen_2_0.databinding.ItemGameNotChoiceBinding
 class GameAdapter(
     var itemGameList: List<GameItem>,
     private val choicePosition: (position: Int) -> Unit
-) : RecyclerView.Adapter<NotChoiceViewHolder>() {
+) : RecyclerView.Adapter<GameViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotChoiceViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GameViewHolder(
         ItemGameNotChoiceBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -19,7 +19,7 @@ class GameAdapter(
         )
     )
 
-    override fun onBindViewHolder(holder: NotChoiceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val gameItem = itemGameList[position]
         holder.bind(gameItem)
         holder.clickItem(gameItem) { positionList ->

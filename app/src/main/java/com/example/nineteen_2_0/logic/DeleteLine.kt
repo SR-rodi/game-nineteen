@@ -14,13 +14,9 @@ class DeleteLine(private val itemList: MutableList<GameItem>) {
         checkOneLine(lineOne, deleteListLineOne)
         if (lineOne != lineTwo) checkOneLine(lineTwo, deleteListLineTwo)
 
-        if (deleteListLineTwo.size == 9) {
-            deleteLine(deleteListLineTwo, deleteList)
-        }
+        if (deleteListLineTwo.size == 9) deleteLine(deleteListLineTwo, deleteList)
 
-        if (deleteListLineOne.size == 9) {
-            deleteLine(deleteListLineOne, deleteList)
-        }
+        if (deleteListLineOne.size == 9) deleteLine(deleteListLineOne, deleteList)
 
         return deleteList.ifEmpty { emptyList<Int>().toMutableList() }
 
@@ -37,8 +33,7 @@ class DeleteLine(private val itemList: MutableList<GameItem>) {
         line: Int,
         deleteListPosition: MutableList<Int>
     ) {
-        var n = 0
-        n = if (itemList.size > line * 9 + 8) line * 9 + 8
+        val n = if (itemList.size > line * 9 + 8) line * 9 + 8
         else itemList.lastIndex
 
         for (i in line * 9..n) {
@@ -46,7 +41,6 @@ class DeleteLine(private val itemList: MutableList<GameItem>) {
                 deleteListPosition.add(i)
             else break
         }
-
     }
 
 }

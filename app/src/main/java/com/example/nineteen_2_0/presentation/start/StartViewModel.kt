@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.repository.GameRepository
-import com.example.nineteen_2_0.toSettingGame
+import com.example.nineteen_2_0.utility.toSettingGame
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

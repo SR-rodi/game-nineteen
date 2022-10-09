@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class SettingGame(
+    var gameMode:String = "classic",
     var list: List<GameItem> = ClassicItemList().create(),
     var time: Int = 0,
     var stepCount: Int = 0

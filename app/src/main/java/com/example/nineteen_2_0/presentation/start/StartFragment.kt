@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.data.gameitem.SettingGame
+import com.example.nineteen_2_0.data.itemlist.RandomItemList
 import com.example.nineteen_2_0.data.itemlist.TestList
 import com.example.nineteen_2_0.databinding.FragmentStartBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,15 +47,16 @@ class StartFragment : Fragment() {
             }
         }
 
-        binding.testButton.setOnClickListener {
-            val testList = SettingGame()
-            testList.list = TestList().create()
+        binding.randomNewGame.setListener {
+            val settingGame =SettingGame()
+            settingGame.list = RandomItemList().create()
+            settingGame.gameMode = "random"
             findNavController().navigate(
-                StartFragmentDirections.actionStartFragmentToGameFieldFragment(testList)
+                StartFragmentDirections.actionStartFragmentToGameFieldFragment(settingGame)
             )
         }
 
-        binding.nextGameButton.setOnClickListener {
+        binding.nextGameButton.setListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.list.collect { setting ->
                     findNavController().navigate(
@@ -64,15 +66,20 @@ class StartFragment : Fragment() {
             }
         }
 
-        binding.newGameButton.setOnClickListener {
+        binding.newGameButton.setListener {
             findNavController().navigate(
                 StartFragmentDirections.actionStartFragmentToGameFieldFragment(SettingGame())
             )
         }
 
-        binding.helpGameButton.setOnClickListener {
+        binding.rattingButton.setListener {
+            findNavController().navigate(
+                StartFragmentDirections.actionStartFragmentToRattingFragment()
+            )
+        }
+
+        binding.helpGameButton.setListener {
             findNavController().navigate(R.id.action_startFragment_to_trainingFragment)
         }
     }
-
 }

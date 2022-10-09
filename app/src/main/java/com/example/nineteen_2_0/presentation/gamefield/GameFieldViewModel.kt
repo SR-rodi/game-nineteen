@@ -3,7 +3,7 @@ package com.example.nineteen_2_0.presentation.gamefield
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
-import com.example.nineteen_2_0.data.database.entity.RatingEntity
+import com.example.nineteen_2_0.data.database.entity.RattingEntity
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.repository.GameRepository
@@ -34,7 +34,7 @@ class GameFieldViewModel @Inject constructor(
     private val _isWin = MutableStateFlow(false)
     val isWin = _isWin.asStateFlow()
 
-    private val _statistics = MutableStateFlow(Pair(0,0))
+    private val _statistics = MutableStateFlow(Pair(0, 0))
     val statistics = _statistics.asStateFlow()
 
 
@@ -61,10 +61,10 @@ class GameFieldViewModel @Inject constructor(
 
     fun help() = game.helpButton()
 
-    fun addDatabase() {
+    fun addDatabase(gameMode: String) {
         viewModelScope.launch(Dispatchers.IO) {
             gameRepository.deleteItemList()
-            gameRepository.insertItemList(GameListEntity(itemList,timerCounter,stepCounter))
+            gameRepository.insertItemList(GameListEntity(gameMode,itemList, timerCounter, stepCounter))
         }
     }
 
@@ -89,12 +89,14 @@ class GameFieldViewModel @Inject constructor(
             while (true) {
                 timerCounter++
                 delay(1000)
-                _statistics.value = Pair(timerCounter,stepCounter)
+                _statistics.value = Pair(timerCounter, stepCounter)
             }
         }
     }
 
-    fun addRatingDatabase() {
-        ratingRepository.insertNewRating(RatingEntity(timerCounter,stepCounter))
+    fun addRatingDatabase(gameMode: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ratingRepository.insertNewRating(RattingEntity(gameMode,timerCounter, stepCounter))
+        }
     }
 }
