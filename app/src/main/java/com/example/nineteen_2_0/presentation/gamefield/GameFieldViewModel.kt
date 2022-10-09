@@ -3,7 +3,7 @@ package com.example.nineteen_2_0.presentation.gamefield
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
-import com.example.nineteen_2_0.data.database.entity.RattingEntity
+import com.example.nineteen_2_0.data.database.entity.RatingEntity
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.repository.GameRepository
@@ -25,6 +25,7 @@ class GameFieldViewModel @Inject constructor(
 ) : ViewModel() {
 
     var itemList = mutableListOf<GameItem>()
+    var mode = ""
     private val game by lazy { ClassicGameLogic(itemList) }
     private val winLogic by lazy { WinLogic(itemList) }
     private val positionList = mutableListOf<Int>()
@@ -36,7 +37,6 @@ class GameFieldViewModel @Inject constructor(
 
     private val _statistics = MutableStateFlow(Pair(0, 0))
     val statistics = _statistics.asStateFlow()
-
 
     fun playGame(position: Int): List<Int> {
         game.selectItem(position)
@@ -72,6 +72,7 @@ class GameFieldViewModel @Inject constructor(
         itemList = settingGame.list.toMutableList()
         timerCounter = settingGame.time
         stepCounter = settingGame.stepCount
+        mode = settingGame.gameMode
     }
 
     fun deleteDatabase() {
@@ -96,7 +97,7 @@ class GameFieldViewModel @Inject constructor(
 
     fun addRatingDatabase(gameMode: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            ratingRepository.insertNewRating(RattingEntity(gameMode,timerCounter, stepCounter))
+            ratingRepository.insertNewRating(RatingEntity(gameMode,timerCounter, stepCounter))
         }
     }
 }

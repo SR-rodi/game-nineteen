@@ -3,6 +3,7 @@ package com.example.nineteen_2_0.presentation.start
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nineteen_2_0.data.gameitem.SettingGame
+import com.example.nineteen_2_0.data.itemlist.RandomItemList
 import com.example.nineteen_2_0.data.repository.GameRepository
 import com.example.nineteen_2_0.utility.toSettingGame
 
@@ -22,6 +23,13 @@ class StartViewModel @Inject constructor(
 
     private val _itemList = MutableStateFlow(SettingGame())
     val list = _itemList.asStateFlow()
+
+    fun createRandomList(): SettingGame {
+        val settingGame = SettingGame()
+        settingGame.list = RandomItemList().create()
+        settingGame.gameMode = "random"
+        return settingGame
+    }
 
     fun getGameList() {
         gameRepository.getGameList().onEach { entity ->

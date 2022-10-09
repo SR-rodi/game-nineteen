@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "rating")
-class RattingEntity (
+class RatingEntity (
     @ColumnInfo(name = "gameMode")
     val gameMode:String,
     @ColumnInfo(name = "time")

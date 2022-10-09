@@ -60,9 +60,9 @@
     </fragment>
     <fragment
         android:id="@+id/rattingFragment"
-        android:name="com.example.nineteen_2_0.presentation.ratting.RattingFragment"
+        android:name="com.example.nineteen_2_0.presentation.rating.RattingFragment"
         android:label="fragment_ratting"
-        tools:layout="@layout/fragment_ratting" >
+        tools:layout="@layout/fragment_rating" >
         <action
             android:id="@+id/action_rattingFragment_to_startFragment"
             app:destination="@id/startFragment"

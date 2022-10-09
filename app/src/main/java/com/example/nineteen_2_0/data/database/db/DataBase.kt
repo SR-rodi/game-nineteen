@@ -6,12 +6,12 @@ import androidx.room.TypeConverters
 import com.example.nineteen_2_0.data.database.dao.GameDao
 import com.example.nineteen_2_0.data.database.dao.RatingDao
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
-import com.example.nineteen_2_0.data.database.entity.RattingEntity
+import com.example.nineteen_2_0.data.database.entity.RatingEntity
 
 @Database(
     entities = [
         GameListEntity::class,
-        RattingEntity::class
+        RatingEntity::class
     ], version = 1
 )
 @TypeConverters(ConverterList::class)

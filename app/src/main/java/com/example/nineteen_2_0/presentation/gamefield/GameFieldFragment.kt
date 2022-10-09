@@ -10,19 +10,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.databinding.FragmentGameFieldBinding
 import com.example.nineteen_2_0.utility.notifyLineRemove
 import com.example.nineteen_2_0.utility.notifyTwoPosition
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
+import com.example.nineteen_2_0.utility.BaseFragment
+import com.example.nineteen_2_0.utility.setClickFromNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class GameFieldFragment : Fragment() {
+class GameFieldFragment : BaseFragment<FragmentGameFieldBinding>() {
 
-    private var _binding: FragmentGameFieldBinding? = null
-    private val binding get() = _binding!!
+    override fun initBinding(inflater: LayoutInflater) = FragmentGameFieldBinding.inflate(inflater)
 
     private val viewModel by viewModels<GameFieldViewModel>()
 
@@ -60,19 +62,13 @@ class GameFieldFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentGameFieldBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.startSetting(args.settingsGame)
 
         binding.gameField.adapter = adapter
+
+        setText(viewModel.mode)
 
         timer()
 
@@ -80,7 +76,16 @@ class GameFieldFragment : Fragment() {
 
         clickHelpButton()
 
+        binding.goBack.setClickFromNavigate(GameFieldFragmentDirections.actionGameFieldFragmentToStartFragment())
     }
+
+    private fun setText(gameMode: String) {
+        when (gameMode) {
+            "classic" -> binding.gameMode.text = "Классический режим"
+            "random" -> binding.gameMode.text = "Случайный режим"
+        }
+    }
+
 
     private fun clickHelpButton() {
         binding.helpNew.setOnClickListener {
@@ -94,16 +99,12 @@ class GameFieldFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        viewModel.addDatabase(args.settingsGame.gameMode)
-        super.onPause()
-    }
-
     private fun timer() {
         viewModel.startTimer()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.statistics.collect { statistics ->
-                binding.timer.text = DateUtils.formatElapsedTime(statistics.first.toLong()).toString()
+                binding.timer.text =
+                    DateUtils.formatElapsedTime(statistics.first.toLong()).toString()
                 binding.stepCount.text = statistics.second.toString()
             }
         }
@@ -116,5 +117,9 @@ class GameFieldFragment : Fragment() {
             binding.gameField.smoothScrollToPosition(pairPosition.second)
         }
     }
-}
 
+    override fun onPause() {
+        viewModel.addDatabase(args.settingsGame.gameMode)
+        super.onPause()
+    }
+}

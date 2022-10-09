@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/blue_300"
-    tools:context=".presentation.ratting.RattingFragment">
+    tools:context=".presentation.rating.RattingFragment">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -17,18 +17,15 @@
     android:textColor="@color/blue_500"
     android:layout_gravity="center"/>
 
-    <include
-        layout="@layout/item_rating"
+    <include layout="@layout/rating_cat"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rating_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_rating"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
-
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/ratting_recycler"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:listitem="@layout/item_rating"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    />
 
     <Button
         android:id="@+id/back_button"
@@ -37,5 +34,4 @@
         android:layout_gravity="bottom|center"
         android:layout_marginTop="15dp"
         android:text="Назад"/>
-
 </LinearLayout>

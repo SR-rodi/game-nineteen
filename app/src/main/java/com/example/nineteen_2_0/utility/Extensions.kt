@@ -1,10 +1,16 @@
 package com.example.nineteen_2_0.utility
 
+import android.view.View
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.gameitem.StatusItem
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
+
+
 
 fun List<GameItem>.isChoice(first: Int, second: Int) {
     this[first].statusItem = StatusItem.CHOICE
@@ -25,7 +31,7 @@ fun List<GameItem>.isNotChoice(first: Int, second: Int? = null) {
 }
 
 fun GameItem.isSelect() {
-    this.statusItem = com.example.nineteen_2_0.data.gameitem.StatusItem.SELECT
+    this.statusItem = StatusItem.SELECT
 }
 
 fun GameAdapter.notifyTwoPosition(first: Int, second: Int) {
@@ -55,3 +61,10 @@ fun List<GameItem>.checkNumberAndStatus(
 }
 
 fun GameListEntity.toSettingGame() = SettingGame(gameMode,list,time,stepCount)
+
+fun View.setClickFromNavigate(action: NavDirections){
+    when (this) {
+        is CustomButtonView -> this.setListener { findNavController().navigate(action) }
+        else -> this.setOnClickListener { findNavController().navigate(action) }
+    }
+}

@@ -1,9 +1,8 @@
-package com.example.nineteen_2_0.presentation.ratting
+package com.example.nineteen_2_0.presentation.rating
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.nineteen_2_0.data.database.entity.RattingEntity
+import com.example.nineteen_2_0.data.database.entity.RatingEntity
 import com.example.nineteen_2_0.data.repository.RatingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,19 +12,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RattingViewModel @Inject constructor(
+class RatingViewModel @Inject constructor(
     private val rattingRepository: RatingRepository
 ) : ViewModel() {
 
 
-    private val _rattingList = MutableStateFlow<List<RattingEntity>>(emptyList())
-    val rattingList = _rattingList.asStateFlow()
+    private val _ratingList = MutableStateFlow<List<RatingEntity>>(emptyList())
+    val ratingList = _ratingList.asStateFlow()
 
     fun getRatting(){
         viewModelScope.launch(Dispatchers.IO) {
             val ratting = rattingRepository.getRatingList()
             val a = ratting.sortedWith(compareBy{ it.time })
-           _rattingList.value = a
+           _ratingList.value = a
         }
     }
 }

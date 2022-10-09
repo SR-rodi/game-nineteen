@@ -8,18 +8,45 @@
     android:orientation="vertical"
     tools:context=".presentation.gamefield.GameFieldFragment">
 
-
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="Классический Режим"
-        android:textColor="@color/blue_100"
-        android:textSize="20sp" />
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
-    <!-- style="@style/Widget.Material3.Button.TextButton"-->
+        <ImageButton
+            android:layout_marginStart="10dp"
+            android:id="@+id/go_back"
+            android:backgroundTint="@color/blue_300"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:src="@drawable/ic_arrow_back"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/kitekat_8"/>
+
+        <TextView
+            android:id="@+id/game_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            tools:text="Классический Режим"
+            android:textColor="@color/blue_100"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/kitekat_7"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -12,52 +12,58 @@ import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.databinding.TrainingOneBinding
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
+import com.example.nineteen_2_0.utility.BaseFragment
+import com.example.nineteen_2_0.utility.setClickFromNavigate
 
-class TrainingFragment : Fragment() {
+class TrainingFragment : BaseFragment<TrainingOneBinding>() {
 
-    private var _binding: TrainingOneBinding? = null
-    private val binding get() = _binding!!
+    private var counter = 1
+
+    override fun initBinding(inflater: LayoutInflater) = TrainingOneBinding.inflate(inflater)
 
     private val viewModel by viewModels<TrainingViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = TrainingOneBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       getTrainingScreen(viewModel.getItemListOne(),resources.getText(R.string.learn_one))
+        getTrainingScreen(viewModel.getItemListOne(), resources.getText(R.string.learn_one))
 
-        var counter = 1
+        setFieldAndText()
+
+        binding.skipButton.setClickFromNavigate(TrainingFragmentDirections.actionTrainingFragmentToStartFragment())
+
+    }
+
+    private fun setFieldAndText() {
         binding.nextButton.setOnClickListener {
             counter++
             when (counter) {
-                2 -> getTrainingScreen(viewModel.getItemListTwo(),resources.getText(R.string.learn_two))
-                3 -> getTrainingScreen(viewModel.getItemListThree(),resources.getText(R.string.learn_three))
-                4 -> getTrainingScreen(viewModel.getItemListFour(),resources.getText(R.string.learn_four))
-                5 -> getTrainingScreen(viewModel.getItemListFive(),resources.getText(R.string.learn_five))
+                2 -> getTrainingScreen(
+                    viewModel.getItemListTwo(),
+                    resources.getText(R.string.learn_two)
+                )
+                3 -> getTrainingScreen(
+                    viewModel.getItemListThree(),
+                    resources.getText(R.string.learn_three)
+                )
+                4 -> getTrainingScreen(
+                    viewModel.getItemListFour(),
+                    resources.getText(R.string.learn_four)
+                )
+                5 -> getTrainingScreen(
+                    viewModel.getItemListFive(),
+                    resources.getText(R.string.learn_five)
+                )
                 else -> {
                     binding.trainingText.text = resources.getText(R.string.learn_six)
-                    binding.nextButton.isEnabled = false
+                    binding.nextButton.isEnabled = true
                     binding.trainingRecycler.isVisible = false
                 }
             }
-        }
-
-        binding.skipButton.setOnClickListener {
-            findNavController().navigate(R.id.action_trainingFragment_to_startFragment)
         }
     }
 
     private fun getTrainingScreen(itemList: MutableList<GameItem>, text: CharSequence) {
         binding.trainingText.text = text
-        binding.trainingRecycler.adapter = GameAdapter(itemList){}
+        binding.trainingRecycler.adapter = GameAdapter(itemList) {}
     }
-
-
 }

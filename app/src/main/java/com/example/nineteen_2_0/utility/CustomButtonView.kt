@@ -1,4 +1,4 @@
-package com.example.nineteen_2_0
+package com.example.nineteen_2_0.utility
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.databinding.TestBinding
 
 enum class CustomButtonAction {
@@ -34,13 +35,18 @@ class CustomButtonView(
     private val binding: TestBinding
     private var listener: onActionListener? = null
 
+    var isEnableButton:Boolean =false
+    set(value) {
+        field=value
+        binding.playButton.isEnabled = value
+    }
 
     init {
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.test, this, true)
         binding = TestBinding.bind(this)
         initAttrs(attrs, defStileAttrs, defStileRes)
-        onCliKc()
+        onClick()
     }
 
     private fun initAttrs(attrs: AttributeSet?, defStileAttrs: Int, defStileRes: Int) {
@@ -78,12 +84,11 @@ class CustomButtonView(
                     Color.TRANSPARENT
                 )
             )
-
         }
         typedArray.recycle()
     }
 
-    private fun onCliKc(){
+    private fun onClick(){
         binding.playButton.setOnClickListener {
             this.listener?.invoke(CustomButtonAction.ACTION)
         }

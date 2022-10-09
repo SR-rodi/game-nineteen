@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".presentation.start.StartFragment">
 
-    <com.example.nineteen_2_0.CustomButtonView
+    <com.example.nineteen_2_0.utility.CustomButtonView
         android:id="@+id/next_game_button"
         android:layout_width="match_parent"
         android:layout_height="225dp"
@@ -25,7 +25,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.example.nineteen_2_0.CustomButtonView
+        <com.example.nineteen_2_0.utility.CustomButtonView
             android:id="@+id/new_game_button"
             android:layout_width="0dp"
             android:layout_height="225dp"
@@ -36,7 +36,7 @@
             app:image="@drawable/kitekat_3"
             app:textModeGame="Классик" />
 
-        <com.example.nineteen_2_0.CustomButtonView
+        <com.example.nineteen_2_0.utility.CustomButtonView
             android:id="@+id/random_new_game"
             android:layout_width="0dp"
             android:layout_height="225dp"
@@ -44,7 +44,7 @@
             app:textButtonGame="Играть"
             app:backgroundButton="@color/blue_500"
             app:backgroundCard="@color/blue_100"
-            app:image="@drawable/kitekat_4"
+            app:image="@drawable/kitekat_6"
             app:textModeGame="Рандом" />
 
     </LinearLayout>
@@ -55,7 +55,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.example.nineteen_2_0.CustomButtonView
+        <com.example.nineteen_2_0.utility.CustomButtonView
             android:id="@+id/help_game_button"
             android:layout_width="0dp"
             android:layout_height="225dp"
@@ -63,10 +63,10 @@
             app:textButtonGame="Пройти"
             app:backgroundButton="@color/blue_500"
             app:backgroundCard="@color/blue_100"
-            app:image="@drawable/kitekat_2"
+            app:image="@drawable/kitekat_4"
             app:textModeGame="Обучение" />
 
-        <com.example.nineteen_2_0.CustomButtonView
+        <com.example.nineteen_2_0.utility.CustomButtonView
             android:id="@+id/ratting_button"
             android:layout_width="0dp"
             android:layout_height="225dp"
