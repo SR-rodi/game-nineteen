@@ -1,9 +1,10 @@
+/*
 package ru.sr.nineteen.presentation.adapter.fieldadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.sr.nineteen.data.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItem
 import ru.sr.nineteen.databinding.ItemGameNotChoiceBinding
 
 class GameAdapter(
@@ -29,3 +30,4 @@ class GameAdapter(
 
     override fun getItemCount() = itemGameList.size
 }
+*/

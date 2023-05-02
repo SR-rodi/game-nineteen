@@ -12,9 +12,11 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "NineTeen_2_0"
+rootProject.name = "NineTeen"
 include (":app")
 include (":core")
+include (":navigation")
+include (":core_ui")
 include (":feature_game")
 include (":feature_rating")
 include (":feature_training")

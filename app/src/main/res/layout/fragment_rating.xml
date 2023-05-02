@@ -19,6 +19,7 @@
 
     <include layout="@layout/rating_cat"/>
 
+<!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rating_recycler"
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
         tools:listitem="@layout/item_rating"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
+-->
 
     <Button
         android:id="@+id/back_button"

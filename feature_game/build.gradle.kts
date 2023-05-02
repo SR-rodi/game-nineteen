@@ -5,17 +5,9 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace = "ru.sr.nineteen.fame"
+    namespace = "ru.sr.nineteen.game"
     defaultConfig {
         minSdk = 29
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
     }
 
 }

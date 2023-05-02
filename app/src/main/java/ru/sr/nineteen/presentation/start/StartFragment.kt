@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.start
 
 import android.os.Bundle
@@ -8,9 +9,9 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.sr.nineteen.data.gameitem.SettingGame
+import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.databinding.FragmentStartBinding
-import ru.sr.nineteen.utility.BaseFragment
+import ru.sr.BaseFragment
 import ru.sr.nineteen.utility.CustomButtonView
 import ru.sr.nineteen.utility.setClickFromNavigate
 
@@ -74,4 +75,4 @@ class StartFragment : BaseFragment<FragmentStartBinding>() {
             }
         }
     }
-}
+}*/

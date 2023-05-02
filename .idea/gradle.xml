@@ -13,10 +13,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core_ui" />
             <option value="$PROJECT_DIR$/feature_game" />
             <option value="$PROJECT_DIR$/feature_menu" />
             <option value="$PROJECT_DIR$/feature_rating" />
             <option value="$PROJECT_DIR$/feature_training" />
+            <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>
       </GradleProjectSettings>

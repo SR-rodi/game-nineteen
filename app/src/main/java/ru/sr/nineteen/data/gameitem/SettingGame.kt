@@ -2,7 +2,8 @@ package ru.sr.nineteen.data.gameitem
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import ru.sr.nineteen.data.itemlist.ClassicItemList
+import ru.sr.nineteen.domain.gameitem.GameItem
+import ru.sr.nineteen.ClassicItemList
 
 @Parcelize
 class SettingGame(

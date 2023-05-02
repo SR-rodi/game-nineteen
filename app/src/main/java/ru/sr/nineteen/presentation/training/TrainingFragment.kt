@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.training
 
 import android.os.Bundle
@@ -6,10 +7,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.R
-import ru.sr.nineteen.data.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItem
 import ru.sr.nineteen.databinding.TrainingOneBinding
 import ru.sr.nineteen.presentation.adapter.fieldadapter.GameAdapter
-import ru.sr.nineteen.utility.BaseFragment
+import ru.sr.BaseFragment
 import ru.sr.nineteen.utility.setClickFromNavigate
 
 class TrainingFragment : BaseFragment<TrainingOneBinding>() {
@@ -63,4 +64,4 @@ class TrainingFragment : BaseFragment<TrainingOneBinding>() {
         binding.trainingText.text = text
         binding.trainingRecycler.adapter = GameAdapter(itemList) {}
     }
-}
+}*/

@@ -3,7 +3,7 @@ package ru.sr.nineteen.data.database.db
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.sr.nineteen.data.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.GameItem
 
 class ConverterList {
 

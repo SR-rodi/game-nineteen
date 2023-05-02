@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.rating
 
 import android.os.Bundle
@@ -8,7 +9,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.databinding.FragmentRatingBinding
 import ru.sr.nineteen.presentation.adapter.ratingadapter.RatingAdapter
-import ru.sr.nineteen.utility.BaseFragment
+import ru.sr.BaseFragment
 import ru.sr.nineteen.utility.setClickFromNavigate
 
 class RatingFragment : BaseFragment<FragmentRatingBinding>() {
@@ -30,4 +31,4 @@ class RatingFragment : BaseFragment<FragmentRatingBinding>() {
             }
         }
     }
-}
+}*/

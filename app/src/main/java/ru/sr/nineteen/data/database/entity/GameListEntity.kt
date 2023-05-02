@@ -3,7 +3,7 @@ package ru.sr.nineteen.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ru.sr.nineteen.data.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.GameItem
 
 @Entity(tableName = "game_list")
 class GameListEntity(

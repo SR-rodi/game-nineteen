@@ -1,9 +1,9 @@
 package ru.sr.nineteen.presentation.training
 
 import androidx.lifecycle.ViewModel
-import ru.sr.nineteen.data.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.GameItem
 import ru.sr.nineteen.data.gameitem.StatusItem
-import ru.sr.nineteen.data.itemlist.TrainingItemList
+import ru.sr.nineteen.itemlist.TrainingItemList
 
 class TrainingViewModel : ViewModel() {
 

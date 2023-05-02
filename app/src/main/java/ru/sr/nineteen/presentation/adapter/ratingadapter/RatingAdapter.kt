@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.adapter.ratingadapter
 
 import android.view.LayoutInflater
@@ -19,4 +20,4 @@ class RatingAdapter(
     }
 
     override fun getItemCount()= ratingList.size
-}
+}*/

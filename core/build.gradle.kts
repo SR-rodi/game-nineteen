@@ -1,5 +1,6 @@
 plugins {
     id ("com.android.library")
+    id ("kotlin-parcelize")
     id ("org.jetbrains.kotlin.android")
 }
 
@@ -10,12 +11,13 @@ android {
         minSdk = 29
     }
 
-    buildFeatures {
-        compose = true
-    }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
+    compileOptions   {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility  = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
 }

@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.start
 
 import androidx.lifecycle.ViewModel
@@ -8,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
-import ru.sr.nineteen.data.gameitem.SettingGame
+import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.itemlist.RandomItemList
 import ru.sr.nineteen.data.repository.GameRepository
 import ru.sr.nineteen.utility.toSettingGame
@@ -40,4 +41,4 @@ class StartViewModel(
             }
         }.launchIn(viewModelScope + Dispatchers.IO)
     }
-}
+}*/

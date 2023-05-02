@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.gamefield
 
 import android.os.Bundle
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.databinding.FragmentGameFieldBinding
 import ru.sr.nineteen.presentation.adapter.fieldadapter.GameAdapter
-import ru.sr.nineteen.utility.BaseFragment
+import ru.sr.BaseFragment
 import ru.sr.nineteen.utility.notifyLineRemove
 import ru.sr.nineteen.utility.notifyTwoPosition
 import ru.sr.nineteen.utility.setClickFromNavigate
@@ -116,4 +117,4 @@ class GameFieldFragment : BaseFragment<FragmentGameFieldBinding>() {
         viewModel.addDatabase(args.settingsGame.gameMode)
         super.onPause()
     }
-}
+}*/

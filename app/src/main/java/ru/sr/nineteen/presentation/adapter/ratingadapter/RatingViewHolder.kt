@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.adapter.ratingadapter
 
 import android.text.format.DateUtils
@@ -18,3 +19,4 @@ class RatingViewHolder(private val binding: ItemRatingBinding) :
         }
     }
 }
+*/

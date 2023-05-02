@@ -79,6 +79,7 @@
 
     </LinearLayout>
 
+<!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/game_field"
         android:layout_width="match_parent"
@@ -119,6 +120,7 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+-->
 
 
 </LinearLayout>

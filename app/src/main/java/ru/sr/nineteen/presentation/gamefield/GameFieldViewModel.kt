@@ -1,3 +1,4 @@
+/*
 package ru.sr.nineteen.presentation.gamefield
 
 import androidx.lifecycle.ViewModel
@@ -9,12 +10,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.sr.nineteen.data.database.entity.GameListEntity
 import ru.sr.nineteen.data.database.entity.RatingEntity
-import ru.sr.nineteen.data.gameitem.GameItem
-import ru.sr.nineteen.data.gameitem.SettingGame
+import ru.sr.nineteen.data.domain.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.repository.GameRepository
 import ru.sr.nineteen.data.repository.RatingRepository
-import ru.sr.nineteen.logic.ClassicGameLogic
-import ru.sr.nineteen.logic.WinLogic
+import ru.sr.nineteen.data.domain.logic.ClassicGameLogic
+import ru.sr.nineteen.data.*/
+/**//*
+domain.logic.WinLogic
 
 class GameFieldViewModel(
     private val gameRepository: GameRepository,
@@ -97,4 +100,4 @@ class GameFieldViewModel(
             ratingRepository.insertNewRating(RatingEntity(gameMode,timerCounter, stepCounter))
         }
     }
-}
+}*/

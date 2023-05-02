@@ -10,14 +10,6 @@ android {
         minSdk = 29
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
-    }
-
 }
 
 dependencies {
