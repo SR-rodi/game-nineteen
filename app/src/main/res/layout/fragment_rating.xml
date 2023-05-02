@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/blue_300"
-    tools:context=".presentation.rating.RattingFragment">
+    tools:context=".presentation.rating.RatingFragment">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
