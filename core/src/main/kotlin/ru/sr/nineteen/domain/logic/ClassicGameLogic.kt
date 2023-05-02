@@ -1,7 +1,7 @@
 package ru.sr.nineteen.domain.logic
 
 import ru.sr.nineteen.domain.gameitem.GameItem
-import ru.sr.nineteen.data.gameitem.StatusItem
+import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.utility.isChoice
 import ru.sr.nineteen.utility.isHelp

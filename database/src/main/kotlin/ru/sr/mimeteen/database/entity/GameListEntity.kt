@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.sr.nineteen.domain.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.SettingGame
 
 @Entity(tableName = "game_list")
 class GameListEntity(
@@ -18,4 +19,8 @@ class GameListEntity(
     @PrimaryKey
     @ColumnInfo(name = "position")
     val id: Int? = null
-)
+) {
+    fun toSettingGame() = SettingGame(gameMode,list,time,stepCount)
+
+
+}

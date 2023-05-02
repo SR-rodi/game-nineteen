@@ -3,7 +3,7 @@ package ru.sr.nineteen.presentation.adapter.ratingadapter
 
 import android.text.format.DateUtils
 import androidx.recyclerview.widget.RecyclerView
-import ru.sr.nineteen.data.database.entity.RatingEntity
+import RatingEntity
 import ru.sr.nineteen.databinding.ItemRatingBinding
 
 

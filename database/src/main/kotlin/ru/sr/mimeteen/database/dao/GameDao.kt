@@ -1,4 +1,4 @@
-package ru.sr.nineteen.data.database.dao
+package ru.sr.mimeteen.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

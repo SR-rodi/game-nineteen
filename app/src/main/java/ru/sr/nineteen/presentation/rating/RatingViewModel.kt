@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.sr.nineteen.data.database.entity.RatingEntity
-import ru.sr.nineteen.data.repository.RatingRepository
+import ru.sr.mimeteen.database.repository.RatingRepository
 
 class RatingViewModel(
     private val rattingRepository: RatingRepository

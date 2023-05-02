@@ -22,7 +22,7 @@ fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
 
         when (action) {
             is MenuAction.OpenGame -> {
-                rootController.push(NavigationTree.Game.name)
+                rootController.push(NavigationTree.Game.name,action.settingGame)
                 viewModel.obtainEvent(MenuEvent.ResetActions)
             }
 

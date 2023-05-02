@@ -1,7 +1,13 @@
 package ru.sr.nineteen.presentation.viewmodel
 
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.plus
+import ru.sr.mimeteen.database.repository.GameRepository
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.itemlist.RandomItemList
@@ -9,30 +15,20 @@ import ru.sr.nineteen.presentation.viewmodel.model.MenuAction
 import ru.sr.nineteen.presentation.viewmodel.model.MenuEvent
 import ru.sr.nineteen.presentation.viewmodel.model.MenuState
 
-class MenuViewModel:BaseViewModel<MenuState,MenuAction,MenuEvent>(MenuState()) {
+class MenuViewModel(
+    private val gameRepository: GameRepository,
+) : BaseViewModel<MenuState, MenuAction, MenuEvent>(MenuState()) {
 
-    private fun createRandomList(): SettingGame {
-        val settingGame = SettingGame()
-        settingGame.list = RandomItemList().create()
-        settingGame.gameMode = "random"
-        return settingGame
+    private var localSettings: SettingGame? = null
+
+    init {
+        getGameList()
     }
 
-/*    fun getGameList() {
-        gameRepository.getGameList().onEach { entity ->
-            if (entity != null) {
-                if (entity.list.isNotEmpty()) {
-                    _nextButton.value = true
-                    _itemList.value = entity.toSettingGame()
-                } else _nextButton.value = false
-            }
-        }.launchIn(viewModelScope + Dispatchers.IO)
-    }*/
-
     override fun obtainEvent(viewEvent: MenuEvent) {
-        when(viewEvent){
+        when (viewEvent) {
             MenuEvent.OnClickClassicButton -> onStartGame(SettingGame())
-            MenuEvent.OnClickNextButton -> onStartGame(SettingGame())
+            MenuEvent.OnClickNextButton -> localSettings?.let { settings -> onStartGame(settings) }
             MenuEvent.OnClickRandomButton -> onStartGame(createRandomList())
             MenuEvent.OnClickRatingButton -> onStartRating()
             MenuEvent.OnClickTrainingButton -> onStartTraining()
@@ -50,5 +46,23 @@ class MenuViewModel:BaseViewModel<MenuState,MenuAction,MenuEvent>(MenuState()) {
 
     private fun onStartGame(settingGame: SettingGame) {
         viewAction = MenuAction.OpenGame(settingGame)
+    }
+
+    private fun createRandomList(): SettingGame {
+        val settingGame = SettingGame()
+        settingGame.list = RandomItemList().create()
+        settingGame.gameMode = "random"
+        return settingGame
+    }
+
+    private fun getGameList() {
+        gameRepository.getGameList().onEach { entity ->
+            if (entity != null) {
+                viewState = if (entity.list.isNotEmpty()) {
+                    localSettings = entity.toSettingGame()
+                    viewState.copy(isNextEnable = true)
+                } else viewState.copy(isNextEnable = true)
+            }
+        }.launchIn(viewModelScope + Dispatchers.IO)
     }
 }

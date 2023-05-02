@@ -1,4 +1,4 @@
-package ru.sr.nineteen.data.database.db
+package ru.sr.mimeteen.database.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

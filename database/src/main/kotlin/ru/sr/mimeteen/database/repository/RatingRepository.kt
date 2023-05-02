@@ -1,6 +1,6 @@
-package ru.sr.nineteen.data.repository
+package ru.sr.mimeteen.database.repository
 
-import ru.sr.nineteen.data.database.dao.RatingDao
+import ru.sr.mimeteen.database.dao.RatingDao
 import ru.sr.nineteen.data.database.entity.RatingEntity
 
 class RatingRepository(

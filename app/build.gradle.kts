@@ -45,6 +45,7 @@ dependencies {
    implementation(project(":core"))
     implementation(project(":core_ui"))
     implementation(project(":navigation"))
+    implementation(project(":database"))
     implementation(project(":feature_menu"))
 
     implementation("io.github.alexgladkov:odyssey-core:1.3.1")

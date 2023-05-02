@@ -1,10 +1,10 @@
-package ru.sr.nineteen.data.database.db
+package ru.sr.mimeteen.database.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import ru.sr.nineteen.data.database.dao.GameDao
-import ru.sr.nineteen.data.database.dao.RatingDao
+import ru.sr.mimeteen.database.dao.GameDao
+import ru.sr.mimeteen.database.dao.RatingDao
 import ru.sr.nineteen.data.database.entity.GameListEntity
 import ru.sr.nineteen.data.database.entity.RatingEntity
 

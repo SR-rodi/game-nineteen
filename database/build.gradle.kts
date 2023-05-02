@@ -1,19 +1,16 @@
-
 plugins {
     id ("com.android.library")
     id ("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id ("kotlin-parcelize")
 }
 
 android {
     compileSdk = 33
-    namespace = "ru.sr.nineteen.training"
+    namespace = "ru.sr.nineteen.database"
     defaultConfig {
         minSdk = 29
     }
-    buildFeatures {
-        compose = true
-    }
-
     compileOptions   {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility  = JavaVersion.VERSION_17
@@ -21,12 +18,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
-    }
 }
 
 dependencies {
     implementation(project(":core"))
+
+    implementation ("androidx.room:room-runtime:2.5.1")
+    implementation ("androidx.room:room-ktx:2.5.1")
+    kapt ("androidx.room:room-compiler:2.5.1")
+    implementation ("com.google.code.gson:gson:2.10.1")
+
 }

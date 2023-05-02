@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import ru.sr.nineteen.R
 import ru.sr.nineteen.data.domain.gameitem.GameItem
-import ru.sr.nineteen.data.gameitem.StatusItem
+import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.databinding.ItemGameNotChoiceBinding
 
 class GameViewHolder(

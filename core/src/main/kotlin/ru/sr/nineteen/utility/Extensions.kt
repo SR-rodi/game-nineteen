@@ -1,7 +1,7 @@
 package ru.sr.nineteen.utility
 
 import ru.sr.nineteen.domain.gameitem.GameItem
-import ru.sr.nineteen.data.gameitem.StatusItem
+import ru.sr.nineteen.domain.gameitem.StatusItem
 
 fun List<GameItem>.isChoice(first: Int, second: Int) {
     this[first].statusItem = StatusItem.CHOICE
@@ -53,9 +53,7 @@ fun List<GameItem>.checkNumberAndStatus(
     return a && b
 }
 
-/*fun GameListEntity.toSettingGame() = SettingGame(gameMode,list,time,stepCount)
-
-fun View.setClickFromNavigate(action: NavDirections){
+/*fun View.setClickFromNavigate(action: NavDirections){
     when (this) {
         is CustomButtonView -> this.setListener { findNavController().navigate(action) }
         else -> this.setOnClickListener { findNavController().navigate(action) }

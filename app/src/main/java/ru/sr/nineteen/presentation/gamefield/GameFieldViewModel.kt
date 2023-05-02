@@ -8,8 +8,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.sr.nineteen.data.database.entity.GameListEntity
-import ru.sr.nineteen.data.database.entity.RatingEntity
+import GameListEntity
+import RatingEntity
 import ru.sr.nineteen.data.domain.gameitem.GameItem
 import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.repository.GameRepository

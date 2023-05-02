@@ -1,7 +1,7 @@
 package ru.sr.nineteen
 
 import ru.sr.nineteen.domain.gameitem.GameItem
-import ru.sr.nineteen.data.gameitem.StatusItem
+import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.itemlist.CreateItemList
 
 class ClassicItemList: CreateItemList(){

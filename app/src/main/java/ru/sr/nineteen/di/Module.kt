@@ -3,7 +3,7 @@ package ru.sr.nineteen.di
 import androidx.room.Room
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.sr.nineteen.data.database.db.DataBase
+import ru.sr.mimeteen.database.db.DataBase
 
 
 fun dataBaseModule() = module {

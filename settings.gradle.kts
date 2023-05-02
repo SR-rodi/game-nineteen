@@ -16,6 +16,7 @@ rootProject.name = "NineTeen"
 include (":app")
 include (":core")
 include (":navigation")
+include (":database")
 include (":core_ui")
 include (":feature_game")
 include (":feature_rating")
