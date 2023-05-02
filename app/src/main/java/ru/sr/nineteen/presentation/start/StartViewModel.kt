@@ -12,6 +12,7 @@ import kotlinx.coroutines.plus
 import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.itemlist.RandomItemList
 import ru.sr.nineteen.data.repository.GameRepository
+import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.utility.toSettingGame
 
 class StartViewModel(
@@ -41,4 +42,5 @@ class StartViewModel(
             }
         }.launchIn(viewModelScope + Dispatchers.IO)
     }
-}*/
+}
+*/

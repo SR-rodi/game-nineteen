@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+   >
 
-    <fragment
+ <!--   <fragment
         android:id="@+id/startFragment"
-        android:name="ru.sr.nineteen.presentation.start.StartFragment"
+        android:name="ru.sr.nineteen.TrainingScreen.presentation.start.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/gameFieldFragment"
-        android:name="ru.sr.nineteen.presentation.gamefield.GameFieldFragment"
+        android:name="ru.sr.nineteen.TrainingScreen.presentation.gamefield.GameFieldFragment"
         android:label="fragment_game_field"
         tools:layout="@layout/fragment_game_field" >
         <argument
             android:name="settingsGame"
-            app:argType="ru.sr.nineteen.data.gameitem.SettingGame" />
+            app:argType="ru.sr.nineteen.TrainingScreen.data.gameitem.SettingGame" />
         <action
             android:id="@+id/action_gameFieldFragment_to_winFragment"
             app:destination="@id/winFragment"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
-        android:name="ru.sr.nineteen.presentation.training.TrainingFragment"
+        android:name="ru.sr.nineteen.TrainingScreen.presentation.training.TrainingFragment"
         android:label="TrainingFragment" >
         <action
             android:id="@+id/action_trainingFragment_to_startFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/winFragment"
-        android:name="ru.sr.nineteen.presentation.win.WinFragment"
+        android:name="ru.sr.nineteen.TrainingScreen.presentation.win.WinFragment"
         android:label="fragment_win"
         tools:layout="@layout/fragment_win" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/rattingFragment"
-        android:name="ru.sr.nineteen.presentation.rating.RatingFragment"
+        android:name="ru.sr.nineteen.TrainingScreen.presentation.rating.RatingFragment"
         android:label="fragment_ratting"
         tools:layout="@layout/fragment_rating" >
         <action
@@ -68,5 +68,5 @@
             app:destination="@id/startFragment"
             app:popUpTo="@id/rattingFragment"
             app:popUpToInclusive="true" />
-    </fragment>
+    </fragment>-->
 </navigation>

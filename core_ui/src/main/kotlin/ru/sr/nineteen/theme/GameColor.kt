@@ -17,6 +17,8 @@ data class GameColor(
     val blue_400: Color,
     val blue_500: Color,
     val text: Color,
+    val textTitle:Color,
+    val textButton:Color,
     val background:Color,
 )
 
@@ -29,9 +31,11 @@ val lightPalette = GameColor(
     blue_100 = Color(0xFFEEF0F6),
     blue_200 = Color(0xFFCEDAEC),
     blue_300 = Color(0xFF9CB9D1),
-    blue_400 = Color(0xFFCEDAEC),
+    blue_400 = Color(0xFF749CD7),
     blue_500 = Color(0xFF054D74),
     text = Color(0xFF070707),
+    textTitle = Color(0xFF054D74),
+    textButton = Color(0xFFFFFFFF),
     more = Color(0xFF46E8FD),
     background = Color(0xFF9CB9D1)
 )

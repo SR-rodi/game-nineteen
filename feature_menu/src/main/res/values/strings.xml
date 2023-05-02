@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_next_title">Продолжить</string>
+    <string name="menu_classic_title">Классика</string>
+    <string name="menu_random_title">Случайный</string>
+    <string name="menu_training_title">Обучение</string>
+    <string name="menu_rating_title">Рейтинг</string>
+    <string name="menu_game_button">Играть</string>
+    <string name="menu_go_button">Пройти</string>
+    <string name="menu_look_button">Перейти</string>
+
+
+</resources>

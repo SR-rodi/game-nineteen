@@ -75,4 +75,5 @@ class StartFragment : BaseFragment<FragmentStartBinding>() {
             }
         }
     }
-}*/
+}
+*/

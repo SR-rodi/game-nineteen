@@ -9,7 +9,7 @@
     android:background="@color/blue_300"
     tools:context=".presentation.win.WinFragment">
 
-    <ru.sr.nineteen.utility.CustomButtonView
+    <ru.sr.nineteen.TrainingScreen.utility.CustomButtonView
         android:id="@+id/win_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
