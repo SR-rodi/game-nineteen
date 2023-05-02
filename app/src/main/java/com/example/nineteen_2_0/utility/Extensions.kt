@@ -10,8 +10,6 @@ import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.gameitem.StatusItem
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 
-
-
 fun List<GameItem>.isChoice(first: Int, second: Int) {
     this[first].statusItem = StatusItem.CHOICE
     this[second].statusItem = StatusItem.CHOICE
@@ -42,7 +40,7 @@ fun GameAdapter.notifyTwoPosition(first: Int, second: Int) {
 fun GameAdapter.notifyLineRemove(position: List<Int>) {
     position.forEachIndexed {index,it->
         if (index!=position.lastIndex && index != position.lastIndex-1)
-        notifyItemRemoved(it)
+            notifyItemRemoved(it)
     }
 }
 

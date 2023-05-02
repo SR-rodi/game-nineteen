@@ -4,29 +4,23 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.databinding.FragmentGameFieldBinding
-import com.example.nineteen_2_0.utility.notifyLineRemove
-import com.example.nineteen_2_0.utility.notifyTwoPosition
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 import com.example.nineteen_2_0.utility.BaseFragment
+import com.example.nineteen_2_0.utility.notifyLineRemove
+import com.example.nineteen_2_0.utility.notifyTwoPosition
 import com.example.nineteen_2_0.utility.setClickFromNavigate
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-@AndroidEntryPoint
 class GameFieldFragment : BaseFragment<FragmentGameFieldBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) = FragmentGameFieldBinding.inflate(inflater)
 
-    private val viewModel by viewModels<GameFieldViewModel>()
+    private val viewModel by viewModel<GameFieldViewModel>()
 
     private val args by navArgs<GameFieldFragmentArgs>()
 

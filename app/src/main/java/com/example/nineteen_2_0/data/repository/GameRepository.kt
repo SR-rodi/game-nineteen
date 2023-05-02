@@ -2,9 +2,8 @@ package com.example.nineteen_2_0.data.repository
 
 import com.example.nineteen_2_0.data.database.dao.GameDao
 import com.example.nineteen_2_0.data.database.entity.GameListEntity
-import javax.inject.Inject
 
-class GameRepository @Inject constructor(
+class GameRepository(
     private val gameDao: GameDao
 ) {
 

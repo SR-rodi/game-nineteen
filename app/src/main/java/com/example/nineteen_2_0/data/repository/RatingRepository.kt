@@ -2,9 +2,8 @@ package com.example.nineteen_2_0.data.repository
 
 import com.example.nineteen_2_0.data.database.dao.RatingDao
 import com.example.nineteen_2_0.data.database.entity.RatingEntity
-import javax.inject.Inject
 
-class RatingRepository @Inject constructor(
+class RatingRepository(
     private val ratingDao: RatingDao
 ) {
 

@@ -6,15 +6,14 @@ import com.example.nineteen_2_0.data.gameitem.SettingGame
 import com.example.nineteen_2_0.data.itemlist.RandomItemList
 import com.example.nineteen_2_0.data.repository.GameRepository
 import com.example.nineteen_2_0.utility.toSettingGame
-
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
-import javax.inject.Inject
 
-@HiltViewModel
-class StartViewModel @Inject constructor(
+class StartViewModel(
     private val gameRepository: GameRepository
 ) : ViewModel() {
 

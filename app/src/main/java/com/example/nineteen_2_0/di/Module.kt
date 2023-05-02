@@ -1,16 +1,11 @@
 package com.example.nineteen_2_0.di
 
-import android.content.Context
 import androidx.room.Room
 import com.example.nineteen_2_0.data.database.db.DataBase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-@Module
+/*@Module
 @InstallIn(SingletonComponent::class)
 class Module {
 
@@ -30,4 +25,25 @@ class Module {
             DataBase::class.java,
             "list"
         ).build()
+}*/
+
+fun dataBaseModule() = module {
+
+    single(named("database")) {
+        Room.databaseBuilder(
+            get(),
+            DataBase::class.java,
+            "list"
+        ).build()
+    }
+
+    single {
+        get<DataBase>(named("database")).gameDao()
+    }
+
+
+    single {
+        get<DataBase>(named("database")).ratingDao()
+    }
+
 }

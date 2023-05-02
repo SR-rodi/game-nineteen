@@ -10,16 +10,13 @@ import com.example.nineteen_2_0.data.repository.GameRepository
 import com.example.nineteen_2_0.data.repository.RatingRepository
 import com.example.nineteen_2_0.logic.ClassicGameLogic
 import com.example.nineteen_2_0.logic.WinLogic
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class GameFieldViewModel @Inject constructor(
+class GameFieldViewModel(
     private val gameRepository: GameRepository,
     private val ratingRepository: RatingRepository
 ) : ViewModel() {

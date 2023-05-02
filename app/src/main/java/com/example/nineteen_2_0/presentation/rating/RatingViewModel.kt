@@ -4,15 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nineteen_2_0.data.database.entity.RatingEntity
 import com.example.nineteen_2_0.data.repository.RatingRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class RatingViewModel @Inject constructor(
+class RatingViewModel(
     private val rattingRepository: RatingRepository
 ) : ViewModel() {
 

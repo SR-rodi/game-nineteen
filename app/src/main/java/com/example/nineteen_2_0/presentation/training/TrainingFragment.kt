@@ -3,17 +3,14 @@ package com.example.nineteen_2_0.presentation.training
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.nineteen_2_0.R
 import com.example.nineteen_2_0.data.gameitem.GameItem
 import com.example.nineteen_2_0.databinding.TrainingOneBinding
 import com.example.nineteen_2_0.presentation.adapter.fieldadapter.GameAdapter
 import com.example.nineteen_2_0.utility.BaseFragment
 import com.example.nineteen_2_0.utility.setClickFromNavigate
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TrainingFragment : BaseFragment<TrainingOneBinding>() {
 
@@ -21,7 +18,7 @@ class TrainingFragment : BaseFragment<TrainingOneBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) = TrainingOneBinding.inflate(inflater)
 
-    private val viewModel by viewModels<TrainingViewModel>()
+    private val viewModel by viewModel<TrainingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
