@@ -13,4 +13,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NineTeen_2_0"
-include ':app'
+include (":app")
+include (":core")
+include (":feature_game")
+include (":feature_rating")
+include (":feature_training")
+include (":feature_menu")
+
