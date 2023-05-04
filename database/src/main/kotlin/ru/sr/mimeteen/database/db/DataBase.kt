@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ru.sr.mimeteen.database.dao.GameDao
 import ru.sr.mimeteen.database.dao.RatingDao
-import ru.sr.nineteen.data.database.entity.GameListEntity
+import ru.sr.mimeteen.database.entity.GameListEntity
 import ru.sr.nineteen.data.database.entity.RatingEntity
 
 @Database(

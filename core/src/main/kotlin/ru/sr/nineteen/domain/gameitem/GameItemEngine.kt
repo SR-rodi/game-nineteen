@@ -1,10 +1,10 @@
 package ru.sr.nineteen.domain.gameitem
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GameItem(
+data class GameItemEngine(
     val number: Int,
     var statusItem: StatusItem
-) : Parcelable
+):Parcelable

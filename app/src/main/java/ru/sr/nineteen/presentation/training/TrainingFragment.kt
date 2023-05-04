@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.R
-import ru.sr.nineteen.data.domain.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.databinding.TrainingOneBinding
 import ru.sr.nineteen.presentation.adapter.fieldadapter.GameAdapter
 import ru.sr.BaseFragment
@@ -60,7 +60,7 @@ class TrainingFragment : BaseFragment<TrainingOneBinding>() {
         }
     }
 
-    private fun getTrainingScreen(itemList: MutableList<GameItem>, text: CharSequence) {
+    private fun getTrainingScreen(itemList: MutableList<GameItemEngine>, text: CharSequence) {
         binding.trainingText.text = text
         binding.trainingRecycler.adapter = GameAdapter(itemList) {}
     }

@@ -1,14 +1,12 @@
 package ru.sr.nineteen.itemlist
 
-import ru.sr.nineteen.domain.gameitem.GameItem
-import ru.sr.nineteen.domain.gameitem.StatusItem
-
+/*
 class TrainingItemList: CreateItemList(){
-    override fun create(): MutableList<GameItem> {
-        val itemList = mutableListOf<GameItem>()
+    override fun create(): MutableList<GameItemEngine> {
+        val itemList = mutableListOf<GameItemEngine>()
         baseItem.forEach{ _->
-            itemList.add(GameItem(9, StatusItem.CHOICE))
+            itemList.add(GameItemEngine(9, StatusItem.CHOICE))
         }
         return itemList
     }
-}
+}*/

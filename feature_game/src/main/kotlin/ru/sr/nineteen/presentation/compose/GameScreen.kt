@@ -8,12 +8,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -40,7 +44,7 @@ import ru.sr.nineteen.view.Screen
 @Composable
 fun GameScreen(settingGame: SettingGame, viewModel: GameViewModel = koinViewModel()) {
 
-    LaunchedEffect(key1 = true,){
+    LaunchedEffect(key1 = true) {
         viewModel.obtainEvent(GameEvent.OnStartGame(settingGame))
     }
     Screen(viewModel = viewModel) { state, action, rootController ->
@@ -51,13 +55,15 @@ fun GameScreen(settingGame: SettingGame, viewModel: GameViewModel = koinViewMode
                 rootController.popBackStack()
                 viewModel.obtainEvent(GameEvent.ResetActions)
             }
+
             null -> {}
             GameAction.OpenWinScreen -> {
-                Log.e("Kart","WIN")}
+                Log.e("Kart", "WIN")
+            }
         }
 
         val lifecycleOwner = LocalLifecycleOwner.current
-        DisposableEffect(lifecycleOwner){
+        DisposableEffect(lifecycleOwner) {
             onDispose {
                 viewModel.obtainEvent(GameEvent.OnDispose)
             }
@@ -73,14 +79,21 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
     Column {
         GameTitle(settingGame.mode, evenHandler)
         GameStatisticView(settingGame)
-        LazyVerticalGrid(
-            modifier = Modifier.weight(1f),
-            columns = GridCells.Fixed(9),
-            contentPadding = PaddingValues(4.dp)
-        ) {
-            items(settingGame.items.size) { position ->
-                GameItemView(item = settingGame.items[position]) {
-                    evenHandler(GameEvent.OnClickItem(position))
+
+        LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(4.dp)) {
+            itemsIndexed(settingGame.items) { parentPosition, list ->
+                Row(modifier = Modifier.fillMaxSize()) {
+                    list.forEachIndexed { childPositions, item ->
+                        Box(modifier = Modifier.weight(1f)) {
+                            /*Log.e("Kart","item = $item , childPositions = $childPositions parentPosition = $parentPosition")*/
+                            GameItemView(item = item) {
+                                evenHandler(GameEvent.OnClickItem(Pair(parentPosition, childPositions)
+                                    )
+                                )
+                            }
+                        }
+                    }
+
                 }
             }
         }

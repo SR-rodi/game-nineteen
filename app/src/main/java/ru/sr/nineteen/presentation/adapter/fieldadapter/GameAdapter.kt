@@ -4,11 +4,11 @@ package ru.sr.nineteen.presentation.adapter.fieldadapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.sr.nineteen.data.domain.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.databinding.ItemGameNotChoiceBinding
 
 class GameAdapter(
-    var itemGameList: List<GameItem>,
+    var itemGameList: List<GameItemEngine>,
     private val choicePosition: (position: Int) -> Unit
 ) : RecyclerView.Adapter<GameViewHolder>() {
 

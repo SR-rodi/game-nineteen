@@ -1,11 +1,11 @@
 package ru.sr.nineteen.domain.logic
 
-import ru.sr.nineteen.domain.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 
 class DeleteLine() {
 
-    fun delete(lineOne: Int, lineTwo: Int,items: List<GameItem>): List<Int> {
+    fun delete(lineOne: Int, lineTwo: Int,items: List<GameItemEngine>): List<Int> {
         val deleteListLineOne = mutableListOf<Int>()
         val deleteListLineTwo = mutableListOf<Int>()
         val deleteList = mutableListOf<Int>()
@@ -22,7 +22,7 @@ class DeleteLine() {
 
     }
 
-    private fun deleteLine(deleteListLineOne: MutableList<Int>, deleteList: MutableList<Int>,items: MutableList<GameItem>) {
+    private fun deleteLine(deleteListLineOne: MutableList<Int>, deleteList: MutableList<Int>,items: MutableList<GameItemEngine>) {
         deleteListLineOne.reversed().forEach { position ->
             items.removeAt(position)
             deleteList.add(position)
@@ -32,7 +32,7 @@ class DeleteLine() {
     private fun checkOneLine(
         line: Int,
         deleteListPosition: MutableList<Int>,
-        items: MutableList<GameItem>
+        items: MutableList<GameItemEngine>
     ) {
         val n = if (items.size > line * 9 + 8) line * 9 + 8
         else items.lastIndex

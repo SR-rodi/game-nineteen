@@ -1,7 +1,7 @@
 package ru.sr.mimeteen.database.repository
 
 import ru.sr.mimeteen.database.dao.GameDao
-import ru.sr.nineteen.data.database.entity.GameListEntity
+import ru.sr.mimeteen.database.entity.GameListEntity
 
 class GameRepository(
     private val gameDao: GameDao
@@ -9,7 +9,7 @@ class GameRepository(
 
     fun getGameList() = gameDao.getAll()
 
-    fun insertItemList(itemList: GameListEntity) = gameDao.insert(itemList)
+   // fun insertItemList(itemList: GameListEntity) = gameDao.insert(itemList)
 
     fun deleteItemList() = gameDao.deleteAll()
 }

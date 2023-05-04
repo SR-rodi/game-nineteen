@@ -5,7 +5,7 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import ru.sr.nineteen.R
-import ru.sr.nineteen.data.domain.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.databinding.ItemGameNotChoiceBinding
 
@@ -13,7 +13,7 @@ class GameViewHolder(
     private val binding: ItemGameNotChoiceBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(gameItem: GameItem) {
+    fun bind(gameItem: GameItemEngine) {
         binding.button.text = gameItem.number.toString()
         when (gameItem.statusItem) {
             StatusItem.CHOICE -> {
@@ -42,7 +42,7 @@ class GameViewHolder(
     }
 
     fun clickItem(
-        gameItem: GameItem,
+        gameItem: GameItemEngine,
         choicePosition: (positionList: Int) -> Unit
     ) {
         binding.button.setOnClickListener {

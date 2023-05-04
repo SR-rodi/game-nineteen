@@ -18,12 +18,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.sr.nineteen.domain.gameitem.GameItem
+import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.theme.GameTheme
 
 @Composable
-fun GameItemView(item: GameItem, evenHandler: () -> Unit) {
+fun GameItemView(item: GameItemEngine, evenHandler: () -> Unit) {
 
     var cardColor by remember { mutableStateOf(Color(0xFF9CB9D1)) }
     var borderColor by remember { mutableStateOf(Color(0xFF9CB9D1)) }
@@ -55,7 +55,7 @@ fun GameItemView(item: GameItem, evenHandler: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = GameTheme.shapes.small)
-            .padding(4.dp)
+         .padding(4.dp)
             .then(modifier),
         shape = GameTheme.shapes.small,
         border = BorderStroke(width = 2.dp, color = borderColor),

@@ -2,15 +2,12 @@ package ru.sr.nineteen.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
 import ru.sr.mimeteen.database.repository.GameRepository
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.gameitem.SettingGame
-import ru.sr.nineteen.itemlist.RandomItemList
 import ru.sr.nineteen.presentation.viewmodel.model.MenuAction
 import ru.sr.nineteen.presentation.viewmodel.model.MenuEvent
 import ru.sr.nineteen.presentation.viewmodel.model.MenuState
@@ -50,7 +47,7 @@ class MenuViewModel(
 
     private fun createRandomList(): SettingGame {
         val settingGame = SettingGame()
-        settingGame.list = RandomItemList().create()
+        //settingGame.list = RandomItemList().create()
         settingGame.gameMode = "random"
         return settingGame
     }

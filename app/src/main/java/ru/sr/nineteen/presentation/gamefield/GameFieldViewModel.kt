@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import GameListEntity
 import RatingEntity
-import ru.sr.nineteen.data.domain.gameitem.GameItem
+import ru.sr.nineteen.data.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.repository.GameRepository
 import ru.sr.nineteen.data.repository.RatingRepository
@@ -24,7 +24,7 @@ class GameFieldViewModel(
     private val ratingRepository: RatingRepository
 ) : ViewModel() {
 
-    var itemList = mutableListOf<GameItem>()
+    var itemList = mutableListOf<GameItemEngine>()
     var mode = ""
     private val game by lazy { ClassicGameLogic(itemList) }
     private val winLogic by lazy { WinLogic(itemList) }
