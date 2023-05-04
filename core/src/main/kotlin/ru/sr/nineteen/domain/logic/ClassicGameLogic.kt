@@ -1,68 +1,55 @@
 package ru.sr.nineteen.domain.logic
 
+import android.util.Log
 import ru.sr.nineteen.domain.gameitem.GameItem
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
-import ru.sr.nineteen.utility.isChoice
-import ru.sr.nineteen.utility.isHelp
-import ru.sr.nineteen.utility.isNotChoice
-import ru.sr.nineteen.utility.isSelect
 
 
-class ClassicGameLogic(
-    private val itemList: MutableList<GameItem>
-) : BaseLogic(itemList) {
+class ClassicGameLogic : BaseLogic() {
 
-    private val helper: Helper = Helper(itemList)
-    private val deleteLine = DeleteLine(itemList)
-    private var helpPosition = Pair(0,0)
+    private val helper: Helper = Helper()
+    private val deleteLine = DeleteLine()
+    private var helpPosition = Pair(0, 0)
 
-    fun helpButton(): Pair<Int, Int> {
-        helpPosition = helper.testHelper()
-        itemList.isHelp(helpPosition)
+    fun helpButton(items: List<GameItem>): Pair<Int, Int> {
+        helpPosition = helper.getHelpPosition(items)
         return helpPosition
     }
 
-    fun start(first: Int, second: Int): List<Int> {
-        return when (locationStatus(first, second)) {
-            LocationStatus.PASS -> {
-                itemList.isNotChoice(first, second)
-                if (helpPosition.first != helpPosition.second){
-                    itemList.isNotChoice(helpPosition.first, helpPosition.second)
-                    helpPosition = Pair(0,0)
-                }
-                emptyList()
-            }
-            else -> {
-                if (helpPosition.first != helpPosition.second){
-                    itemList.isNotChoice(helpPosition.first, helpPosition.second)
-                    helpPosition = Pair(0,0)
-                }
-                itemList.isChoice(first, second)
-
-                deleteLine.delete(first / 9, second / 9)
-            }
-        }
+    fun deleteInLine(firstPosition:Int,secondPosition:Int,items: List<GameItem>): List<Int> {
+       return deleteLine.delete(firstPosition / 9, secondPosition / 9,items)
     }
 
-    fun selectItem(position: Int) =
-        when (itemList[position].statusItem) {
-            StatusItem.SELECT -> itemList.isNotChoice(position)
-            else -> itemList[position].isSelect()
-        }
+    fun startCheck(firstPosition: Int, secondPosition: Int, items: List<GameItem>): Boolean {
+        return locationStatus(firstPosition, secondPosition, items) != LocationStatus.PASS
+    }
 
-    fun addList(): Pair<Int, Int> {
-        val newList = mutableListOf<GameItem>()
-        val a = itemList.lastIndex
 
-        itemList.forEach { gameItem ->
+    fun addList(items: List<GameItem>): List<GameItem> {
+        val newItems = mutableListOf<GameItem>()
+        items.forEach { gameItem ->
             if (gameItem.statusItem == StatusItem.HELP || gameItem.statusItem == StatusItem.SELECT)
                 gameItem.statusItem = StatusItem.NOT_CHOICE
 
             if (gameItem.statusItem == StatusItem.NOT_CHOICE)
-                newList.add(GameItem(gameItem.number, gameItem.statusItem))
+                newItems.add(GameItem(gameItem.number, gameItem.statusItem))
         }
-        itemList.addAll(newList)
-        return Pair(a, newList.size)
+
+        val newList = items.toMutableList()
+        newList.addAll(newItems)
+        return newList
+    }
+
+    fun isWin(items: List<GameItem>): Boolean {
+        var counter = 0
+        return if (items.size < 9) {
+            items.forEach { gameItem ->
+                if (gameItem.statusItem == StatusItem.CHOICE) counter++
+                else return@forEach
+            }
+            Log.d("Kart","${counter == items.size}")
+            counter == items.size
+        } else false
     }
 }

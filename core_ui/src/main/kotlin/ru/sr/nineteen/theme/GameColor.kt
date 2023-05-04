@@ -1,6 +1,5 @@
 package ru.sr.nineteen.theme
 
-import android.text.style.BackgroundColorSpan
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 

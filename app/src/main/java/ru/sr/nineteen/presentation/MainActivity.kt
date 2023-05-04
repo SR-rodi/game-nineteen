@@ -29,17 +29,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameTheme(isNightMode = false) {
+                val configuration = OdysseyConfiguration(
+                    canvas = this,
+                    displayType = DisplayType.FullScreen,
+                    backgroundColor = GameTheme.colors.background,
+                )
 
-                    val configuration = OdysseyConfiguration(
-                        canvas = this,
-                        displayType = DisplayType.FullScreen,
-                        backgroundColor = GameTheme.colors.background
-                    )
-
-                    setNavigationContent(configuration) {
-                            getNavGraph()
-                    }
+                setNavigationContent(
+                    onApplicationFinish = { finish() },
+                    configuration = configuration
+                ) {
+                    getNavGraph()
                 }
             }
+        }
     }
 }

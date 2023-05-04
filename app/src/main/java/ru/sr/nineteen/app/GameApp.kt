@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.sr.nineteen.di.dataBaseModule
+import ru.sr.nineteen.di.gameViewModelModule
 import ru.sr.nineteen.di.menuViewModelModule
 import ru.sr.nineteen.di.repositoryModule
 import ru.sr.nineteen.di.viewModelModule
@@ -20,7 +21,8 @@ class GameApp:Application(){
                     dataBaseModule(),
                     repositoryModule(),
                     viewModelModule(),
-                    menuViewModelModule()
+                    menuViewModelModule(),
+                    gameViewModelModule()
                 )
             )
         }

@@ -15,8 +15,8 @@ import ru.sr.nineteen.data.domain.gameitem.SettingGame
 import ru.sr.nineteen.data.repository.GameRepository
 import ru.sr.nineteen.data.repository.RatingRepository
 import ru.sr.nineteen.data.domain.logic.ClassicGameLogic
-import ru.sr.nineteen.data.*/
-/**//*
+import ru.sr.nineteen.data.
+
 domain.logic.WinLogic
 
 class GameFieldViewModel(
@@ -100,4 +100,5 @@ class GameFieldViewModel(
             ratingRepository.insertNewRating(RatingEntity(gameMode,timerCounter, stepCounter))
         }
     }
-}*/
+}
+*/

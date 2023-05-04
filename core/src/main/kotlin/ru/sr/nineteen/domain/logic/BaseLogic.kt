@@ -7,19 +7,19 @@ import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.utility.checkNumberAndStatus
 import kotlin.math.abs
 
-abstract class BaseLogic(private val itemList: MutableList<GameItem>) {
+abstract class BaseLogic {
 
-    protected fun locationStatus(first: Int, second: Int): LocationStatus {
-        return when (itemList.checkNumberAndStatus(first, second, itemList)) {
-            true -> checkPosition(first, second)
+    protected fun locationStatus(first: Int, second: Int, items: List<GameItem>): LocationStatus {
+        return when (items.checkNumberAndStatus(first, second, items.toMutableList())) {
+            true -> checkPosition(first, second,items)
             false -> LocationStatus.PASS
         }
     }
 
-    private fun checkPosition(first: Int, second: Int) =
+    private fun checkPosition(first: Int, second: Int, items: List<GameItem>) =
         if (checkNear(first, second) == LocationStatus.NEAR) LocationStatus.NEAR
-        else if (chekHorizontal(first, second) == LocationStatus.HORIZONTAL) LocationStatus.HORIZONTAL
-        else if (chekVertical(first, second) == LocationStatus.VERTICAL) LocationStatus.VERTICAL
+        else if (checkHorizontal(first, second,items) == LocationStatus.HORIZONTAL) LocationStatus.HORIZONTAL
+        else if (checkVertical(first, second,items) == LocationStatus.VERTICAL) LocationStatus.VERTICAL
         else LocationStatus.PASS
 
     private fun checkNear(first: Int, second: Int) =
@@ -28,10 +28,10 @@ abstract class BaseLogic(private val itemList: MutableList<GameItem>) {
             false -> LocationStatus.PASS
         }
 
-    private fun chekHorizontal(first: Int, second: Int): LocationStatus {
+    private fun checkHorizontal(first: Int, second: Int,items: List<GameItem>): LocationStatus {
         var counter = 0
         for (i in first + 1 until second) {
-            if (itemList[i].statusItem == StatusItem.CHOICE) counter++
+            if (items[i].statusItem == StatusItem.CHOICE) counter++
             else break
         }
         return when (abs(first - second) - 1 == counter) {
@@ -40,11 +40,11 @@ abstract class BaseLogic(private val itemList: MutableList<GameItem>) {
         }
     }
 
-    private fun chekVertical(first: Int, second: Int): LocationStatus {
+    private fun checkVertical(first: Int, second: Int,items: List<GameItem>): LocationStatus {
         var counter = 0
         if ((second - first) % 9 == 0)
             for (i in 1..second / 9 - first / 9) {
-                if (itemList[first + (9 * i)].statusItem == StatusItem.CHOICE) counter++
+                if (items[first + (9 * i)].statusItem == StatusItem.CHOICE) counter++
                 else break
             }
         return when (counter > 0 && counter == (second / 9 - first / 9) - 1) {

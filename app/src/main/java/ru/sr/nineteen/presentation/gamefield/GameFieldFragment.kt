@@ -117,4 +117,5 @@ class GameFieldFragment : BaseFragment<FragmentGameFieldBinding>() {
         viewModel.addDatabase(args.settingsGame.gameMode)
         super.onPause()
     }
-}*/
+}
+*/

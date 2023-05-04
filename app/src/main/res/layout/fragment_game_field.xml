@@ -22,7 +22,7 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:src="@drawable/ic_arrow_back"/>
+            android:src="@drawable/core_ui_arrow_back"/>
 
         <ImageView
             android:layout_width="50dp"

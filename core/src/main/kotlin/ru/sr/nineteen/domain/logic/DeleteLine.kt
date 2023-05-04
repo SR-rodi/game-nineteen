@@ -3,40 +3,42 @@ package ru.sr.nineteen.domain.logic
 import ru.sr.nineteen.domain.gameitem.GameItem
 import ru.sr.nineteen.domain.gameitem.StatusItem
 
-class DeleteLine(private val itemList: MutableList<GameItem>) {
+class DeleteLine() {
 
-    fun delete(lineOne: Int, lineTwo: Int): MutableList<Int> {
+    fun delete(lineOne: Int, lineTwo: Int,items: List<GameItem>): List<Int> {
         val deleteListLineOne = mutableListOf<Int>()
         val deleteListLineTwo = mutableListOf<Int>()
         val deleteList = mutableListOf<Int>()
+        val itemList = items.toMutableList()
 
-        checkOneLine(lineOne, deleteListLineOne)
-        if (lineOne != lineTwo) checkOneLine(lineTwo, deleteListLineTwo)
+        checkOneLine(lineOne, deleteListLineOne,itemList)
+        if (lineOne != lineTwo) checkOneLine(lineTwo, deleteListLineTwo,itemList)
 
-        if (deleteListLineTwo.size == 9) deleteLine(deleteListLineTwo, deleteList)
+        if (deleteListLineTwo.size == 9) deleteLine(deleteListLineTwo, deleteList,itemList)
 
-        if (deleteListLineOne.size == 9) deleteLine(deleteListLineOne, deleteList)
+        if (deleteListLineOne.size == 9) deleteLine(deleteListLineOne, deleteList,itemList)
 
-        return deleteList.ifEmpty { emptyList<Int>().toMutableList() }
+        return deleteList
 
     }
 
-    private fun deleteLine(deleteListLineOne: MutableList<Int>, deleteList: MutableList<Int>) {
+    private fun deleteLine(deleteListLineOne: MutableList<Int>, deleteList: MutableList<Int>,items: MutableList<GameItem>) {
         deleteListLineOne.reversed().forEach { position ->
-            itemList.removeAt(position)
+            items.removeAt(position)
             deleteList.add(position)
         }
     }
 
     private fun checkOneLine(
         line: Int,
-        deleteListPosition: MutableList<Int>
+        deleteListPosition: MutableList<Int>,
+        items: MutableList<GameItem>
     ) {
-        val n = if (itemList.size > line * 9 + 8) line * 9 + 8
-        else itemList.lastIndex
+        val n = if (items.size > line * 9 + 8) line * 9 + 8
+        else items.lastIndex
 
         for (i in line * 9..n) {
-            if (itemList[i].statusItem == StatusItem.CHOICE || itemList[i].statusItem == StatusItem.NOT_VISIBLE)
+            if (items[i].statusItem == StatusItem.CHOICE || items[i].statusItem == StatusItem.NOT_VISIBLE)
                 deleteListPosition.add(i)
             else break
         }
