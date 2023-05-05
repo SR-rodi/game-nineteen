@@ -8,16 +8,16 @@ import ru.sr.nineteen.domain.gameitem.GameItemEngine
 class ConverterList {
 
     @TypeConverter
-    fun fromCountryLangList(value: List<GameItemEngine>): String {
+    fun fromCountryLangList(value: List<List<GameItemEngine>>): String {
         val gson = Gson()
-        val type = object : TypeToken<List<GameItemEngine>>() {}.type
+        val type = object : TypeToken<List<List<GameItemEngine>>>() {}.type
         return gson.toJson(value, type)
     }
 
     @TypeConverter
-    fun toCountryLangList(value: String): List<GameItemEngine> {
+    fun toCountryLangList(value: String): List<List<GameItemEngine>> {
         val gson = Gson()
-        val type = object : TypeToken<List<GameItemEngine>>() {}.type
+        val type = object : TypeToken<List<List<GameItemEngine>>>() {}.type
         return gson.fromJson(value, type)
     }
 }

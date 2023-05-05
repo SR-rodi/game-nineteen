@@ -11,7 +11,7 @@ class GameListEntity(
     @ColumnInfo(name = "gameMode")
     val gameMode:String = "classic",
     @ColumnInfo(name = "list")
-    val list :List<GameItemEngine> = listOf(),
+    val list :List<List<GameItemEngine>> = listOf(),
     @ColumnInfo(name = "time")
     val time:Int = 0,
     @ColumnInfo(name = "stepCount")
@@ -20,5 +20,5 @@ class GameListEntity(
     @ColumnInfo(name = "position")
     val id: Int? = null
 ) {
-    fun toSettingGame() = SettingGame(gameMode, listOf(),time,stepCount)
+    fun toSettingGame() = SettingGame(gameMode, list,time,stepCount)
 }

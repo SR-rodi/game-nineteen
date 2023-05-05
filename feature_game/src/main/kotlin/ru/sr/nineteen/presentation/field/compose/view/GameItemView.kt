@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose.view
+package ru.sr.nineteen.presentation.field.compose.view
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable

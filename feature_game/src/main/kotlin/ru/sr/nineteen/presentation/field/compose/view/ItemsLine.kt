@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose.view
+package ru.sr.nineteen.presentation.field.compose.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -9,9 +9,9 @@ import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 
 @Composable
-fun ItemsLine(items: List<GameItemEngine>, onClickItem: (position:Int) -> Unit) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            items.forEachIndexed { index,gameItem ->
+fun ItemsLine(items: List<GameItemEngine>, onClickItem: (position: Int) -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        items.forEachIndexed { index, gameItem ->
             Box(modifier = Modifier.weight(1f)) {
                 when (gameItem.statusItem) {
 
@@ -25,6 +25,11 @@ fun ItemsLine(items: List<GameItemEngine>, onClickItem: (position:Int) -> Unit) 
 
                     StatusItem.HELP -> GameItemHelpView(item = gameItem) { onClickItem(index) }
                 }
+            }
+        }
+        if (items.size < 9) {
+            for (position in items.size until 9) {
+                Box(modifier = Modifier.weight(1f))
             }
         }
     }

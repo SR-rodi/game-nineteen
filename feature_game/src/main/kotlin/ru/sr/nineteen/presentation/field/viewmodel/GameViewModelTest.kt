@@ -75,11 +75,10 @@ class GameViewModel(
                     stepCounter = viewState.stepCounter + 1,
                     isWin = true
                 )
-                */
-/*      val deleteList = game.deleteInLine(firstPosition, lastPosition, items)
+      val deleteList = game.deleteInLine(firstPosition, lastPosition, items)
                       if (deleteList.isNotEmpty()) {
                           deleteList.forEach { index -> items.removeAt(index) }
-                      }*//*
+                      }
 
             } else {
                 items[firstPosition] = items[firstPosition].copy(statusItem = StatusItem.NOT_CHOICE)
@@ -106,15 +105,14 @@ class GameViewModel(
 
         scopeLaunch(context = Dispatchers.IO) {
             gameRepository.deleteItemList()
-*/
-/*            gameRepository.insertItemList(
+            gameRepository.insertItemList(
                 GameListEntity(
                     viewState.mode,
                     viewState.items,
                     viewState.timeCounter,
                     viewState.stepCounter
                 )
-            )*//*
+            )
 
         }
     }
@@ -159,4 +157,5 @@ class GameViewModel(
             )
         }
     }
-}*/
+}
+*/

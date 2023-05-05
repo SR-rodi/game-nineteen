@@ -1,15 +1,19 @@
-package ru.sr.nineteen.presentation.viewmodel
+package ru.sr.nineteen.presentation.field.viewmodel
 
+import android.util.Log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import ru.sr.mimeteen.database.entity.GameListEntity
 import ru.sr.mimeteen.database.repository.GameRepository
 import ru.sr.mimeteen.database.repository.RatingRepository
 import ru.sr.nineteen.BaseViewModel
+import ru.sr.nineteen.data.database.entity.RatingEntity
 import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.domain.logic.ClassicGameLogic
-import ru.sr.nineteen.presentation.viewmodel.model.GameAction
-import ru.sr.nineteen.presentation.viewmodel.model.GameEvent
-import ru.sr.nineteen.presentation.viewmodel.model.GameState
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameAction
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameState
 
 class GameViewModel(
     private val gameRepository: GameRepository,
@@ -26,8 +30,9 @@ class GameViewModel(
             GameEvent.ResetActions -> onResetAction()
             GameEvent.OnClickBackArrow -> onBackStack()
             GameEvent.OnClickHelpButton -> onGetHelpItem()
-            GameEvent.OnDispose -> {}
-            GameEvent.OnWinOpen -> {}
+            GameEvent.OnWinOpen -> onSaveAndOpenWinScreen()
+            GameEvent.OnDispose -> onDispose()
+
         }
     }
 
@@ -46,6 +51,7 @@ class GameViewModel(
         delay(100)
         viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
         viewState = viewState.copy(items = game.deleteItems(viewState.items))
+        if (viewState.items.isEmpty()) viewAction = GameAction.SaveWinIfo
     }
 
     private fun addList() {
@@ -58,6 +64,35 @@ class GameViewModel(
 
     private fun onGetHelpItem() {
         viewState = viewState.copy(items = game.helpButton(viewState.items))
+    }
+
+    private fun onSaveAndOpenWinScreen() {
+        scopeLaunch(context = Dispatchers.IO,
+            onFinally = { viewAction = GameAction.OpenWinScreen }
+        ) {
+            ratingRepository.insertNewRating(
+                RatingEntity(
+                    viewState.mode, viewState.timeCounter, viewState.stepCounter
+                )
+            )
+            gameRepository.deleteItemList()
+        }
+    }
+
+    private fun onDispose() {
+        scopeLaunch(context = Dispatchers.IO) {
+            if (viewState.items.isNotEmpty())
+                gameRepository.deleteItemList()
+            gameRepository.insertItemList(
+                GameListEntity(
+                    viewState.mode,
+                    viewState.items,
+                    viewState.timeCounter,
+                    viewState.stepCounter
+                )
+            )
+        }
+
     }
 
 }

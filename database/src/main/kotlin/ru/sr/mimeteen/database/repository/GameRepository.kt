@@ -9,7 +9,7 @@ class GameRepository(
 
     fun getGameList() = gameDao.getAll()
 
-   // fun insertItemList(itemList: GameListEntity) = gameDao.insert(itemList)
+    fun insertItemList(itemList: GameListEntity) = gameDao.insert(itemList)
 
     fun deleteItemList() = gameDao.deleteAll()
 }

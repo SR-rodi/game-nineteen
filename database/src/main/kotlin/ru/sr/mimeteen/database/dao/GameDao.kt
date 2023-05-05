@@ -13,8 +13,8 @@ interface GameDao {
     @Query("SELECT*FROM game_list")
     fun getAll(): Flow<GameListEntity?>
 
-/*    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(gameListEntity: GameListEntity)*/
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(gameListEntity: GameListEntity)
 
     @Query("DELETE FROM game_list")
     fun deleteAll()

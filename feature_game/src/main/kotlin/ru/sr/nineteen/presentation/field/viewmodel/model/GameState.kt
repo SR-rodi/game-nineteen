@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.viewmodel.model
+package ru.sr.nineteen.presentation.field.viewmodel.model
 
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 

@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose
+package ru.sr.nineteen.presentation.field.compose
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -27,14 +27,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
+import ru.alexgladkov.odyssey.compose.RootController
+import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.sr.nineteen.core_ui.R
+import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.SettingGame
-import ru.sr.nineteen.presentation.compose.view.ItemsLine
-import ru.sr.nineteen.presentation.viewmodel.GameViewModel
-import ru.sr.nineteen.presentation.viewmodel.model.GameAction
-import ru.sr.nineteen.presentation.viewmodel.model.GameEvent
-import ru.sr.nineteen.presentation.viewmodel.model.GameState
+import ru.sr.nineteen.presentation.field.compose.view.ItemsLine
+import ru.sr.nineteen.presentation.field.viewmodel.GameViewModel
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameAction
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
+import ru.sr.nineteen.presentation.field.viewmodel.model.GameState
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.Screen
@@ -54,10 +57,17 @@ fun GameScreen(settingGame: SettingGame, viewModel: GameViewModel = koinViewMode
                 viewModel.obtainEvent(GameEvent.ResetActions)
             }
 
-            null -> {}
             GameAction.OpenWinScreen -> {
-                Log.e("Kart", "WIN")
+                rootController.popBackStack()
+                rootController.push(NavigationTree.Win.name)
             }
+
+            GameAction.SaveWinIfo -> {
+                viewModel.obtainEvent(GameEvent.OnWinOpen)
+            }
+
+            null -> {}
+
         }
 
         val lifecycleOwner = LocalLifecycleOwner.current
@@ -82,25 +92,9 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
             itemsIndexed(settingGame.items) { rowId, list ->
                 Row(modifier = Modifier.fillMaxSize()) {
 
-                    ItemsLine(items = list) {columnId->
+                    ItemsLine(items = list) { columnId ->
                         evenHandler(GameEvent.OnClickItem(Position(rowId, columnId)))
                     }
-/*                    list.forEachIndexed { columnId, item ->
-                        Box(modifier = Modifier.weight(1f)) {
-                            GameItemView(item = item) {
-                                evenHandler(
-                                    GameEvent.OnClickItem(Position(rowId, columnId))
-                                )
-                            }
-                        }
-                    }*/
-
-                    if (list.size < 9) {
-                        for (i in list.size..8) {
-                            Box(modifier = Modifier.weight(1f))
-                        }
-                    }
-
                 }
             }
         }
