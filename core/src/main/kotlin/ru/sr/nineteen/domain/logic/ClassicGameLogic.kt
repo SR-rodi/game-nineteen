@@ -6,12 +6,12 @@ import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.utility.reWriteItemsChoiceOrNotChoice
+import ru.sr.nineteen.utility.reWriteItemsHelp
 
 
 class ClassicGameLogic : BaseLogic() {
 
     private val helper: Helper = Helper()
-    private var helpPosition = Pair(0, 0)
     private val positionList = mutableListOf<Position>()
 
     private var firstPosition: Position? = null
@@ -66,9 +66,15 @@ class ClassicGameLogic : BaseLogic() {
         return newItems
     }
 
-    fun helpButton(items: List<GameItemEngine>): Pair<Int, Int> {
-        helpPosition = helper.getHelpPosition(items)
-        return helpPosition
+    fun helpButton(items: List<List<GameItemEngine>>): List<List<GameItemEngine>> {
+        val helpPosition = helper.getHelpPosition(items)
+        var newItems = items.toMutableList()
+
+        if (helpPosition != null) {
+            newItems =  newItems.reWriteItemsHelp(helpPosition)
+        }
+
+        return newItems
     }
 
     fun deleteItems(

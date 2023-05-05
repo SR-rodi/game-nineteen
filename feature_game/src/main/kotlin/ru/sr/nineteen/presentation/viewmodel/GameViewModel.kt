@@ -22,12 +22,14 @@ class GameViewModel(
         when (viewEvent) {
             is GameEvent.OnStartGame -> startSetting(viewEvent.settingGame)
             is GameEvent.OnClickItem -> playGame(viewEvent.position)
-            GameEvent.OnClickAddButton-> addList()
-            else -> {}
+            GameEvent.OnClickAddButton -> addList()
+            GameEvent.ResetActions -> onResetAction()
+            GameEvent.OnClickBackArrow -> onBackStack()
+            GameEvent.OnClickHelpButton -> onGetHelpItem()
+            GameEvent.OnDispose -> {}
+            GameEvent.OnWinOpen -> {}
         }
     }
-
-
 
     private fun startSetting(settingGame: SettingGame) {
         viewState = viewState.copy(isStartTamer = true)
@@ -37,18 +39,25 @@ class GameViewModel(
             stepCounter = settingGame.stepCount,
             mode = settingGame.gameMode
         )
-        /*   startTimer()*/
     }
 
-    private fun playGame(position: Position) =scopeLaunch {
-            viewState = viewState.copy(items = game.selectItems(viewState.items, position))
-            delay(100)
-            viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
-            viewState = viewState.copy(items = game.deleteItems(viewState.items))
-        }
+    private fun playGame(position: Position) = scopeLaunch {
+        viewState = viewState.copy(items = game.selectItems(viewState.items, position))
+        delay(100)
+        viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
+        viewState = viewState.copy(items = game.deleteItems(viewState.items))
+    }
 
     private fun addList() {
         viewState = viewState.copy(items = game.addList(viewState.items))
+    }
+
+    private fun onBackStack() {
+        viewAction = GameAction.GoToBackStack
+    }
+
+    private fun onGetHelpItem() {
+        viewState = viewState.copy(items = game.helpButton(viewState.items))
     }
 
 }

@@ -1,6 +1,7 @@
 package ru.sr.nineteen.domain.logic
 
 
+import android.util.Log
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.domain.gameitem.Position
@@ -13,18 +14,29 @@ abstract class BaseLogic {
         firstPosition: Position,
         secondPosition: Position,
         items: List<List<GameItemEngine>>,
-    ): LocationStatus = if (items.checkNumberAndStatus(firstPosition, secondPosition))
-        when {
-            checkNear(firstPosition, secondPosition) -> LocationStatus.NEAR
-            checkVertical(firstPosition, secondPosition, items) -> LocationStatus.VERTICAL
-            checkHorizontalItem(firstPosition, secondPosition, items) -> LocationStatus.HORIZONTAL
-            else -> LocationStatus.PASS
-        }
-    else LocationStatus.PASS
+    ): LocationStatus {
+        Log.d("Kart", "Start locationStatus ")
+        return if (items.checkNumberAndStatus(firstPosition, secondPosition))
+
+            when {
+                checkNear(firstPosition, secondPosition) -> LocationStatus.NEAR
+
+                checkVertical(firstPosition, secondPosition, items) ->
+                    LocationStatus.VERTICAL
+
+                checkHorizontalItem(firstPosition, secondPosition, items) ->
+                    LocationStatus.HORIZONTAL
+
+                else -> LocationStatus.PASS
+            }
+        else LocationStatus.PASS
+    }
 }
 
-private fun checkNear(firstPosition: Position, secondPosition: Position) =
-    (firstPosition.row + 1 == secondPosition.row || firstPosition.column + 1 == secondPosition.column)
+private fun checkNear(firstPosition: Position, secondPosition: Position): Boolean {
+    return (firstPosition.row + 1 == secondPosition.row && firstPosition.column == secondPosition.column)
+            || (firstPosition.row == secondPosition.row && firstPosition.column + 1 == secondPosition.column)
+}
 
 private fun checkVertical(
     firstPosition: Position,
@@ -49,6 +61,7 @@ fun checkHorizontalItem(
     items: List<List<GameItemEngine>>,
     columns: Int = 9,
 ): Boolean {
+
     val startIndex = firstPosition.row * columns + firstPosition.column
     val finishIndex = secondPosition.row * columns + secondPosition.column
     val expectedSize = finishIndex - startIndex - 1

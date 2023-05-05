@@ -59,3 +59,27 @@ fun List<List<GameItemEngine>>.reWriteItemsChoiceOrNotChoice(
 
     return lists
 }
+
+fun List<List<GameItemEngine>>.reWriteItemsHelp(
+    pairPosition: Pair<Position, Position>,
+): MutableList<List<GameItemEngine>> {
+    val newItems = this.toMutableList()
+    val listFirstItems = this[pairPosition.first.row].toMutableList()
+    val listSecondItems = this[pairPosition.second.row].toMutableList()
+    val isOnLine: Boolean = pairPosition.first.row == pairPosition.second.row
+
+    listFirstItems[pairPosition.first.column] =
+        listFirstItems[pairPosition.first.column].copy(statusItem = StatusItem.HELP)
+
+    if (isOnLine)
+        listFirstItems[pairPosition.second.column] =
+            listFirstItems[pairPosition.second.column].copy(statusItem = StatusItem.HELP)
+    else listSecondItems[pairPosition.second.column] =
+        listSecondItems[pairPosition.second.column].copy(statusItem = StatusItem.HELP)
+
+    newItems[pairPosition.first.row] = listFirstItems
+    if (!isOnLine) newItems[pairPosition.second.row] = listSecondItems
+
+    return newItems
+
+}
