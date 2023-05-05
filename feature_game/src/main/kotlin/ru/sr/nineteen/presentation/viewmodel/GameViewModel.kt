@@ -44,6 +44,7 @@ class GameViewModel(
             viewState = viewState.copy(items = game.selectItems(viewState.items, position))
             delay(100)
             viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
+            viewState = viewState.copy(items = game.deleteItems(viewState.items))
         }
 
     private fun addList() {

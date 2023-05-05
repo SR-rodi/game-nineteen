@@ -1,20 +1,21 @@
 package ru.sr.nineteen.domain.logic
 
 import android.util.Log
-import ru.sr.nineteen.ClassicItemList
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.domain.gameitem.Position
-import ru.sr.nineteen.utility.reWriteItems
+import ru.sr.nineteen.utility.reWriteItemsChoiceOrNotChoice
 
 
 class ClassicGameLogic : BaseLogic() {
 
     private val helper: Helper = Helper()
-    private val deleteLine = DeleteLine()
     private var helpPosition = Pair(0, 0)
     private val positionList = mutableListOf<Position>()
+
+    private var firstPosition: Position? = null
+    private var secondPosition: Position? = null
 
     fun selectItems(
         list: List<List<GameItemEngine>>,
@@ -45,10 +46,10 @@ class ClassicGameLogic : BaseLogic() {
         return if (positionList.size == 2) {
             val isSorted = positionList.first().row == positionList.last().row
             positionList.sortBy { if (isSorted) it.column else it.row }
-            val firstPosition = positionList.first()
-            val lastPosition = positionList.last()
+            firstPosition = positionList.first()
+            secondPosition = positionList.last()
             positionList.clear()
-            listOf(firstPosition, lastPosition)
+            listOf(firstPosition!!, secondPosition!!)
         } else emptyList()
     }
 
@@ -60,7 +61,7 @@ class ClassicGameLogic : BaseLogic() {
         val listPositions = getSelectPositions(position)
         val newItems = if (listPositions.isNotEmpty()) {
             val isChoiceItems = startCheck(listPositions.first(), listPositions.last(), list)
-            list.reWriteItems(listPositions, isChoiceItems)
+            list.reWriteItemsChoiceOrNotChoice(listPositions, isChoiceItems)
         } else list
         return newItems
     }
@@ -70,14 +71,31 @@ class ClassicGameLogic : BaseLogic() {
         return helpPosition
     }
 
-    fun deleteInLine(
-        firstPosition: Int,
-        secondPosition: Int,
-        items: List<GameItemEngine>,
-    ): List<Int> {
-        return deleteLine.delete(firstPosition / 9, secondPosition / 9, items)
-    }
+    fun deleteItems(
+        items: List<List<GameItemEngine>>,
+    ): List<List<GameItemEngine>> {
+        val newItems = items.toMutableList()
+        if (firstPosition != null && secondPosition != null) {
+            val firstListSize = newItems[firstPosition!!.row].size
+            val secondListSize = newItems[secondPosition!!.row].size
+            var deleteCounterFirst = 0
+            var deleteCounterSecond = 0
 
+            newItems[firstPosition!!.row].forEach { item ->
+                if (item.statusItem == StatusItem.CHOICE) deleteCounterFirst++
+            }
+            newItems[secondPosition!!.row].forEach { item ->
+                if (item.statusItem == StatusItem.CHOICE) deleteCounterSecond++
+            }
+            val deleteList = mutableListOf<List<GameItemEngine>>()
+            if (firstListSize == deleteCounterFirst) deleteList.add(newItems[firstPosition!!.row])
+            if (secondListSize == deleteCounterSecond) deleteList.add(newItems[secondPosition!!.row])
+            if (deleteList.isNotEmpty()) newItems.removeAll(deleteList)
+            secondPosition = null
+            firstPosition = null
+        }
+        return newItems
+    }
 
     fun addList(items: List<List<GameItemEngine>>): List<List<GameItemEngine>> {
         val newItems = mutableListOf<GameItemEngine>()

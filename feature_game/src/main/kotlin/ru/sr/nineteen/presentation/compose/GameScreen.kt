@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +30,7 @@ import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.SettingGame
-import ru.sr.nineteen.presentation.compose.view.GameItemView
+import ru.sr.nineteen.presentation.compose.view.ItemsLine
 import ru.sr.nineteen.presentation.viewmodel.GameViewModel
 import ru.sr.nineteen.presentation.viewmodel.model.GameAction
 import ru.sr.nineteen.presentation.viewmodel.model.GameEvent
@@ -85,7 +82,10 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
             itemsIndexed(settingGame.items) { rowId, list ->
                 Row(modifier = Modifier.fillMaxSize()) {
 
-                    list.forEachIndexed { columnId, item ->
+                    ItemsLine(items = list) {columnId->
+                        evenHandler(GameEvent.OnClickItem(Position(rowId, columnId)))
+                    }
+/*                    list.forEachIndexed { columnId, item ->
                         Box(modifier = Modifier.weight(1f)) {
                             GameItemView(item = item) {
                                 evenHandler(
@@ -93,7 +93,7 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
                                 )
                             }
                         }
-                    }
+                    }*/
 
                     if (list.size < 9) {
                         for (i in list.size..8) {

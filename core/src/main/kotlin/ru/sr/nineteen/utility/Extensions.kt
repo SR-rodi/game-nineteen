@@ -1,6 +1,5 @@
 package ru.sr.nineteen.utility
 
-import android.util.Log
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.StatusItem
@@ -22,7 +21,7 @@ fun List<List<GameItemEngine>>.checkNumberAndStatus(
 }
 
 
-fun List<List<GameItemEngine>>.reWriteItems(
+fun List<List<GameItemEngine>>.reWriteItemsChoiceOrNotChoice(
     listPositions: List<Position>,
     isChoiceItems: Boolean,
 ): MutableList<List<GameItemEngine>> {
