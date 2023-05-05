@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.core_ui.R
+import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.view.GameItemView
 import ru.sr.nineteen.presentation.viewmodel.GameViewModel
@@ -81,14 +82,12 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
         GameStatisticView(settingGame)
 
         LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(4.dp)) {
-            itemsIndexed(settingGame.items) { parentPosition, list ->
+            itemsIndexed(settingGame.items) { rowId, list ->
                 Row(modifier = Modifier.fillMaxSize()) {
-                    list.forEachIndexed { childPositions, item ->
+                    list.forEachIndexed { columnId, item ->
                         Box(modifier = Modifier.weight(1f)) {
-                            /*Log.e("Kart","item = $item , childPositions = $childPositions parentPosition = $parentPosition")*/
                             GameItemView(item = item) {
-                                evenHandler(GameEvent.OnClickItem(Pair(parentPosition, childPositions)
-                                    )
+                                evenHandler(GameEvent.OnClickItem(Position(rowId, columnId))
                                 )
                             }
                         }

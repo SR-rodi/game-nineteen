@@ -4,6 +4,7 @@ import android.util.Log
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
+import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.utility.reWriteItems
 
 
@@ -12,37 +13,37 @@ class ClassicGameLogic : BaseLogic() {
     private val helper: Helper = Helper()
     private val deleteLine = DeleteLine()
     private var helpPosition = Pair(0, 0)
-    private val positionList = mutableListOf<Pair<Int, Int>>()
+    private val positionList = mutableListOf<Position>()
 
     fun selectItems(
         list: List<List<GameItemEngine>>,
-        position: Pair<Int, Int>,
+        position:Position,
     ): List<List<GameItemEngine>> {
         val lists = list.toMutableList()
-        val items = lists[position.first].toMutableList()
+        val items = lists[position.row].toMutableList()
         val status =
-            if (items[position.second].statusItem == StatusItem.SELECT) StatusItem.NOT_CHOICE
+            if (items[position.column].statusItem == StatusItem.SELECT) StatusItem.NOT_CHOICE
             else StatusItem.SELECT
 
-        items[position.second] = items[position.second].copy(statusItem = status)
+        items[position.column] = items[position.column].copy(statusItem = status)
 
-        lists[position.first] = items
+        lists[position.row] = items
         return lists
     }
 
     private fun startCheck(
-        firstPosition: Pair<Int, Int>,
-        secondPosition: Pair<Int, Int>,
+        firstPosition: Position,
+        secondPosition: Position,
         items: List<List<GameItemEngine>>,
     ): Boolean {
         return locationStatus(firstPosition, secondPosition, items) != LocationStatus.PASS
     }
 
-    private fun getSelectPositions(position: Pair<Int, Int>): List<Pair<Int, Int>> {
+    private fun getSelectPositions(position:Position): List<Position> {
         positionList.add(position)
         return if (positionList.size == 2) {
-            val isSorted = positionList.first().first == positionList.last().first
-            positionList.sortBy { if (isSorted) it.second else it.first }
+            val isSorted = positionList.first().row == positionList.last().row
+            positionList.sortBy { if (isSorted) it.column else it.row }
             val firstPosition = positionList.first()
             val lastPosition = positionList.last()
             positionList.clear()
@@ -51,7 +52,7 @@ class ClassicGameLogic : BaseLogic() {
     }
 
     fun choiceItems(
-        position: Pair<Int, Int>,
+        position: Position,
         list: List<List<GameItemEngine>>,
     ): List<List<GameItemEngine>> {
 

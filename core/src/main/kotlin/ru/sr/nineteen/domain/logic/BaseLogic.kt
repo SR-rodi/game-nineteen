@@ -4,6 +4,7 @@ package ru.sr.nineteen.domain.logic
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
+import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.utility.checkNumberAndStatus
 import java.net.PasswordAuthentication
 import kotlin.math.abs
@@ -11,8 +12,8 @@ import kotlin.math.abs
 abstract class BaseLogic {
 
     protected fun locationStatus(
-        firstPosition: Pair<Int, Int>,
-        secondPosition: Pair<Int, Int>,
+        firstPosition: Position,
+        secondPosition: Position,
         items: List<List<GameItemEngine>>,
     ): LocationStatus {
 
@@ -23,16 +24,16 @@ abstract class BaseLogic {
 }
 
 private fun checkPosition(
-    firstPosition: Pair<Int, Int>,
-    secondPosition: Pair<Int, Int>,
+    firstPosition: Position,
+    secondPosition: Position,
 ): LocationStatus {
 
 
     return when {
-        firstPosition.second == secondPosition.second
-                && firstPosition.first == secondPosition.first -> LocationStatus.PASS
-        firstPosition.first == secondPosition.first -> LocationStatus.HORIZONTAL
-        firstPosition.second == secondPosition.second -> LocationStatus.VERTICAL
+        firstPosition.column == secondPosition.column
+                && firstPosition.row == secondPosition.row -> LocationStatus.PASS
+        firstPosition.row == secondPosition.row -> LocationStatus.HORIZONTAL
+        firstPosition.column == secondPosition.column -> LocationStatus.VERTICAL
         else -> LocationStatus.PASS
     }
 }

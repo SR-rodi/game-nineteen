@@ -4,6 +4,7 @@ import kotlinx.coroutines.delay
 import ru.sr.mimeteen.database.repository.GameRepository
 import ru.sr.mimeteen.database.repository.RatingRepository
 import ru.sr.nineteen.BaseViewModel
+import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.domain.logic.ClassicGameLogic
 import ru.sr.nineteen.presentation.viewmodel.model.GameAction
@@ -36,7 +37,7 @@ class GameViewModel(
         /*   startTimer()*/
     }
 
-    private fun playGame(position: Pair<Int, Int>) {
+    private fun playGame(position: Position) {
         scopeLaunch {
             viewState = viewState.copy(items = game.selectItems(viewState.items, position))
             delay(100)

@@ -2,15 +2,16 @@ package ru.sr.nineteen.utility
 
 import android.util.Log
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
+import ru.sr.nineteen.domain.gameitem.Position
 import ru.sr.nineteen.domain.gameitem.StatusItem
 
 fun List<List<GameItemEngine>>.checkNumberAndStatus(
-    firstPosition: Pair<Int, Int>,
-    secondPosition: Pair<Int, Int>,
+    firstPosition: Position,
+    secondPosition: Position,
 ): Boolean {
 
-    val itemOne = this[firstPosition.first][firstPosition.second]
-    val itemTwo = this[secondPosition.first][secondPosition.second]
+    val itemOne = this[firstPosition.row][firstPosition.column]
+    val itemTwo = this[secondPosition.row][secondPosition.column]
 
     val a = itemOne.number == itemTwo.number || itemOne.number + itemTwo.number == 10
 
@@ -22,46 +23,40 @@ fun List<List<GameItemEngine>>.checkNumberAndStatus(
 
 
 fun List<List<GameItemEngine>>.reWriteItems(
-    listPositions: List<Pair<Int, Int>>,
+    listPositions: List<Position>,
     isChoiceItems: Boolean,
 ): MutableList<List<GameItemEngine>> {
     val lists = this.toMutableList()
-    val itemsOne = lists[listPositions.first().first].toMutableList()
-    val itemsTwo = lists[listPositions.last().first].toMutableList()
-    val isOneLine = listPositions.first().first == listPositions.last().first
+    val itemsOne = lists[listPositions.first().row].toMutableList()
+    val itemsTwo = lists[listPositions.last().row].toMutableList()
+    val isOneLine = listPositions.first().row == listPositions.last().row
 
     if (isChoiceItems) {
+        itemsOne[listPositions.first().column] =
+            itemsOne[listPositions.first().column].copy(statusItem = StatusItem.CHOICE)
         if (isOneLine) {
-            itemsOne[listPositions.first().second] =
-                itemsOne[listPositions.first().second].copy(statusItem = StatusItem.CHOICE)
-            itemsOne[listPositions.last().second] =
-                itemsOne[listPositions.last().second].copy(statusItem = StatusItem.CHOICE)
+            itemsOne[listPositions.last().column] =
+                itemsOne[listPositions.last().column].copy(statusItem = StatusItem.CHOICE)
 
         } else {
-            itemsOne[listPositions.first().second] =
-                itemsOne[listPositions.first().second].copy(statusItem = StatusItem.CHOICE)
-            itemsTwo[listPositions.last().second] =
-                itemsTwo[listPositions.last().second].copy(statusItem = StatusItem.CHOICE)
+            itemsTwo[listPositions.last().column] =
+                itemsTwo[listPositions.last().column].copy(statusItem = StatusItem.CHOICE)
 
         }
     } else {
+        itemsOne[listPositions.first().column] =
+            itemsOne[listPositions.first().column].copy(statusItem = StatusItem.NOT_CHOICE)
         if (isOneLine) {
-            itemsOne[listPositions.first().second] =
-                itemsOne[listPositions.first().second].copy(statusItem = StatusItem.NOT_CHOICE)
-            itemsOne[listPositions.last().second] =
-                itemsOne[listPositions.last().second].copy(statusItem = StatusItem.NOT_CHOICE)
+            itemsOne[listPositions.last().column] =
+                itemsOne[listPositions.last().column].copy(statusItem = StatusItem.NOT_CHOICE)
         } else {
-            itemsOne[listPositions.first().second] =
-                itemsOne[listPositions.first().second].copy(statusItem = StatusItem.NOT_CHOICE)
-            itemsTwo[listPositions.last().second] =
-                itemsTwo[listPositions.last().second].copy(statusItem = StatusItem.NOT_CHOICE)
+            itemsTwo[listPositions.last().column] =
+                itemsTwo[listPositions.last().column].copy(statusItem = StatusItem.NOT_CHOICE)
         }
     }
+    lists[listPositions.first().row] = itemsOne
 
-    if (isOneLine) lists[listPositions.first().first] = itemsOne
-    else {
-        lists[listPositions.first().first] = itemsOne
-        lists[listPositions.last().first] = itemsTwo
-    }
+    if (!isOneLine) lists[listPositions.last().row] = itemsTwo
+
     return lists
 }
