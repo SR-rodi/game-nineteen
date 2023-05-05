@@ -17,15 +17,21 @@ import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.theme.GameTheme
 
 @Composable
-fun GameItemChoiceView(
+fun BaseGameItem(
     item: GameItemEngine,
-    cardColor: Color = GameTheme.colors.choice,
+    cardColor: Color = GameTheme.colors.notChoice,
+    borderColor: Color? = null,
+    onClickItem: () -> Unit = {},
 ) {
+    val modifier =
+        if (borderColor == null) Modifier else Modifier.border(width = 2.dp, color = borderColor)
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = GameTheme.shapes.small)
-            .padding(4.dp),
+            .padding(4.dp)
+            .then(modifier)
+            .clickable { onClickItem() },
         shape = GameTheme.shapes.small,
         colors = CardDefaults.cardColors(containerColor = cardColor)
     ) {
@@ -41,30 +47,21 @@ fun GameItemChoiceView(
 }
 
 @Composable
+fun GameItemChoiceView(
+    item: GameItemEngine,
+    cardColor: Color = GameTheme.colors.choice,
+) {
+    BaseGameItem(item = item, cardColor = cardColor)
+}
+
+@Composable
 fun GameItemNotChoiceView(
     item: GameItemEngine,
     cardColor: Color = GameTheme.colors.notChoice,
     onClickItem: () -> Unit,
 ) {
+    BaseGameItem(item = item, cardColor = cardColor, onClickItem = onClickItem)
 
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape = GameTheme.shapes.small)
-            .padding(4.dp)
-            .clickable { onClickItem() },
-        shape = GameTheme.shapes.small,
-        colors = CardDefaults.cardColors(containerColor = cardColor)
-    ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 5.dp),
-            textAlign = TextAlign.Center,
-            text = item.number.toString(),
-            style = GameTheme.fonts.h2.copy(color = GameTheme.colors.textTitle)
-        )
-    }
 }
 
 @Composable
@@ -74,24 +71,7 @@ fun GameItemSelectView(
     onClickItem: () -> Unit,
 ) {
 
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape = GameTheme.shapes.small)
-            .padding(4.dp)
-            .clickable { onClickItem() },
-        shape = GameTheme.shapes.small,
-        colors = CardDefaults.cardColors(containerColor = cardColor)
-    ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 5.dp),
-            textAlign = TextAlign.Center,
-            text = item.number.toString(),
-            style = GameTheme.fonts.h2.copy(color = GameTheme.colors.textTitle)
-        )
-    }
+    BaseGameItem(item = item, cardColor = cardColor, onClickItem = onClickItem)
 }
 
 
@@ -103,24 +83,10 @@ fun GameItemHelpView(
     onClickItem: () -> Unit,
 ) {
 
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape = GameTheme.shapes.small)
-            .padding(4.dp)
-            .border(width = 1.dp, color = borderColor)
-            .clickable { onClickItem() },
-        shape = GameTheme.shapes.small,
-        colors = CardDefaults.cardColors(containerColor = cardColor)
-    ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 5.dp),
-            textAlign = TextAlign.Center,
-            text = item.number.toString(),
-            style = GameTheme.fonts.h2.copy(color = GameTheme.colors.textTitle)
-        )
-    }
+    BaseGameItem(
+        item = item,
+        cardColor = cardColor,
+        onClickItem = onClickItem,
+        borderColor = borderColor
+    )
 }
-
