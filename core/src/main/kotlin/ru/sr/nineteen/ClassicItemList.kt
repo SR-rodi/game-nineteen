@@ -12,7 +12,8 @@ class ClassicItemList : CreateItemList() {
         for (row in 1..3) {
             val childItems = mutableListOf<GameItemEngine>()
             for (column in 1..COLUMN_SIZE) {
-                childItems.add(GameItemEngine(baseItem[numberIndex], StatusItem.NOT_CHOICE))
+                if (baseItem.size>numberIndex)
+                    childItems.add(GameItemEngine(baseItem[numberIndex], StatusItem.NOT_CHOICE))
                 numberIndex++
             }
             items.add(childItems)
@@ -24,4 +25,3 @@ class ClassicItemList : CreateItemList() {
         private const val COLUMN_SIZE = 9
     }
 }
-

@@ -38,9 +38,9 @@ class DeleteLine() {
         else items.lastIndex
 
         for (i in line * 9..n) {
-            if (items[i].statusItem == StatusItem.CHOICE || items[i].statusItem == StatusItem.NOT_VISIBLE)
+/*            if (items[i].statusItem == StatusItem.CHOICE || items[i].statusItem == StatusItem.NOT_VISIBLE)
                 deleteListPosition.add(i)
-            else break
+            else break*/
         }
     }
 

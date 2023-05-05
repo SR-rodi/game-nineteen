@@ -2,12 +2,10 @@ package ru.sr.nineteen.domain.logic
 
 
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
-import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
 import ru.sr.nineteen.domain.gameitem.Position
+import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.utility.checkNumberAndStatus
-import java.net.PasswordAuthentication
-import kotlin.math.abs
 
 abstract class BaseLogic {
 
@@ -15,88 +13,55 @@ abstract class BaseLogic {
         firstPosition: Position,
         secondPosition: Position,
         items: List<List<GameItemEngine>>,
-    ): LocationStatus {
-
-        return if (items.checkNumberAndStatus(firstPosition, secondPosition))
-            checkPosition(firstPosition, secondPosition)
-        else LocationStatus.PASS
-    }
-}
-
-private fun checkPosition(
-    firstPosition: Position,
-    secondPosition: Position,
-): LocationStatus {
-
-
-    return when {
-        firstPosition.column == secondPosition.column
-                && firstPosition.row == secondPosition.row -> LocationStatus.PASS
-        firstPosition.row == secondPosition.row -> LocationStatus.HORIZONTAL
-        firstPosition.column == secondPosition.column -> LocationStatus.VERTICAL
-        else -> LocationStatus.PASS
-    }
-}
-
-
-/*        when {
-            checkNear(first, second) == LocationStatus.NEAR -> LocationStatus.NEAR
-            checkHorizontal(
-                first,
-                second,
-                items
-            ) == LocationStatus.HORIZONTAL -> LocationStatus.HORIZONTAL
-
-            checkVertical(
-                first,
-                second,
-                items
-            ) == LocationStatus.VERTICAL -> LocationStatus.VERTICAL
-
+    ): LocationStatus = if (items.checkNumberAndStatus(firstPosition, secondPosition))
+        when {
+            checkNear(firstPosition, secondPosition) -> LocationStatus.NEAR
+            checkVertical(firstPosition, secondPosition, items) -> LocationStatus.VERTICAL
+            checkHorizontalItem(firstPosition, secondPosition, items) -> LocationStatus.HORIZONTAL
             else -> LocationStatus.PASS
-
-        }*/
-
-/*   if (checkNear(first, second) == LocationStatus.NEAR) LocationStatus.NEAR
-   else if (checkHorizontal(first, second, items) == LocationStatus.HORIZONTAL) LocationStatus.HORIZONTAL
-   else if (checkVertical(first, second, items) == LocationStatus.VERTICAL) LocationStatus.VERTICAL
-   else LocationStatus.PASS*/
-
-private fun checkNear(first: Int, second: Int) =
-    when (first + 1 == second || first + 9 == second) {
-        true -> LocationStatus.NEAR
-        false -> LocationStatus.PASS
-    }
-
-private fun checkHorizontal(
-    first: Int,
-    second: Int,
-    items: List<GameItemEngine>,
-): LocationStatus {
-    var counter = 0
-    for (i in first + 1 until second) {
-        if (items[i].statusItem == StatusItem.CHOICE) counter++
-        else break
-    }
-    return when (abs(first - second) - 1 == counter) {
-        true -> LocationStatus.HORIZONTAL
-        false -> LocationStatus.PASS
-    }
+        }
+    else LocationStatus.PASS
 }
+
+private fun checkNear(firstPosition: Position, secondPosition: Position) =
+    (firstPosition.row + 1 == secondPosition.row || firstPosition.column + 1 == secondPosition.column)
 
 private fun checkVertical(
-    first: Int,
-    second: Int,
-    items: List<GameItemEngine>,
-): LocationStatus {
-    var counter = 0
-    if ((second - first) % 9 == 0)
-        for (i in 1..second / 9 - first / 9) {
-            if (items[first + (9 * i)].statusItem == StatusItem.CHOICE) counter++
-            else break
-        }
-    return when (counter > 0 && counter == (second / 9 - first / 9) - 1) {
-        true -> LocationStatus.VERTICAL
-        false -> LocationStatus.PASS
+    firstPosition: Position,
+    secondPosition: Position,
+    items: List<List<GameItemEngine>>,
+): Boolean {
+    if (firstPosition.row == secondPosition.row) return false
+    if (firstPosition.column != secondPosition.column) return false
+    val listItem = mutableListOf<GameItemEngine>()
+    val expectedSize = secondPosition.row - firstPosition.row - 1
+    for (row in firstPosition.row + 1 until secondPosition.row) {
+        val item = items[row][firstPosition.column]
+        if (item.statusItem == StatusItem.CHOICE) listItem.add(item)
     }
+    return listItem.size == expectedSize
+}
+
+
+fun checkHorizontalItem(
+    firstPosition: Position,
+    secondPosition: Position,
+    items: List<List<GameItemEngine>>,
+    columns: Int = 9,
+): Boolean {
+    val startIndex = firstPosition.row * columns + firstPosition.column
+    val finishIndex = secondPosition.row * columns + secondPosition.column
+    val expectedSize = finishIndex - startIndex - 1
+    val listItem = mutableListOf<GameItemEngine>()
+
+    for (row in firstPosition.row..secondPosition.row) {
+        val startColumn = if (row == firstPosition.row) firstPosition.column + 1 else 0
+        val finishColumn = if (row == secondPosition.row) secondPosition.column else columns
+        for (column in startColumn until finishColumn) {
+            val item = items[row][column]
+            if (item.statusItem == StatusItem.CHOICE) listItem.add(item)
+        }
+    }
+
+    return listItem.size == expectedSize
 }

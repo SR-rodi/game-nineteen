@@ -1,6 +1,7 @@
 package ru.sr.nineteen.domain.logic
 
 import android.util.Log
+import ru.sr.nineteen.ClassicItemList
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 import ru.sr.nineteen.domain.gameitem.StatusItem
 import ru.sr.nineteen.domain.gameitem.LocationStatus
@@ -17,7 +18,7 @@ class ClassicGameLogic : BaseLogic() {
 
     fun selectItems(
         list: List<List<GameItemEngine>>,
-        position:Position,
+        position: Position,
     ): List<List<GameItemEngine>> {
         val lists = list.toMutableList()
         val items = lists[position.row].toMutableList()
@@ -39,7 +40,7 @@ class ClassicGameLogic : BaseLogic() {
         return locationStatus(firstPosition, secondPosition, items) != LocationStatus.PASS
     }
 
-    private fun getSelectPositions(position:Position): List<Position> {
+    private fun getSelectPositions(position: Position): List<Position> {
         positionList.add(position)
         return if (positionList.size == 2) {
             val isSorted = positionList.first().row == positionList.last().row
@@ -78,18 +79,33 @@ class ClassicGameLogic : BaseLogic() {
     }
 
 
-    fun addList(items: List<GameItemEngine>): List<GameItemEngine> {
+    fun addList(items: List<List<GameItemEngine>>): List<List<GameItemEngine>> {
         val newItems = mutableListOf<GameItemEngine>()
-        items.forEach { gameItem ->
-            if (gameItem.statusItem == StatusItem.HELP || gameItem.statusItem == StatusItem.SELECT)
-                gameItem.statusItem = StatusItem.NOT_CHOICE
+        val oldItems = mutableListOf<GameItemEngine>()
+        val newList = mutableListOf<List<GameItemEngine>>()
+        var counter = 0
 
-            if (gameItem.statusItem == StatusItem.NOT_CHOICE)
-                newItems.add(GameItemEngine(gameItem.number, gameItem.statusItem))
+        items.forEach { list ->
+            list.forEach { gameItem ->
+                oldItems.add(gameItem)
+                if (gameItem.statusItem == StatusItem.HELP || gameItem.statusItem == StatusItem.SELECT)
+                    gameItem.statusItem = StatusItem.NOT_CHOICE
+
+                if (gameItem.statusItem == StatusItem.NOT_CHOICE)
+                    newItems.add(GameItemEngine(gameItem.number, gameItem.statusItem))
+            }
+        }
+        oldItems.addAll(newItems)
+
+        while (oldItems.size > counter) {
+            val listItems = mutableListOf<GameItemEngine>()
+            for (column in 0 until 9) {
+                if (oldItems.size > counter) listItems.add(oldItems[counter])
+                counter++
+            }
+            newList.add(listItems)
         }
 
-        val newList = items.toMutableList()
-        newList.addAll(newItems)
         return newList
     }
 

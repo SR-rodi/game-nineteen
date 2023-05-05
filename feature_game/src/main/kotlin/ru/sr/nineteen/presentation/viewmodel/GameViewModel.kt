@@ -22,9 +22,12 @@ class GameViewModel(
         when (viewEvent) {
             is GameEvent.OnStartGame -> startSetting(viewEvent.settingGame)
             is GameEvent.OnClickItem -> playGame(viewEvent.position)
+            GameEvent.OnClickAddButton-> addList()
             else -> {}
         }
     }
+
+
 
     private fun startSetting(settingGame: SettingGame) {
         viewState = viewState.copy(isStartTamer = true)
@@ -37,12 +40,14 @@ class GameViewModel(
         /*   startTimer()*/
     }
 
-    private fun playGame(position: Position) {
-        scopeLaunch {
+    private fun playGame(position: Position) =scopeLaunch {
             viewState = viewState.copy(items = game.selectItems(viewState.items, position))
             delay(100)
             viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
         }
 
+    private fun addList() {
+        viewState = viewState.copy(items = game.addList(viewState.items))
     }
+
 }

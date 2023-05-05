@@ -31,7 +31,6 @@ fun GameItemView(item: GameItemEngine, evenHandler: () -> Unit) {
     var modifier: Modifier by remember { mutableStateOf(Modifier.clickable { evenHandler() }) }
 
     when (item.statusItem) {
-        StatusItem.NOT_VISIBLE -> modifier = Modifier.size(0.dp)
         StatusItem.CHOICE -> {
             modifier = Modifier
             cardColor = GameTheme.colors.choice

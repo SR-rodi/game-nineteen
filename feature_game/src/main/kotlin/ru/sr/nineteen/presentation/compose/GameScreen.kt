@@ -84,12 +84,20 @@ fun GameFieldView(settingGame: GameState, evenHandler: (GameEvent) -> Unit) {
         LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(4.dp)) {
             itemsIndexed(settingGame.items) { rowId, list ->
                 Row(modifier = Modifier.fillMaxSize()) {
+
                     list.forEachIndexed { columnId, item ->
                         Box(modifier = Modifier.weight(1f)) {
                             GameItemView(item = item) {
-                                evenHandler(GameEvent.OnClickItem(Position(rowId, columnId))
+                                evenHandler(
+                                    GameEvent.OnClickItem(Position(rowId, columnId))
                                 )
                             }
+                        }
+                    }
+
+                    if (list.size < 9) {
+                        for (i in list.size..8) {
+                            Box(modifier = Modifier.weight(1f))
                         }
                     }
 
