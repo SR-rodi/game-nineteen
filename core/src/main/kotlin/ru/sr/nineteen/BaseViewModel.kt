@@ -1,5 +1,6 @@
 package ru.sr.nineteen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
@@ -55,8 +56,9 @@ abstract class BaseViewModel<State : Any, Action : Any, Event : Any>(initialStat
                 onLoading()
                 job()
                 onSuccess()
-            } catch (t: IOException) {
-                onError(t)
+            } catch (e: Exception) {
+                Log.e("Kart", e.message.toString())
+                onError(e)
             } finally {
                 onFinally()
             }

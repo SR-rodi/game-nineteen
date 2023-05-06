@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="auth_forgot_password">Забыли пароль?</string>
+    <string name="auth_to_come_in">Войти</string>
+    <string name="auth_to_come_in_guest">Войти как гость</string>
+    <string name="auth_registration_button">Зарегестрироваться</string>
+
+</resources>

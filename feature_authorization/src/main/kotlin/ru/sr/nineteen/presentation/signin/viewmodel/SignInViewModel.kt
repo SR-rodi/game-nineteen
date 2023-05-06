@@ -1,5 +1,7 @@
 package ru.sr.nineteen.presentation.signin.viewmodel
 
+import android.util.Log
+import kotlinx.coroutines.Dispatchers
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.data.mapper.AuthUiMapper
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
@@ -7,22 +9,47 @@ import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
 class SignInViewModel(
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
     private val uiMapper: AuthUiMapper,
-) : BaseViewModel<AuthState, AuthAction, AuthEvent>(AuthState()) {
+) : BaseViewModel<SignInState, SignInAction, SignInEvent>(SignInState()) {
 
-    override fun obtainEvent(viewEvent: AuthEvent) {
+    override fun obtainEvent(viewEvent: SignInEvent) {
         when (viewEvent) {
-            is AuthEvent.OnClickRegistrationButton -> openRegistrationScreen(viewEvent.email)
-            is AuthEvent.OnClickSignInButton -> startAuth(viewEvent.email, viewEvent.password)
-            AuthEvent.OnClickSkipAuthButton -> openMenu()
+            is SignInEvent.OnClickRegistrationButton -> openRegistrationScreen(viewState.email)
+            SignInEvent.OnClickSignInButton -> startAuth(viewState.email, viewState.password)
+            SignInEvent.OnClickSkipAuthButton -> openMenu()
+            is SignInEvent.OnChangeEmail -> onChangeEmail(viewEvent.email)
+            is SignInEvent.OnChangePassword -> onChangePassword(viewEvent.password)
+            SignInEvent.OnClearEmail -> onClearEmail()
+            SignInEvent.OnClickForgotPasswordButton -> onOpenResetPasswordScreen()
+            SignInEvent.OnOpenWarning -> openWarning()
         }
     }
 
+    private fun openWarning() {
+    }
+
+    private fun onOpenResetPasswordScreen() {
+        viewAction = SignInAction.OpenResetPassword
+    }
+
+    private fun onClearEmail() {
+        viewState = viewState.copy(email = "")
+    }
+
+    private fun onChangeEmail(email: String) {
+        viewState = viewState.copy(email = email)
+    }
+
+    private fun onChangePassword(password: String) {
+        viewState = viewState.copy(password = password)
+    }
+
     private fun openRegistrationScreen(email: String) {
-        viewAction = AuthAction.OpenRegistration(email)
+        viewAction = SignInAction.OpenRegistration(email)
     }
 
     private fun startAuth(email: String, password: String) {
         scopeLaunch(
+            context = Dispatchers.IO,
             onLoading = ::startLoadingAuth,
             onSuccess = ::successAuth,
             onError = ::onError
@@ -35,7 +62,7 @@ class SignInViewModel(
     }
 
     private fun openMenu(email: String? = null) {
-        viewAction = AuthAction.OpenMenu(email)
+        viewAction = SignInAction.OpenMenu(email)
     }
 
     private fun startLoadingAuth() {
@@ -44,7 +71,6 @@ class SignInViewModel(
 
     private fun successAuth() {
         viewState = viewState.copy(isLoading = false)
-
     }
 
     private fun onError(error: Exception) {
@@ -54,20 +80,27 @@ class SignInViewModel(
 
 }
 
-sealed interface AuthAction {
-    class OpenMenu(email: String?) : AuthAction
-    class OpenRegistration(email: String) : AuthAction
+sealed interface SignInAction {
+    object OpenResetPassword : SignInAction
+    class OpenMenu(email: String?) : SignInAction
+    class OpenRegistration(email: String) : SignInAction
 
 }
 
-sealed interface AuthEvent {
-    class OnClickSignInButton(val email: String, val password: String) : AuthEvent
-    class OnClickRegistrationButton(val email: String) : AuthEvent
-    object OnClickSkipAuthButton : AuthEvent
-
+sealed interface SignInEvent {
+    object OnClickSignInButton : SignInEvent
+    object OnClickRegistrationButton : SignInEvent
+    class OnChangePassword(val password: String) : SignInEvent
+    class OnChangeEmail(val email: String) : SignInEvent
+    object OnClickSkipAuthButton : SignInEvent
+    object OnClearEmail : SignInEvent
+    object OnClickForgotPasswordButton : SignInEvent
+    object OnOpenWarning : SignInEvent
 }
 
-data class AuthState(
+data class SignInState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
+    val email: String = "",
+    val password: String = "",
 )

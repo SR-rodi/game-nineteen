@@ -25,7 +25,8 @@ class AuthRepositoryImpl(
         email: String,
         password: String,
     ): AuthUserDomainModel {
-        val user = auth.signInWithEmailAndPassword(email, password).await().user
+
+        val user = auth.signInWithEmailAndPassword("rodin_sr@mail.ru", "12345678").await().user
             ?: throw FirebaseNotAuth()
         return domainMapper.firebaseUserToAuthUserDomainModel(user)
     }

@@ -1,5 +1,7 @@
 package ru.sr.nineteen.view
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,17 +17,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.theme.GameTheme
 
+@SuppressLint("MissingColorAlphaChannel")
 @Composable
 fun ActionButtonView(
     text: String,
     enabled: Boolean = true,
     padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp),
     containerColor: Color = GameTheme.colors.blue_400,
-    contentColor:Color = GameTheme.colors.text,
+    contentColor: Color = GameTheme.colors.text,
+    borderColor: Color = GameTheme.colors.blue_500,
+    isOutLine: Boolean = false,
     onClick: () -> Unit,
 ) {
+
+
     val buttonColors = ButtonDefaults.buttonColors(
-        containerColor = containerColor,
+        containerColor = if (isOutLine) Color(0xFCFCFC) else containerColor,
         contentColor = contentColor,
     )
 
@@ -36,11 +43,15 @@ fun ActionButtonView(
         colors = buttonColors,
         shape = GameTheme.shapes.small,
         enabled = enabled,
+        border = if (!isOutLine) null else BorderStroke(width = 1.dp, color = borderColor),
         onClick = { onClick() },
     ) {
         Text(
             text = text,
-            style = GameTheme.fonts.h3.copy(color = GameTheme.colors.textButton)
+            style = GameTheme.fonts.h3
+                .copy(
+                    color = if (isOutLine) GameTheme.colors.textTitle else GameTheme.colors.textButton
+                )
         )
     }
 }
