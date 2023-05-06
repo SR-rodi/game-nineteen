@@ -1,0 +1,34 @@
+package ru.sr.nineteen.data.repository
+
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
+import ru.sr.nineteen.data.mapper.AuthDomainMapper
+import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.repository.AuthRepository
+
+class AuthRepositoryImpl(
+    private val auth: FirebaseAuth,
+    private val domainMapper: AuthDomainMapper,
+) : AuthRepository {
+    override suspend fun getCurrentUser() = auth.currentUser
+
+    override suspend fun createUserWithEmailAndPassword(
+        email: String,
+        password: String,
+    ): AuthUserDomainModel {
+        val user = auth.createUserWithEmailAndPassword(email, password).await().user
+            ?: throw FirebaseNotAuth()
+        return domainMapper.firebaseUserToAuthUserDomainModel(user)
+    }
+
+    override suspend fun signInWithEmailAndPassword(
+        email: String,
+        password: String,
+    ): AuthUserDomainModel {
+        val user = auth.signInWithEmailAndPassword(email, password).await().user
+            ?: throw FirebaseNotAuth()
+        return domainMapper.firebaseUserToAuthUserDomainModel(user)
+    }
+
+}
+

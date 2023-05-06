@@ -3,13 +3,14 @@ package ru.sr.nineteen.app
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import ru.sr.nineteen.di.authorizationModule
 import ru.sr.nineteen.di.dataBaseModule
 import ru.sr.nineteen.di.gameViewModelModule
 import ru.sr.nineteen.di.menuViewModelModule
 import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
 
-class GameApp:Application(){
+class GameApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -23,7 +24,7 @@ class GameApp:Application(){
                     menuViewModelModule(),
                     gameViewModelModule(),
                     ratingModule()
-                )
+                ) + authorizationModule()
             )
         }
     }

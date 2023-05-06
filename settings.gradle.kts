@@ -22,4 +22,5 @@ include (":feature_game")
 include (":feature_rating")
 include (":feature_training")
 include (":feature_menu")
+include (":feature_authorization")
 

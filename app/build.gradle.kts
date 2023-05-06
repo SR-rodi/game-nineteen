@@ -49,9 +49,12 @@ dependencies {
     implementation(project(":feature_menu"))
     implementation(project(":feature_game"))
     implementation(project(":feature_rating"))
+    implementation(project(":feature_authorization"))
+
 
     implementation (platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-auth-ktx")
 
     implementation("io.github.alexgladkov:odyssey-core:1.3.1")
     implementation("io.github.alexgladkov:odyssey-compose:1.3.1")

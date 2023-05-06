@@ -46,7 +46,7 @@ abstract class BaseViewModel<State : Any, Action : Any, Event : Any>(initialStat
         context: CoroutineContext = EmptyCoroutineContext,
         crossinline onLoading: () -> Unit = {},
         crossinline onSuccess: () -> Unit = {},
-        crossinline onError: (t: Throwable) -> Unit = {},
+        crossinline onError: (t: Exception) -> Unit = {},
         crossinline onFinally: () -> Unit = {},
         crossinline job: suspend () -> Unit,
     ): Job {
