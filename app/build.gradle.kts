@@ -4,7 +4,6 @@ plugins {
     id ("kotlin-kapt")
     id ("kotlin-parcelize")
     id ("com.google.gms.google-services")
-    id ("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -64,10 +63,6 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.5.1")
 
     implementation ("io.insert-koin:koin-android:3.4.0")
-
-    implementation( "androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation ("androidx.fragment:fragment-ktx:1.5.7")
-
 
     implementation ("androidx.core:core-ktx:1.10.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
