@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
-import ru.alexgladkov.odyssey.compose.RootController
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.domain.NavigationTree
@@ -54,12 +53,13 @@ fun GameScreen(settingGame: SettingGame, viewModel: GameViewModel = koinViewMode
         when (action) {
             GameAction.GoToBackStack -> {
                 rootController.popBackStack()
-                viewModel.obtainEvent(GameEvent.ResetActions)
+                viewModel.obtainEvent(GameEvent.OnResetActions)
             }
 
-            GameAction.OpenWinScreen -> {
+            is GameAction.OpenWinScreen -> {
                 rootController.popBackStack()
-                rootController.push(NavigationTree.Win.name)
+                viewModel.obtainEvent(GameEvent.OnResetActions)
+                rootController.push(screen = NavigationTree.Win.name, params = action.setting)
             }
 
             GameAction.SaveWinIfo -> {

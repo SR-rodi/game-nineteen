@@ -32,7 +32,7 @@ class GameViewModel(
 
             is GameEvent.OnClickItem -> playGame(viewEvent.position)
             GameEvent.OnClickBackArrow -> onBackStack()
-            GameEvent.ResetActions -> onResetAction()
+            GameEvent.OnResetActions -> onResetAction()
             GameEvent.OnClickAddButton -> addList()
             GameEvent.OnClickHelpButton -> help()
             GameEvent.OnDispose -> {

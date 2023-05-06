@@ -24,10 +24,11 @@ class GameViewModel(
 
     override fun obtainEvent(viewEvent: GameEvent) {
         when (viewEvent) {
+
             is GameEvent.OnStartGame -> startSetting(viewEvent.settingGame)
             is GameEvent.OnClickItem -> playGame(viewEvent.position)
             GameEvent.OnClickAddButton -> addList()
-            GameEvent.ResetActions -> onResetAction()
+            GameEvent.OnResetActions -> onResetAction()
             GameEvent.OnClickBackArrow -> onBackStack()
             GameEvent.OnClickHelpButton -> onGetHelpItem()
             GameEvent.OnWinOpen -> onSaveAndOpenWinScreen()
@@ -68,7 +69,16 @@ class GameViewModel(
 
     private fun onSaveAndOpenWinScreen() {
         scopeLaunch(context = Dispatchers.IO,
-            onFinally = { viewAction = GameAction.OpenWinScreen }
+            onFinally = {
+                viewAction = GameAction.OpenWinScreen(
+                    SettingGame(
+                        gameMode = viewState.mode,
+                        list = viewState.items,
+                        time = viewState.timeCounter,
+                        stepCount = viewState.stepCounter
+                    )
+                )
+            }
         ) {
             ratingRepository.insertNewRating(
                 RatingEntity(

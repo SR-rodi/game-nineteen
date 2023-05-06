@@ -5,7 +5,7 @@ import ru.sr.nineteen.domain.gameitem.SettingGame
 
 sealed interface GameEvent{
     object OnClickBackArrow : GameEvent
-    object ResetActions : GameEvent
+    object OnResetActions : GameEvent
     class OnStartGame(val settingGame: SettingGame): GameEvent
     class OnClickItem(val position: Position) : GameEvent
     object OnClickAddButton : GameEvent
