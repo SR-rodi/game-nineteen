@@ -3,6 +3,7 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("kotlin-parcelize")
+    id ("com.google.gms.google-services")
     id ("androidx.navigation.safeargs.kotlin")
 }
 
@@ -49,6 +50,9 @@ dependencies {
     implementation(project(":feature_menu"))
     implementation(project(":feature_game"))
     implementation(project(":feature_rating"))
+
+    implementation (platform("com.google.firebase:firebase-bom:32.0.0"))
+    implementation ("com.google.firebase:firebase-analytics-ktx")
 
     implementation("io.github.alexgladkov:odyssey-core:1.3.1")
     implementation("io.github.alexgladkov:odyssey-compose:1.3.1")
