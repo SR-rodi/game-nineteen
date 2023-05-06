@@ -8,7 +8,6 @@ import ru.sr.nineteen.di.gameViewModelModule
 import ru.sr.nineteen.di.menuViewModelModule
 import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
-import ru.sr.nineteen.di.viewModelModule
 
 class GameApp:Application(){
 
@@ -21,7 +20,6 @@ class GameApp:Application(){
                 listOf(
                     dataBaseModule(),
                     repositoryModule(),
-                    viewModelModule(),
                     menuViewModelModule(),
                     gameViewModelModule(),
                     ratingModule()
