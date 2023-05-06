@@ -6,6 +6,7 @@ import org.koin.core.context.startKoin
 import ru.sr.nineteen.di.dataBaseModule
 import ru.sr.nineteen.di.gameViewModelModule
 import ru.sr.nineteen.di.menuViewModelModule
+import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
 import ru.sr.nineteen.di.viewModelModule
 
@@ -22,7 +23,8 @@ class GameApp:Application(){
                     repositoryModule(),
                     viewModelModule(),
                     menuViewModelModule(),
-                    gameViewModelModule()
+                    gameViewModelModule(),
+                    ratingModule()
                 )
             )
         }

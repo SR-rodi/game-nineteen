@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="rating_time_title">время</string>
+    <string name="rating_position_title">позиция</string>
+    <string name="rating_mode_title">режим</string>
+    <string name="rating_step_title">шаги</string>
+
+</resources>

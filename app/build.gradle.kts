@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":database"))
     implementation(project(":feature_menu"))
     implementation(project(":feature_game"))
+    implementation(project(":feature_rating"))
 
     implementation("io.github.alexgladkov:odyssey-core:1.3.1")
     implementation("io.github.alexgladkov:odyssey-compose:1.3.1")

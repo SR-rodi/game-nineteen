@@ -75,7 +75,6 @@ fun WinCardView(settingGame: WinState) {
                 style = GameTheme.fonts.h1.copy(color = GameTheme.colors.textTitle),
                 text = stringResource(id = R.string.game_win_message)
             )
-
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
