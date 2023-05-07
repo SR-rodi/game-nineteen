@@ -12,7 +12,6 @@ fun ModalController.presentAlertDialog(
     cornerRadius: Int = 10,
     closeOnBackdropClick: Boolean = true,
     content: Render,
-
     ) {
     present(
         alertConfiguration = AlertConfiguration(

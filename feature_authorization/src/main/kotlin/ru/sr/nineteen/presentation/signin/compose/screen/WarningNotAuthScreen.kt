@@ -42,7 +42,6 @@ fun WarningNotAuthScreen(rootController: RootController) {
         ) {
             rootController.push(NavigationTree.Menu.name, launchFlag = LaunchFlag.ClearPrevious)
         }
-
     }
 
 }

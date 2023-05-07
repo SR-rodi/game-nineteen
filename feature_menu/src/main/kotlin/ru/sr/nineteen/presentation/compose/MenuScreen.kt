@@ -18,8 +18,6 @@ import ru.sr.nineteen.view.Screen
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
 
-
-
     Screen(viewModel = viewModel) { state, action, rootController ->
         MenuView(state) { event -> viewModel.obtainEvent(event) }
         when (action) {

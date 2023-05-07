@@ -11,10 +11,15 @@
     <string name="auth_auth_title">Авторизация</string>
     <string name="auth_to_come_in_guest">Войти как гость</string>
     <string name="auth_registration_button">Зарегестрироваться</string>
+    <string name="auth_registration_title">Регистрация</string>
+    <string name="auth_registration_success_title">Успешная регистрация</string>
+    <string name="auth_registration_success_message">Для потдверждения email, на почту было высланно сообщение. Следуйте инструкциям из письма</string>
+    <string name="auth_registration_success_Button">Авторизоваться</string>
     <string name="auth_error_delete_user">Нет записи пользователя, соответствующей этому
         идентификатору. Возможно, пользователь был удален.</string>
     <string name="auth_error_not_validation_password">Пароль недействителен</string>
     <string name="auth_error_not_user">Пользователь не найден</string>
+    <string name="auth_error_use_email">Адрес электронной почты уже используется другим аккаунтом.</string>
     <string name="auth_error_not_email_verifications">Пользователь не потвержден. Проверьте почту,
         или нажмите на это сообщение для отправки повтороного кода</string>
     <string name="auth_error_internet">Что-то пошло не так! Проверьте состояние сети

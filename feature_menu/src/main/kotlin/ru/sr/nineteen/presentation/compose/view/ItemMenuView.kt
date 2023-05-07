@@ -53,7 +53,7 @@ fun ItemMenuView(
                 )
                 Spacer(modifier = Modifier.heightIn(10.dp))
 
-                ActionButtonView(padding = PaddingValues(horizontal = 16.dp),
+                ActionButtonView(padding = PaddingValues(horizontal = 8.dp),
                     text = textButton,
                     enabled = isEnable) { onClickButton() }
             }

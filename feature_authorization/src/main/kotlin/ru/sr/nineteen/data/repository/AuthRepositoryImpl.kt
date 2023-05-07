@@ -20,6 +20,7 @@ class AuthRepositoryImpl(
     ): AuthUserDomainModel {
         val user = auth.createUserWithEmailAndPassword(email, password).await().user
             ?: throw FirebaseNotAuth()
+        user.sendEmailVerification()
         return domainMapper.firebaseUserToAuthUserDomainModel(user)
     }
 
@@ -43,6 +44,7 @@ class AuthRepositoryImpl(
     override fun setToken(token: String) {
         tokenProvider.putToken(token)
     }
+
 
 }
 

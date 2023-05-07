@@ -1,23 +1,58 @@
 package ru.sr.nineteen.presentation.registration.viewmodel
 
+import android.util.Log
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import ru.sr.nineteen.BaseViewModel
-import ru.sr.nineteen.data.mapper.AuthUiMapper
+import ru.sr.nineteen.authorization.R
+import ru.sr.nineteen.domain.Validation
 import ru.sr.nineteen.domain.usecase.CreateUserWithEmailAndPasswordUseCase
-import java.lang.Error
 
 class RegistrationViewModel(
     private val createUserWithEmailAndPasswordUseCase: CreateUserWithEmailAndPasswordUseCase,
-    private val uiMapper: AuthUiMapper,
+    private val validation: Validation,
 ) : BaseViewModel<RegistrationState, RegistrationAction, RegistrationEvent>(RegistrationState()) {
 
     override fun obtainEvent(viewEvent: RegistrationEvent) {
         when (viewEvent) {
-            RegistrationEvent.OnClickBackStackButton -> onClickBackStackButton()
-            is RegistrationEvent.OnRegistrationButtonClick ->
-                startRegistration(viewEvent.email, viewEvent.password)
-
             is RegistrationEvent.OnStartScreen -> onStartScreen(viewEvent.email)
+            is RegistrationEvent.OnChangeEmail -> onChangeEmail(viewEvent.email)
+            is RegistrationEvent.OnChangePassword -> onChangePassword(viewEvent.password)
+            is RegistrationEvent.OnChangeRepeatPassword -> onChangeRepeatPassword(viewEvent.password)
+            RegistrationEvent.OnClickBackStackButton -> onClickBackStackButton()
+            RegistrationEvent.OnRegistrationButtonClick -> onClickRegistrationButton()
+            RegistrationEvent.OnClearEmail -> onClearEmail()
+            RegistrationEvent.OnResetAction -> RegistrationEvent.OnResetAction
         }
+    }
+
+    private fun onClickRegistrationButton() {
+
+        val isPasswordValidation =
+            validation.passwordValidation(viewState.password)
+                    && viewState.password == viewState.repeatPassword
+        viewState = viewState.copy(
+            isErrorPasswordValidation = !isPasswordValidation,
+            isErrorEmailValidation = !validation.emailValidation(viewState.email)
+        )
+        if (!viewState.isErrorEmailValidation && !viewState.isErrorPasswordValidation)
+            startRegistration()
+
+    }
+
+    private fun onChangeRepeatPassword(password: String) {
+        viewState = viewState.copy(repeatPassword = password)
+    }
+
+    private fun onChangePassword(password: String) {
+        viewState = viewState.copy(password = password)
+    }
+
+    private fun onChangeEmail(email: String) {
+        viewState = viewState.copy(email = email)
+    }
+
+    private fun onClearEmail() {
+        viewState = viewState.copy(email = "")
     }
 
     private fun onStartScreen(email: String) {
@@ -28,9 +63,9 @@ class RegistrationViewModel(
         viewAction = RegistrationAction.GoToStack
     }
 
-    private fun startRegistration(email: String, password: String) {
+    private fun startRegistration() {
         scopeLaunch(onSuccess = ::onSuccess, onError = ::onError, onLoading = ::onLoading) {
-            createUserWithEmailAndPasswordUseCase.create(email, password)
+            createUserWithEmailAndPasswordUseCase.create(viewState.email, viewState.password)
             viewAction = RegistrationAction.OpenSuccessRegistration
         }
     }
@@ -40,6 +75,9 @@ class RegistrationViewModel(
     }
 
     private fun onError(error: Exception) {
+      if (error is FirebaseAuthUserCollisionException){
+          viewState = viewState.copy(errorMessage = R.string.auth_error_internet)
+      }
         viewState = viewState.copy(isLoading = false, isError = true)
     }
 
@@ -55,9 +93,14 @@ sealed interface RegistrationAction {
 }
 
 sealed interface RegistrationEvent {
-    class OnRegistrationButtonClick(val email: String, val password: String) : RegistrationEvent
+    object OnRegistrationButtonClick : RegistrationEvent
     object OnClickBackStackButton : RegistrationEvent
+    object OnClearEmail : RegistrationEvent
+    object OnResetAction : RegistrationEvent
     class OnStartScreen(val email: String) : RegistrationEvent
+    class OnChangeEmail(val email: String) : RegistrationEvent
+    class OnChangePassword(val password: String) : RegistrationEvent
+    class OnChangeRepeatPassword(val password: String) : RegistrationEvent
 
 }
 
@@ -65,4 +108,9 @@ data class RegistrationState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val email: String = "",
+    val password: String = "",
+    val repeatPassword: String = "",
+    val errorMessage: Int = R.string.auth_error_internet,
+    val isErrorEmailValidation: Boolean = false,
+    val isErrorPasswordValidation: Boolean = false,
 )

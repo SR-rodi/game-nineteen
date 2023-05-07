@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.authorization.R
+import ru.sr.nineteen.presentation.root.ErrorMessageView
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInState
 import ru.sr.nineteen.theme.GameTheme
@@ -52,6 +53,7 @@ fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {
             text = stringResource(id = R.string.auth_auth_title),
             style = GameTheme.fonts.h2.copy(color = GameTheme.colors.textTitle)
         )
+        Spacer(modifier = Modifier.height(8.dp))
         EmailTextField(
             modifier = Modifier.fillMaxWidth(),
             value = state.email,
@@ -85,17 +87,10 @@ fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {
                 style = GameTheme.fonts.p.copy(color = GameTheme.colors.textButton)
             )
         }
-
-        AnimatedVisibility(visible = state.isError) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                text = stringResource(id = state.errorMessage),
-                style = GameTheme.fonts.p.copy(GameTheme.colors.error),
-                textAlign = TextAlign.Center
-            )
-        }
+        ErrorMessageView(
+            isVisible = state.isError,
+            message = stringResource(id = state.errorMessage)
+        )
         ActionButtonView(
             text = stringResource(id = R.string.auth_to_come_in),
             enabled = !state.isLoading,

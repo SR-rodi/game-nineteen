@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.authorization.R
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordEvent
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordState
+import ru.sr.nineteen.presentation.root.ErrorMessageView
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.EmailTextField
@@ -58,18 +59,10 @@ fun ResetPasswordView(state: ResetPasswordState, eventHandler: (ResetPasswordEve
             eventHandler(ResetPasswordEvent.OnClearEmail)
         }
         Spacer(modifier = Modifier.height(16.dp))
-        AnimatedVisibility(visible = state.isError) {
-            Column {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = GameTheme.fonts.p.copy(GameTheme.colors.error),
-                    text = stringResource(id = state.errorMessageId)
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-
-        }
+        ErrorMessageView(
+            isVisible = state.isError,
+            message = stringResource(id = state.errorMessageId)
+        )
         ActionButtonView(
             padding = PaddingValues(),
             enabled = !state.isLoading,
