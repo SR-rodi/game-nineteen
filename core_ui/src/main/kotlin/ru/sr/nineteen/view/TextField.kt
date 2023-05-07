@@ -1,6 +1,9 @@
 package ru.sr.nineteen.view
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.icons.Icons
@@ -14,17 +17,17 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.core_ui.R
+import ru.sr.nineteen.theme.GameTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,6 +35,8 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     value: String,
     hintId: Int = R.string.core_ui_Password,
+    isEnable: Boolean = true,
+    isError: Boolean = false,
     onValueChange: (String) -> Unit,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = GameTheme.colors.blue_500,
@@ -51,8 +56,13 @@ fun PasswordTextField(
     OutlinedTextField(
         modifier = modifier,
         value = value,
+        enabled = isEnable,
+        isError = isError,
         onValueChange = onValueChange,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+            ),
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(20.dp),
@@ -74,7 +84,16 @@ fun PasswordTextField(
             }
         },
         label = { Text(text = stringResource(id = hintId)) },
-        colors = colors
+        colors = colors,
+        supportingText = {
+            Column {
+                AnimatedVisibility(visible = isError) {
+                    Text(text = stringResource(id = R.string.core_ui_password_helper_error))
+                }
+                Text(text = stringResource(id = R.string.core_ui_password_helper))
+            }
+
+        }
     )
 }
 
@@ -85,6 +104,8 @@ fun EmailTextField(
     value: String,
     hintId: Int = R.string.core_ui_Email,
     onValueChange: (String) -> Unit,
+    isEnable: Boolean = true,
+    isError: Boolean = false,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = GameTheme.colors.blue_500,
         unfocusedBorderColor = GameTheme.colors.blue_500,
@@ -101,8 +122,12 @@ fun EmailTextField(
     OutlinedTextField(
         modifier = modifier,
         value = value,
+        enabled = isEnable,
+        isError = isError,
         onValueChange = onValueChange,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Next),
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(20.dp),
@@ -122,7 +147,14 @@ fun EmailTextField(
             }
         },
         label = { Text(text = stringResource(id = hintId)) },
-        colors = colors
+        colors = colors,
+        supportingText = {
+            AnimatedVisibility(visible = isError) {
+                Text(
+                    text = stringResource(id = R.string.core_ui_email_helper_error)
+                )
+            }
+        }
     )
 
 }

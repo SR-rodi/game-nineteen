@@ -5,6 +5,9 @@ import org.koin.dsl.module
 import ru.sr.nineteen.presentation.field.viewmodel.GameViewModel
 import ru.sr.nineteen.presentation.win.viewmodel.WinViewModel
 
+
+fun gameModel() = listOf(gameViewModelModule())
+
 fun gameViewModelModule() = module {
     viewModelOf(::GameViewModel)
     viewModelOf(::WinViewModel)

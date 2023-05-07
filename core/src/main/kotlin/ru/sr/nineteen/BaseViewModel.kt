@@ -57,7 +57,6 @@ abstract class BaseViewModel<State : Any, Action : Any, Event : Any>(initialStat
                 job()
                 onSuccess()
             } catch (e: Exception) {
-                Log.e("Kart", e.message.toString())
                 onError(e)
             } finally {
                 onFinally()

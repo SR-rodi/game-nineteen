@@ -1,5 +1,6 @@
 package ru.sr.nineteen.theme
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
@@ -19,6 +20,7 @@ data class GameColor(
     val textTitle:Color,
     val textButton:Color,
     val background:Color,
+    val error: Color
 )
 
 val lightPalette = GameColor(
@@ -36,7 +38,8 @@ val lightPalette = GameColor(
     textTitle = Color(0xFF054D74),
     textButton = Color(0xFFFFFFFF),
     more = Color(0xFF46E8FD),
-    background = Color(0xFF9CB9D1)
+    background = Color(0xFF9CB9D1),
+    error = Color(0xFFC00A0A),
 )
 
 

@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import org.koin.androidx.compose.koinViewModel
 import ru.alexgladkov.odyssey.compose.extensions.push
+import ru.alexgladkov.odyssey.core.LaunchFlag
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
@@ -33,9 +34,9 @@ fun WinScreen(settingGame: SettingGame, viewModel: WinViewModel = koinViewModel(
 
             WinAction.OpenRating -> {
                 viewModel.obtainEvent(WinEvent.OnResetAction)
-                rootController.popBackStack()
-                rootController.push(NavigationTree.Rating.name)
+                rootController.push(NavigationTree.Rating.name, LaunchFlag.ClearPrevious)
             }
+
             null -> {}
         }
     }

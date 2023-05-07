@@ -1,5 +1,6 @@
 package ru.sr.nineteen.presentation.signin.compose.view
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,10 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.authorization.R
-import ru.sr.nineteen.presentation.signin.viewmodel.SignInEvent
-import ru.sr.nineteen.presentation.signin.viewmodel.SignInState
+import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
+import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInState
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.EmailTextField
@@ -33,60 +36,88 @@ import ru.sr.nineteen.view.PasswordTextField
 @Composable
 fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {
 
-        Column(
-            Modifier
-                .padding(16.dp)
+    if (state.isLoading) Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(color = GameTheme.colors.blue_500)
+    }
+    Column(
+        Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
 
-        ) {
-            EmailTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.email,
-                onValueChange = { email -> eventHandler(SignInEvent.OnChangeEmail(email)) }) {
-                eventHandler(SignInEvent.OnClearEmail)
-            }
+        EmailTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = state.email,
+            isEnable = !state.isLoading,
+            isError = state.isErrorEmailValidation,
+            onValueChange = { email -> eventHandler(SignInEvent.OnChangeEmail(email)) }) {
+            eventHandler(SignInEvent.OnClearEmail)
+        }
 
-            PasswordTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.password,
-                onValueChange = { password -> eventHandler(SignInEvent.OnChangePassword(password)) }
-            )
-            Box(modifier = Modifier
+        PasswordTextField(
+            modifier = Modifier.fillMaxWidth(),
+            isEnable = !state.isLoading,
+            isError = state.isErrorPasswordValidation,
+            value = state.password,
+            onValueChange = { password -> eventHandler(SignInEvent.OnChangePassword(password)) }
+        )
+        val forgotPasswordClickable = if (state.isLoading) Modifier
+        else Modifier.clickable { eventHandler(SignInEvent.OnClickForgotPasswordButton) }
+        Box(
+            modifier = Modifier
                 .clip(GameTheme.shapes.medium)
                 .align(Alignment.End)
                 .padding(vertical = 4.dp)
-                .clickable { eventHandler(SignInEvent.OnClickForgotPasswordButton) }
-            ) {
+                .then(forgotPasswordClickable)
+        ) {
 
-                Text(
-                    modifier = Modifier
-                        .padding(8.dp),
-                    text = stringResource(id = R.string.auth_forgot_password),
-                    style = GameTheme.fonts.p.copy(color = GameTheme.colors.textButton)
-                )
-            }
-
-            ActionButtonView(
-                text = stringResource(id = R.string.auth_to_come_in),
-                padding = PaddingValues()
-            ) { eventHandler(SignInEvent.OnClickSignInButton) }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OrDivider()
-            Spacer(modifier = Modifier.height(8.dp))
-            ActionButtonView(
-                text = stringResource(id = R.string.auth_to_come_in_guest),
-                padding = PaddingValues(),
-                isOutLine = true
-            ) { eventHandler(SignInEvent.OnOpenWarning) }
-            Spacer(modifier = Modifier.height(8.dp))
-            ActionButtonView(
-                text = stringResource(id = R.string.auth_registration_button),
-                padding = PaddingValues(),
-                isOutLine = true
-            ) { eventHandler(SignInEvent.OnClickRegistrationButton) }
+            Text(
+                modifier = Modifier
+                    .padding(8.dp),
+                text = stringResource(id = R.string.auth_forgot_password),
+                style = GameTheme.fonts.p.copy(color = GameTheme.colors.textButton)
+            )
         }
+
+        AnimatedVisibility(visible = state.isError) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                text = stringResource(id = state.errorMessage),
+                style = GameTheme.fonts.p.copy(GameTheme.colors.error),
+                textAlign = TextAlign.Center
+            )
+        }
+        ActionButtonView(
+            text = stringResource(id = R.string.auth_to_come_in),
+            enabled = !state.isLoading,
+            padding = PaddingValues()
+        ) { eventHandler(SignInEvent.OnClickSignInButton) }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OrDivider()
+        Spacer(modifier = Modifier.height(8.dp))
+        ActionButtonView(
+            text = stringResource(id = R.string.auth_to_come_in_guest),
+            padding = PaddingValues(),
+            enabled = !state.isLoading,
+            isOutLine = true
+        ) { eventHandler(SignInEvent.OnOpenWarning) }
+        Spacer(modifier = Modifier.height(8.dp))
+        ActionButtonView(
+            text = stringResource(id = R.string.auth_registration_button),
+            padding = PaddingValues(),
+            isOutLine = true,
+            enabled = !state.isLoading,
+        ) { eventHandler(SignInEvent.OnClickRegistrationButton) }
     }
+}
 
 
 @Composable

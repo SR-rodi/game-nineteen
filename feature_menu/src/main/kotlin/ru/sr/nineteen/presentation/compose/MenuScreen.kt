@@ -1,6 +1,7 @@
 package ru.sr.nineteen.presentation.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import org.koin.androidx.compose.koinViewModel
 import ru.alexgladkov.odyssey.compose.RootController
@@ -17,9 +18,10 @@ import ru.sr.nineteen.view.Screen
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
 
+
+
     Screen(viewModel = viewModel) { state, action, rootController ->
         MenuView(state) { event -> viewModel.obtainEvent(event) }
-
         when (action) {
             is MenuAction.OpenGame -> {
                 rootController.push(NavigationTree.Game.name,action.settingGame)

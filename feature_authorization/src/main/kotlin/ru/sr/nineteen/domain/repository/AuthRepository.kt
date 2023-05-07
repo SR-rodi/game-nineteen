@@ -11,4 +11,6 @@ interface AuthRepository {
 
    suspend fun signInWithEmailAndPassword(email:String, password:String): AuthUserDomainModel
 
+   fun setToken(token:String)
+
 }

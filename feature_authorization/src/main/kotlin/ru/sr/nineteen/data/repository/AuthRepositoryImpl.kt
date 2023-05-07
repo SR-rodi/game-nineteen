@@ -4,11 +4,13 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import ru.sr.nineteen.data.mapper.AuthDomainMapper
 import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.TokenProvider
 import ru.sr.nineteen.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val auth: FirebaseAuth,
     private val domainMapper: AuthDomainMapper,
+    private val tokenProvider: TokenProvider,
 ) : AuthRepository {
     override suspend fun getCurrentUser() = auth.currentUser
 
@@ -26,9 +28,16 @@ class AuthRepositoryImpl(
         password: String,
     ): AuthUserDomainModel {
 
-        val user = auth.signInWithEmailAndPassword("rodin_sr@mail.ru", "12345678").await().user
+        val user = auth.signInWithEmailAndPassword(email, password).await().user
             ?: throw FirebaseNotAuth()
-        return domainMapper.firebaseUserToAuthUserDomainModel(user)
+
+        return if (user.isEmailVerified)
+            domainMapper.firebaseUserToAuthUserDomainModel(user)
+        else throw FirebaseNoEmailVerifications()
+    }
+
+    override fun setToken(token: String) {
+        tokenProvider.putToken(token)
     }
 
 }

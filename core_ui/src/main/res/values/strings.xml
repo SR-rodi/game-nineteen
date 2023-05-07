@@ -2,4 +2,11 @@
 <resources>
     <string name="core_ui_Password">Пароль</string>
     <string name="core_ui_Email">email</string>
+    <string name="core_ui_next_button">Продолжить</string>
+    <string name="core_ui_password_helper_error">* Пустое поле, или не соответствует минимальным требованием </string>
+    <string name="core_ui_password_helper">* Пароль должен быть:\n
+        - не короче 8 символов;\n
+        - содержать хотябы одну латинскую букву и одну цифру
+    </string>
+    <string name="core_ui_email_helper_error">* Пустое поле, или не соответствует минимальным требованием </string>
 </resources>

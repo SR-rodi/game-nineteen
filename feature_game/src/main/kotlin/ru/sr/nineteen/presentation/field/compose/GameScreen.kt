@@ -1,6 +1,5 @@
 package ru.sr.nineteen.presentation.field.compose
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,6 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
 import ru.alexgladkov.odyssey.compose.extensions.push
+import ru.alexgladkov.odyssey.core.LaunchFlag
+import ru.alexgladkov.odyssey.core.animations.AnimationType
 import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.Position
@@ -57,9 +58,12 @@ fun GameScreen(settingGame: SettingGame, viewModel: GameViewModel = koinViewMode
             }
 
             is GameAction.OpenWinScreen -> {
-                rootController.popBackStack()
                 viewModel.obtainEvent(GameEvent.OnResetActions)
-                rootController.push(screen = NavigationTree.Win.name, params = action.setting)
+                rootController.push(
+                    screen = NavigationTree.Win.name,
+                    params = action.setting,
+                    launchFlag = LaunchFlag.ClearPrevious
+                )
             }
 
             GameAction.SaveWinIfo -> {
