@@ -48,7 +48,10 @@ fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {
         Modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-
+        Text(
+            text = stringResource(id = R.string.auth_auth_title),
+            style = GameTheme.fonts.h2.copy(color = GameTheme.colors.textTitle)
+        )
         EmailTextField(
             modifier = Modifier.fillMaxWidth(),
             value = state.email,

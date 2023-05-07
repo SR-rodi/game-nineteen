@@ -26,7 +26,7 @@ class SignInViewModel(
         when (viewEvent) {
             is SignInEvent.OnClickRegistrationButton -> openRegistrationScreen(viewState.email)
             SignInEvent.OnClickSignInButton ->
-                onClickRegistration(viewState.email, viewState.password)
+                onClickSignIn(viewState.email, viewState.password)
             SignInEvent.OnClickSkipAuthButton -> openMenu()
             is SignInEvent.OnChangeEmail -> onChangeEmail(viewEvent.email)
             is SignInEvent.OnChangePassword -> onChangePassword(viewEvent.password)
@@ -37,7 +37,7 @@ class SignInViewModel(
         }
     }
 
-    private fun onClickRegistration(email: String, password: String) {
+    private fun onClickSignIn(email: String, password: String) {
         viewState = viewState.copy(
             isErrorEmailValidation = !validation.emailValidation(viewState.email),
             isErrorPasswordValidation = !validation.passwordValidation(viewState.password)

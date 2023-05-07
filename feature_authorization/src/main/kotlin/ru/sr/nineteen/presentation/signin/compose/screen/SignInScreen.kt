@@ -31,10 +31,13 @@ fun SignInScreen(viewModel: SignInViewModel = koinViewModel()) {
                 viewModel.obtainEvent(SignInEvent.OnResetAction)
             }
 
-            SignInAction.OpenWarningMessage -> rootController.findModalController()
-                .presentAlertDialog {
-                    WarningNotAuthScreen(rootController = rootController)
-                }
+            SignInAction.OpenWarningMessage -> {
+                rootController.findModalController().presentAlertDialog {
+                        WarningNotAuthScreen(rootController = rootController)
+                    }
+                viewModel.obtainEvent(SignInEvent.OnResetAction)
+            }
+
 
             null -> {}
 

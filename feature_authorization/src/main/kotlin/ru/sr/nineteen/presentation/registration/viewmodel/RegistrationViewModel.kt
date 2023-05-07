@@ -21,7 +21,7 @@ class RegistrationViewModel(
     }
 
     private fun onStartScreen(email: String) {
-        viewState = viewState.copy(email =email)
+        viewState = viewState.copy(email = email)
     }
 
     private fun onClickBackStackButton() {
@@ -64,5 +64,5 @@ sealed interface RegistrationEvent {
 data class RegistrationState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val email: String =""
+    val email: String = "",
 )

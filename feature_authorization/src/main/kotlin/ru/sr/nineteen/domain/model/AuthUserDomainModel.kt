@@ -1,4 +1,4 @@
-package ru.sr.nineteen.domain
+package ru.sr.nineteen.domain.model
 
 class AuthUserDomainModel (
     val token: String,

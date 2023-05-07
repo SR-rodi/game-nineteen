@@ -22,7 +22,7 @@ import ru.sr.nineteen.theme.GameTheme
 fun ActionButtonView(
     text: String,
     enabled: Boolean = true,
-    padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp),
+    padding: PaddingValues = PaddingValues(),
     containerColor: Color = GameTheme.colors.blue_400,
     contentColor: Color = GameTheme.colors.text,
     borderColor: Color = GameTheme.colors.blue_500,

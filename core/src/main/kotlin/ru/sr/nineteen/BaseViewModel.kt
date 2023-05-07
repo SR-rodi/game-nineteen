@@ -43,7 +43,7 @@ abstract class BaseViewModel<State : Any, Action : Any, Event : Any>(initialStat
         viewAction = null
     }
 
-    inline fun scopeLaunch(
+    protected inline fun scopeLaunch(
         context: CoroutineContext = EmptyCoroutineContext,
         crossinline onLoading: () -> Unit = {},
         crossinline onSuccess: () -> Unit = {},

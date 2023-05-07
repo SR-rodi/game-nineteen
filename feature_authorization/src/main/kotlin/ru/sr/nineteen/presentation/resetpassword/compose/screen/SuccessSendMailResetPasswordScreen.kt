@@ -1,7 +1,6 @@
-package ru.sr.nineteen.presentation.signin.compose.screen
+package ru.sr.nineteen.presentation.resetpassword.compose.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,28 +20,25 @@ import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 
 @Composable
-fun WarningNotAuthScreen(rootController: RootController) {
+fun SuccessSendMailResetPasswordScreen(rootController: RootController) {
 
-    Column(Modifier.padding(16.dp)) {
-
+    Column (Modifier.padding(16.dp)){
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.auth_warning_not_auth_title),
+            text = stringResource(id = R.string.auth_send_reset_password_success_title),
             style = GameTheme.fonts.h2.copy(GameTheme.colors.textTitle),
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = stringResource(id = R.string.auth_warning_not_auth_message),
-            style = GameTheme.fonts.h4.copy(GameTheme.colors.text)
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.auth_send_reset_password_success_message),
+            style = GameTheme.fonts.h4.copy(GameTheme.colors.textTitle),
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
-        ActionButtonView(
-            text = stringResource(id = ru.sr.nineteen.core_ui.R.string.core_ui_next_button),
-            padding = PaddingValues()
-        ) {
-            rootController.push(NavigationTree.Menu.name, launchFlag = LaunchFlag.ClearPrevious)
+        ActionButtonView(text = stringResource(id = R.string.auth_send_reset_password_success_button)) {
+            rootController.push(NavigationTree.SignIn.name, launchFlag = LaunchFlag.SingleNewTask)
         }
-
     }
-
 }

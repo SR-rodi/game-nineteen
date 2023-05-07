@@ -3,6 +3,12 @@
 
     <string name="auth_forgot_password">Забыли пароль?</string>
     <string name="auth_to_come_in">Войти</string>
+    <string name="auth_send_reset_password_title">Сбросить пароль</string>
+    <string name="auth_send_reset_password_success_title">Сообщение отправлено</string>
+    <string name="auth_send_reset_password_success_button">Вернутся</string>
+    <string name="auth_send_reset_password_success_message">Проверьте почту, и следуйте инструкции
+        из сообщения</string>
+    <string name="auth_auth_title">Авторизация</string>
     <string name="auth_to_come_in_guest">Войти как гость</string>
     <string name="auth_registration_button">Зарегестрироваться</string>
     <string name="auth_error_delete_user">Нет записи пользователя, соответствующей этому

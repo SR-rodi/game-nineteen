@@ -1,7 +1,6 @@
 package ru.sr.nineteen.domain.usecase
 
-import com.google.firebase.auth.FirebaseUser
-import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.model.AuthUserDomainModel
 
 interface CreateUserWithEmailAndPasswordUseCase {
 

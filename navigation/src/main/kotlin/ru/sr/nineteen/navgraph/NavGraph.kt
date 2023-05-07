@@ -9,7 +9,7 @@ import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.MenuScreen
 import ru.sr.nineteen.presentation.registration.compose.RegistrationScreen
-import ru.sr.nineteen.presentation.resetpassword.compose.ResetPasswordScreen
+import ru.sr.nineteen.presentation.resetpassword.compose.screen.ResetPasswordScreen
 import ru.sr.nineteen.presentation.signin.compose.screen.SignInScreen
 import ru.sr.nineteen.presentation.win.compose.WinScreen
 

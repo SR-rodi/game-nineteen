@@ -3,6 +3,7 @@ package ru.sr.nineteen.presentation.compose.view
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -52,7 +53,9 @@ fun ItemMenuView(
                 )
                 Spacer(modifier = Modifier.heightIn(10.dp))
 
-                ActionButtonView(text = textButton,enabled = isEnable) { onClickButton() }
+                ActionButtonView(padding = PaddingValues(horizontal = 16.dp),
+                    text = textButton,
+                    enabled = isEnable) { onClickButton() }
             }
         }
         Image(

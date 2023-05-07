@@ -1,10 +1,8 @@
 package ru.sr.nineteen.domain.usecase
 
-import android.provider.ContactsContract.CommonDataKinds.Email
-import com.google.firebase.auth.FirebaseUser
-import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.model.AuthUserDomainModel
 
 interface SignInWithEmailUseCase {
 
-    suspend fun signIn(email: String,password:String):AuthUserDomainModel
+    suspend fun signIn(email: String,password:String): AuthUserDomainModel
 }

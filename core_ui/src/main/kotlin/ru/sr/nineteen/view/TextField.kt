@@ -106,6 +106,7 @@ fun EmailTextField(
     onValueChange: (String) -> Unit,
     isEnable: Boolean = true,
     isError: Boolean = false,
+    imeAction:ImeAction = ImeAction.Next,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = GameTheme.colors.blue_500,
         unfocusedBorderColor = GameTheme.colors.blue_500,
@@ -127,7 +128,7 @@ fun EmailTextField(
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Next),
+            imeAction = imeAction),
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(20.dp),

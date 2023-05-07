@@ -1,7 +1,7 @@
 package ru.sr.nineteen.data.mapper
 
 import com.google.firebase.auth.FirebaseUser
-import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.model.AuthUserDomainModel
 import ru.sr.nineteen.presentation.model.AuthUserUiModel
 
 interface AuthDomainMapper {

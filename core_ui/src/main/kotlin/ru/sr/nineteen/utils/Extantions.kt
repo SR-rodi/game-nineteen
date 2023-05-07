@@ -10,11 +10,14 @@ fun ModalController.presentAlertDialog(
     maxHeight: Float? = null,
     maxWith: Float? = null,
     cornerRadius: Int = 10,
+    closeOnBackdropClick: Boolean = true,
     content: Render,
-) {
+
+    ) {
     present(
         alertConfiguration = AlertConfiguration(
-            maxHeight = maxHeight, maxWidth = maxWith, cornerRadius = cornerRadius
+            maxHeight = maxHeight, maxWidth = maxWith, cornerRadius = cornerRadius,
+            closeOnBackdropClick = closeOnBackdropClick
         ),
         content = content
     )

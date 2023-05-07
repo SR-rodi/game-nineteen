@@ -3,7 +3,7 @@ package ru.sr.nineteen.data.repository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import ru.sr.nineteen.data.mapper.AuthDomainMapper
-import ru.sr.nineteen.domain.AuthUserDomainModel
+import ru.sr.nineteen.domain.model.AuthUserDomainModel
 import ru.sr.nineteen.domain.TokenProvider
 import ru.sr.nineteen.domain.repository.AuthRepository
 
@@ -34,6 +34,10 @@ class AuthRepositoryImpl(
         return if (user.isEmailVerified)
             domainMapper.firebaseUserToAuthUserDomainModel(user)
         else throw FirebaseNoEmailVerifications()
+    }
+
+    override suspend fun resetPassword(email: String) {
+        auth.sendPasswordResetEmail(email).await()
     }
 
     override fun setToken(token: String) {
