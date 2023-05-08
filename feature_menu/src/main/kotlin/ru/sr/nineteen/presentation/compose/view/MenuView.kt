@@ -13,11 +13,17 @@ import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.presentation.viewmodel.model.MenuEvent
 import ru.sr.nineteen.presentation.viewmodel.model.MenuState
+import ru.sr.nineteen.view.ActionButtonView
 
 @Composable
 fun MenuView(state: MenuState, eventHandler: (event: MenuEvent) -> Unit) {
 
     LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
+        item {
+            ActionButtonView(text = "Профиль") {
+                eventHandler(MenuEvent.OnClickProfileButton)
+            }
+        }
         item {
             ItemMenuView(
                 modifier = Modifier.fillMaxWidth(),

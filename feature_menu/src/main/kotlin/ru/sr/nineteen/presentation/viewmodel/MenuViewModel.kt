@@ -30,7 +30,12 @@ class MenuViewModel(
             MenuEvent.OnClickRatingButton -> onStartRating()
             MenuEvent.OnClickTrainingButton -> onStartTraining()
             MenuEvent.ResetActions -> onResetAction()
+            MenuEvent.OnClickProfileButton -> onOpenProfile()
         }
+    }
+
+    private fun onOpenProfile() {
+        viewAction = MenuAction.OpenProfile
     }
 
     private fun onStartTraining() {

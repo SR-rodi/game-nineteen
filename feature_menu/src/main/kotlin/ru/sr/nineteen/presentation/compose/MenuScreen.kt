@@ -35,8 +35,13 @@ fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
                 rootController.push(NavigationTree.Training.name)
                 viewModel.obtainEvent(MenuEvent.ResetActions)
             }
+            MenuAction.OpenProfile -> {
+                rootController.push(NavigationTree.Profile.name)
+                viewModel.obtainEvent(MenuEvent.ResetActions)
+            }
 
             null -> {}
+
         }
     }
 }

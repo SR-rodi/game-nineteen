@@ -1,5 +1,6 @@
 package ru.sr.nineteen.domain
 
 enum class NavigationTree {
-    Menu,Game,Training,Rating,Win,SignIn,Registration,ResetPassword
+    Menu,Game,Training,Rating,Win,SignIn,Registration,ResetPassword,Profile
+
 }

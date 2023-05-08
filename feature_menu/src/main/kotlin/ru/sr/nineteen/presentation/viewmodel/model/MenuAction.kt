@@ -6,4 +6,5 @@ sealed interface MenuAction {
     class OpenGame(val settingGame: SettingGame) : MenuAction
     object OpenTraining : MenuAction
     object OpenRating : MenuAction
+    object OpenProfile : MenuAction
 }

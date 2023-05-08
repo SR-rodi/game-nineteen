@@ -23,4 +23,5 @@ include (":feature_rating")
 include (":feature_training")
 include (":feature_menu")
 include (":feature_authorization")
+include (":feature_profile")
 

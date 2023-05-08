@@ -7,4 +7,5 @@ sealed interface MenuEvent {
     object OnClickTrainingButton:MenuEvent
     object OnClickRatingButton:MenuEvent
     object ResetActions:MenuEvent
+    object OnClickProfileButton : MenuEvent
 }
