@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":feature_game"))
     implementation(project(":feature_rating"))
     implementation(project(":feature_authorization"))
+    implementation(project(":feature_profile"))
 
 
     implementation (platform("com.google.firebase:firebase-bom:32.0.0"))

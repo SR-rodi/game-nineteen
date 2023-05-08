@@ -4,13 +4,13 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import ru.sr.nineteen.data.mapper.AuthDomainMapper
 import ru.sr.nineteen.domain.model.AuthUserDomainModel
-import ru.sr.nineteen.domain.TokenProvider
+import ru.sr.nineteen.domain.UserIdProvider
 import ru.sr.nineteen.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val auth: FirebaseAuth,
     private val domainMapper: AuthDomainMapper,
-    private val tokenProvider: TokenProvider,
+    private val tokenProvider: UserIdProvider,
 ) : AuthRepository {
     override suspend fun getCurrentUser() = auth.currentUser
 
@@ -42,7 +42,7 @@ class AuthRepositoryImpl(
     }
 
     override fun setToken(token: String) {
-        tokenProvider.putToken(token)
+        tokenProvider.putUserId(token)
     }
 
 

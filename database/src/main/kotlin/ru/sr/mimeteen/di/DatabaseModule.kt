@@ -10,7 +10,8 @@ import ru.sr.mimeteen.database.db.DataBase
 import ru.sr.mimeteen.remotedatabase.FirebaseUserApi
 import ru.sr.mimeteen.remotedatabase.UserApi
 
-fun databaseModule() = listOf(remoteModule(),locationModule())
+
+fun databaseModule() = listOf(remoteModule(), locationModule())
 
 fun remoteModule() = module {
     val baseUrl = "https://emaillinkregistration-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -18,6 +19,7 @@ fun remoteModule() = module {
     single { FirebaseDatabase.getInstance(baseUrl) }
 
     singleOf(::FirebaseUserApi) { bind<UserApi>() }
+
 }
 
 fun locationModule() = module {
@@ -39,3 +41,4 @@ fun locationModule() = module {
         get<DataBase>(named("database")).ratingDao()
     }
 }
+

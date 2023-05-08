@@ -8,6 +8,7 @@ import ru.sr.nineteen.di.authorizationModule
 import ru.sr.nineteen.di.coreModule
 import ru.sr.nineteen.di.gameModel
 import ru.sr.nineteen.di.menuModule
+import ru.sr.nineteen.di.profileModule
 import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
 
@@ -26,6 +27,7 @@ class GameApp : Application() {
                         + ratingModule()
                         + menuModule()
                         + databaseModule()
+                        + profileModule()
             )
         }
     }

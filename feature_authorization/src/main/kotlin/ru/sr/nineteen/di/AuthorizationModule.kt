@@ -11,7 +11,9 @@ import ru.sr.nineteen.data.mapper.AuthDomainMapper
 import ru.sr.nineteen.data.mapper.AuthDomainMapperImpl
 import ru.sr.nineteen.data.mapper.AuthUiMapperImpl
 import ru.sr.nineteen.data.repository.AuthRepositoryImpl
+import ru.sr.nineteen.data.repository.AuthUserRepositoryImpl
 import ru.sr.nineteen.domain.repository.AuthRepository
+import ru.sr.nineteen.domain.repository.AuthUserRepository
 import ru.sr.nineteen.domain.usecase.CreateUserWithEmailAndPasswordUseCase
 import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 import ru.sr.nineteen.domain.usecase.ResetPasswordUseCase
@@ -29,6 +31,7 @@ fun authorizationModule() =
 
 fun repositoryModule() = module {
     singleOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
+    singleOf(::AuthUserRepositoryImpl) { bind<AuthUserRepository>() }
 }
 
 fun networkModule() = module {

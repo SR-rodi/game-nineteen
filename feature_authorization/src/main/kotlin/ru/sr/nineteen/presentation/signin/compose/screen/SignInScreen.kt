@@ -37,8 +37,6 @@ fun SignInScreen(viewModel: SignInViewModel = koinViewModel()) {
                     }
                 viewModel.obtainEvent(SignInEvent.OnResetAction)
             }
-
-
             null -> {}
 
         }

@@ -1,7 +1,7 @@
 package ru.sr.mimeteen.remotedatabase.model
 
-class UserDto(
-    val id:String,
-    val name:String,
-    val email:String,
+data class UserDto(
+    val email: String?=null,
+    val id: String="",
+    val name: String? = null,
 )

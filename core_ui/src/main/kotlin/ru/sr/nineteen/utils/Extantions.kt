@@ -8,11 +8,11 @@ import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConf
 
 fun ModalController.presentAlertDialog(
     maxHeight: Float? = null,
-    maxWith: Float? = null,
+    maxWith: Float? = 0.9f,
     cornerRadius: Int = 10,
     closeOnBackdropClick: Boolean = true,
     content: Render,
-    ) {
+) {
     present(
         alertConfiguration = AlertConfiguration(
             maxHeight = maxHeight, maxWidth = maxWith, cornerRadius = cornerRadius,

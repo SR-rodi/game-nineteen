@@ -1,4 +1,4 @@
-package ru.sr.nineteen.domaine
+package ru.sr.nineteen.domain
 
 import ru.sr.nineteen.domain.gameitem.GameItemEngine
 

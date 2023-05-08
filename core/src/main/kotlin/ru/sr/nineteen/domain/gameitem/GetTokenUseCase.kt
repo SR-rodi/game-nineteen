@@ -1,6 +1,6 @@
 package ru.sr.nineteen.domain.gameitem
 
-import ru.sr.nineteen.domain.TokenProvider
+import ru.sr.nineteen.domain.UserIdProvider
 
 interface GetTokenUseCase {
 
@@ -8,7 +8,7 @@ interface GetTokenUseCase {
 
 }
 
-class GetTokenUseCaseImpl(private val tokenProvider: TokenProvider) : GetTokenUseCase {
-    override fun getToken() = tokenProvider.getToken()
+class GetTokenUseCaseImpl(private val tokenProvider: UserIdProvider) : GetTokenUseCase {
+    override fun getToken() = tokenProvider.getUserId()
 
 }
