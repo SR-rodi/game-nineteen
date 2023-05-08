@@ -7,7 +7,7 @@ class ProfileDomainMapperImpl(): ProfileDomainMapper {
 
 
     override  fun userDtoToProfileUserDomainModel(userDto: UserDto) = ProfileUserDomainModel(
-        email = userDto.email, id = userDto.id, userDto.name
+        email = userDto.email, id = userDto.id!!, userDto.name
     )
 }
 

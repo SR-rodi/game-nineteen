@@ -10,4 +10,5 @@ sealed interface SignInEvent {
     object OnClickForgotPasswordButton : SignInEvent
     object OnOpenWarning : SignInEvent
     object OnResetAction: SignInEvent
+    object OnResetState : SignInEvent
 }

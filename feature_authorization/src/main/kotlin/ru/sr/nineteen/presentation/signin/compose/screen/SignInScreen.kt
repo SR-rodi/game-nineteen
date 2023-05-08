@@ -19,6 +19,8 @@ fun SignInScreen(viewModel: SignInViewModel = koinViewModel()) {
         when (action) {
             is SignInAction.OpenMenu -> {
                 rootController.push(NavigationTree.Menu.name, launchFlag = LaunchFlag.ClearPrevious)
+                viewModel.obtainEvent(SignInEvent.OnResetAction)
+                viewModel.obtainEvent(SignInEvent.OnResetState)
             }
 
             is SignInAction.OpenRegistration -> {

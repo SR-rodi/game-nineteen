@@ -1,32 +1,38 @@
 package ru.sr.nineteen.data
 
-import com.google.firebase.auth.FirebaseAuth
+
 import ru.sr.mimeteen.remotedatabase.UserApi
 import ru.sr.nineteen.data.mapper.ProfileDomainMapper
-import ru.sr.nineteen.domain.UserIdProvider
 import ru.sr.nineteen.domain.model.ProfileUserDomainModel
 import ru.sr.nineteen.domain.repository.ProfileUserRepository
 
 class ProfileUserRepositoryImpl(
-    private val userIdProvider: UserIdProvider,
     private val api: UserApi,
-    private val auth: FirebaseAuth,
     private val domainMapper: ProfileDomainMapper,
 ) : ProfileUserRepository {
 
-    override suspend fun getUserById(): ProfileUserDomainModel {
-        return domainMapper.userDtoToProfileUserDomainModel(api.getUserByUUid(userIdProvider.getUserId()!!))
+    override suspend fun getCurrentUser(): ProfileUserDomainModel =
+        domainMapper.userDtoToProfileUserDomainModel(api.getCurrentUser())
+
+    override suspend fun updateUserName(newName: String) {
+        api.changeUserName(newName)
     }
 
-    override suspend fun updateUser() {
+    override suspend fun updateUserAvatar(avatar: String) {
+        api.changeUserAvatar(avatar)
+    }
+
+    override suspend fun updatePassword(newPassword: String) {
+        api.updatePassword(newPassword)
     }
 
     override suspend fun logOut() {
-        userIdProvider.clearUserId()
+        api.logOut()
     }
 
     override suspend fun deleteProfile() {
-
+        api.deleteUser()
     }
+
 
 }

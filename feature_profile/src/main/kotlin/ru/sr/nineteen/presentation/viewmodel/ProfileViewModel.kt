@@ -1,9 +1,6 @@
 package ru.sr.nineteen.presentation.viewmodel
 
-import android.util.Log
 import ru.sr.nineteen.BaseViewModel
-import ru.sr.nineteen.domain.repository.ProfileUserRepository
-import ru.sr.nineteen.domain.usecase.DeleteUserUseCase
 import ru.sr.nineteen.domain.usecase.GetUserInfoUseCase
 import ru.sr.nineteen.domain.usecase.LogOutUseCase
 import ru.sr.nineteen.presentation.model.ProfileUserUIModel
@@ -12,7 +9,6 @@ import ru.sr.nineteen.presentation.model.mapper.ProfileUIMapper
 class ProfileViewModel(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val logOutUseCase: LogOutUseCase,
-    private val deleteUserUseCase: DeleteUserUseCase,
     private val uiMapper: ProfileUIMapper,
 ) : BaseViewModel<ProfileState, ProfileAction, ProfileEvent>(ProfileState()) {
 
@@ -27,7 +23,7 @@ class ProfileViewModel(
     override fun obtainEvent(viewEvent: ProfileEvent) {
         when (viewEvent) {
             ProfileEvent.OnClickAvatar -> {}
-            ProfileEvent.OnClickDeleteOutButton -> onExit()
+            ProfileEvent.OnClickDeleteOutButton -> onClickDeleteButton()
             ProfileEvent.OnClickLogOutButton -> onExit()
             ProfileEvent.OnClickUserName -> {}
             ProfileEvent.OnResetAction -> onResetAction()
@@ -37,10 +33,14 @@ class ProfileViewModel(
 
     }
 
+    private fun onClickDeleteButton() {
+        viewAction = ProfileAction.OpenWarningScreen
+    }
+
     private fun onExit() = scopeLaunch(
         onSuccess = ::onSuccess, onError = ::onError, onLoading = ::onLoading
     ) {
-        deleteUserUseCase.delete()
+        logOutUseCase.logOut()
         viewAction = ProfileAction.OpenSignInScreen
     }
 
@@ -66,6 +66,7 @@ class ProfileViewModel(
 
 sealed interface ProfileAction {
     object OpenSignInScreen : ProfileAction
+    object OpenWarningScreen : ProfileAction
 }
 
 sealed interface ProfileEvent {

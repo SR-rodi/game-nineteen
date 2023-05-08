@@ -8,6 +8,6 @@ class GetUserInfoUseCaseImpl(
     private val repository: ProfileUserRepository,
 ) : GetUserInfoUseCase {
     override suspend fun getInfo(): ProfileUserDomainModel {
-        return repository.getUserById()
+        return repository.getCurrentUser()
     }
 }

@@ -1,16 +1,18 @@
 package ru.sr.nineteen.presentation
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import ru.sr.nineteen.data.FirebaseNotAuth
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.GetTokenUseCase
 import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 
 class MainViewModel(
-    private val tokenUseCase: GetTokenUseCase,
+    private val firebaseAuth: FirebaseAuth,
 ) : ViewModel() {
 
     fun getStartScreen(): String {
-        return if (tokenUseCase.getToken() == null) NavigationTree.SignIn.name else NavigationTree.Menu.name
+        return if (firebaseAuth.currentUser == null) NavigationTree.SignIn.name else NavigationTree.Menu.name
     }
 
 }

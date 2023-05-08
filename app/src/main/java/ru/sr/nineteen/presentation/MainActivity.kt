@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GameTheme(isNightMode = false) {
                 val configuration = OdysseyConfiguration(
-                    startScreen = StartScreen.Custom(/*NavigationTree.SignIn.name*/viewModel.getStartScreen()),
+                    startScreen = StartScreen.Custom(/*NavigationTree.Profile.name*/viewModel.getStartScreen()),
                     canvas = this,
                     displayType = DisplayType.FullScreen,
                     backgroundColor = GameTheme.colors.background,

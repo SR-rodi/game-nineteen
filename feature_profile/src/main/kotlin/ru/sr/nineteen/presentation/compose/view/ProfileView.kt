@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose.screen.view
+package ru.sr.nineteen.presentation.compose.view
 
 import android.media.Image
 import androidx.compose.foundation.background

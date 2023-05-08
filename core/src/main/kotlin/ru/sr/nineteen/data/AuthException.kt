@@ -1,9 +1,7 @@
-package ru.sr.nineteen.data.repository
-
-import com.google.firebase.FirebaseException
+package ru.sr.nineteen.data
 
 class FirebaseNotAuth(errorMessage: String = "не неайден пользователь") :
-    FirebaseException(errorMessage)
+    Exception(errorMessage)
 
 class  FirebaseNoEmailVerifications(errorMessage: String = "не прошла валидация") :
-    FirebaseException(errorMessage)
+    Exception(errorMessage)

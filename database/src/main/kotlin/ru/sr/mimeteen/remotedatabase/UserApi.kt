@@ -4,10 +4,16 @@ import ru.sr.mimeteen.remotedatabase.model.UserDto
 
 interface UserApi {
 
-    suspend fun createUser(newUser: UserDto)
+    suspend fun getCurrentUser(): UserDto
 
-    suspend fun getUserByUUid(uuid: String): UserDto
+    suspend fun deleteUser()
 
-    suspend fun deleteUserByUUid(uuid: String)
+    suspend fun changeUserName(name:String)
+
+    suspend fun changeUserAvatar(avatar:String)
+
+    suspend fun updatePassword(newPassword:String)
+
+    suspend fun logOut()
 
 }

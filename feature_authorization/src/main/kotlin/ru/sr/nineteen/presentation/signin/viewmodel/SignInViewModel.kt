@@ -5,9 +5,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.Dispatchers
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.authorization.R
+import ru.sr.nineteen.data.FirebaseNoEmailVerifications
+import ru.sr.nineteen.data.FirebaseNotAuth
 import ru.sr.nineteen.data.mapper.AuthUiMapper
-import ru.sr.nineteen.data.repository.FirebaseNoEmailVerifications
-import ru.sr.nineteen.data.repository.FirebaseNotAuth
 import ru.sr.nineteen.domain.Validation
 import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
@@ -34,7 +34,12 @@ class SignInViewModel(
             SignInEvent.OnClickForgotPasswordButton -> onOpenResetPasswordScreen()
             SignInEvent.OnOpenWarning -> openWarningMessage()
             SignInEvent.OnResetAction -> onResetAction()
+            SignInEvent.OnResetState -> onResetState()
         }
+    }
+
+    private fun onResetState() {
+        viewState = viewState.copy(isLoading = false,isError = false, email = "", password = "")
     }
 
     private fun onClickSignIn(email: String, password: String) {
