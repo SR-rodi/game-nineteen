@@ -24,13 +24,12 @@ class EditUserNameViewModel(
     private fun onClickSave() = scopeLaunch(
         onSuccess = ::onSuccess, onError = ::onError, onLoading = ::onLoading
     ) {
-        Log.e("Kart","IsStartLoading")
         updateUserNameUseCase.update(viewState.userName)
     }
 
 
-    private fun onGoBack() {
-        viewAction = EditNameAction.GoBack
+    private fun onGoBack(newName: String? = null) {
+        viewAction = EditNameAction.GoBack(newName)
     }
 
     private fun onChangeName(newName: String) {
@@ -48,7 +47,7 @@ class EditUserNameViewModel(
 
     private fun onSuccess() {
         viewState = viewState.copy(isLoading = false, isError = false)
-        onGoBack()
+        onGoBack(viewState.userName)
     }
 }
 
@@ -59,7 +58,7 @@ data class EditNameState(
 )
 
 sealed interface EditNameAction {
-    object GoBack : EditNameAction
+    class GoBack(val newName: String?) : EditNameAction
 
 }
 

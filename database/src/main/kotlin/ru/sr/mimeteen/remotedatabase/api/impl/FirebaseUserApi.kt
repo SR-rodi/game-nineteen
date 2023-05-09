@@ -2,6 +2,7 @@ package ru.sr.mimeteen.remotedatabase.api.impl
 
 import android.net.Uri
 import android.util.Log
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import kotlinx.coroutines.tasks.await
@@ -15,7 +16,7 @@ class FirebaseUserApi(
 
     override suspend fun getCurrentUser(): UserDto {
         val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
-        Log.e("Kart","photoUri = ${currentUser.photoUrl}")
+        Log.e("Kart", "photoUri = ${currentUser.photoUrl}")
         return UserDto(
             email = currentUser.email,
             id = currentUser.uid,
@@ -41,8 +42,11 @@ class FirebaseUserApi(
         currentUser.updateProfile(profileUpdates).await()
     }
 
-    override suspend fun updatePassword(newPassword: String) {
+    override suspend fun updatePassword(oldPassword:String,newPassword: String) {
         val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
+        val credential = EmailAuthProvider
+            .getCredential(currentUser.email!!, oldPassword)
+        currentUser.reauthenticate(credential).await()
         currentUser.updatePassword(newPassword).await()
     }
 

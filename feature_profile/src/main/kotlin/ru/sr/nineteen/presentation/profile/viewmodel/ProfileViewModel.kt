@@ -1,13 +1,11 @@
 package ru.sr.nineteen.presentation.profile.viewmodel
 
 import android.net.Uri
-import android.util.Log
 import kotlinx.coroutines.delay
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.usecase.GetUserInfoUseCase
 import ru.sr.nineteen.domain.usecase.LogOutUseCase
 import ru.sr.nineteen.domain.usecase.UpdateUserAvatarUseCase
-import ru.sr.nineteen.domain.usecase.UpdateUserNameUseCase
 import ru.sr.nineteen.presentation.model.ProfileUserUIModel
 import ru.sr.nineteen.presentation.model.mapper.ProfileUIMapper
 
@@ -28,6 +26,10 @@ class ProfileViewModel(
             ProfileEvent.OnClickAvatar -> onClickAvatar()
             is ProfileEvent.OnSetNewAvatar -> onSetNewAvatar(viewEvent.uri)
             ProfileEvent.OnClickSaveAvatar -> onClickSaveAvatar()
+            is ProfileEvent.OnChangeName -> viewState =
+                viewState.copy(user = viewState.user.copy(name = viewEvent.newName))
+
+            ProfileEvent.OnClickUpdatePasswordButton -> viewAction = ProfileAction.OpenUpdatePasswordScreen
         }
 
     }
@@ -47,7 +49,8 @@ class ProfileViewModel(
     }
 
     private fun onSetNewAvatar(uri: Uri?) {
-        viewState = viewState.copy(avatarUri = uri, isSaveButtonVisibility = true)
+        if (uri != null)
+            viewState = viewState.copy(avatarUri = uri, isSaveButtonVisibility = true)
     }
 
     private fun onClickAvatar() {
@@ -89,11 +92,13 @@ sealed interface ProfileAction {
     object OpenSignInScreen : ProfileAction
     object OpenWarningScreen : ProfileAction
     object OpenGallery : ProfileAction
+    object OpenUpdatePasswordScreen : ProfileAction
     class OpenEditNameScreen(val userName: String?) : ProfileAction
 }
 
 sealed interface ProfileEvent {
     class OnSetNewAvatar(val uri: Uri?) : ProfileEvent
+    class OnChangeName(val newName: String) : ProfileEvent
     object OnStartScreen : ProfileEvent
     object OnClickLogOutButton : ProfileEvent
     object OnClickDeleteOutButton : ProfileEvent
@@ -101,6 +106,7 @@ sealed interface ProfileEvent {
     object OnClickUserName : ProfileEvent
     object OnResetAction : ProfileEvent
     object OnClickSaveAvatar : ProfileEvent
+    object OnClickUpdatePasswordButton : ProfileEvent
 
 }
 

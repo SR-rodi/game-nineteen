@@ -13,7 +13,7 @@ interface UserApi {
 
     suspend fun changeUserAvatar(avatar: Uri)
 
-    suspend fun updatePassword(newPassword:String)
+    suspend fun updatePassword(oldPassword:String,newPassword:String)
 
     suspend fun logOut()
 

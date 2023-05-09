@@ -25,6 +25,7 @@ import ru.sr.nineteen.presentation.model.mapper.ProfileUIMapperImpl
 import ru.sr.nineteen.presentation.edit.viewmodel.EditUserNameViewModel
 import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteWarningViewModel
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileViewModel
+import ru.sr.nineteen.presentation.updatepassword.presentation.viewmodel.UpDatePasswordViewModel
 
 fun profileModule() =
     listOf(profileViewModelModule(), profileRepositoryModule(), mapperModule(), useCaseModule())
@@ -33,6 +34,7 @@ fun profileViewModelModule() = module {
     viewModelOf(::ProfileViewModel)
     viewModelOf(::ProfileDeleteWarningViewModel)
     viewModelOf(::EditUserNameViewModel)
+    viewModelOf(::UpDatePasswordViewModel)
 }
 
 fun profileRepositoryModule() = module {

@@ -10,4 +10,7 @@
         - содержать хотябы одну латинскую букву и одну цифру
     </string>
     <string name="core_ui_email_helper_error">* Пустое поле, или не соответствует минимальным требованием </string>
+    <string name="core_ui_error_network">Что то пошло не по плану. Проверте состояние сети и повтоите попытку</string>
+    <string name="core_ui_yes">Да</string>
+    <string name="core_ui_no">Нет</string>
 </resources>

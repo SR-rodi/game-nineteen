@@ -27,8 +27,8 @@ class ProfileUserRepositoryImpl(
         api.changeUserAvatar(avatar)
     }
 
-    override suspend fun updatePassword(newPassword: String) {
-        api.updatePassword(newPassword)
+    override suspend fun updatePassword(oldPassword:String,newPassword: String) {
+        api.updatePassword(oldPassword,newPassword)
     }
 
     override suspend fun logOut() {

@@ -9,10 +9,12 @@ import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.core.LaunchFlag
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.presentation.edit.compose.screen.EditUserNameScreen
+import ru.sr.nineteen.presentation.edit.viewmodel.EditNameEvent
 import ru.sr.nineteen.presentation.profile.compose.view.ProfileView
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileAction
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileEvent
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileViewModel
+import ru.sr.nineteen.presentation.updatepassword.presentation.compose.screen.UpDatePasswordScreen
 import ru.sr.nineteen.presentation.warning.compose.screen.ProfileDeleteWarningScreen
 import ru.sr.nineteen.utils.presentAlertDialog
 import ru.sr.nineteen.view.Screen
@@ -20,7 +22,7 @@ import ru.sr.nineteen.view.Screen
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {
 
-    LaunchedEffect(key1 = true){ viewModel.obtainEvent(ProfileEvent.OnStartScreen) }
+    LaunchedEffect(key1 = true) { viewModel.obtainEvent(ProfileEvent.OnStartScreen) }
 
     Screen(viewModel) { state, action, rootController ->
 
@@ -53,13 +55,25 @@ fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {
                 viewModel.obtainEvent(ProfileEvent.OnResetAction)
             }
 
-            is ProfileAction.OpenEditNameScreen ->{
-                rootController.findModalController().presentAlertDialog { EditUserNameScreen(action.userName) }
+            is ProfileAction.OpenEditNameScreen -> {
+                rootController.findModalController()
+                    .presentAlertDialog(closeOnBackdropClick = false) {
+                        EditUserNameScreen(action.userName) { newName ->
+                            viewModel.obtainEvent(ProfileEvent.OnChangeName(newName))
+                        }
+                    }
+                viewModel.obtainEvent(ProfileEvent.OnResetAction)
+            }
+
+            ProfileAction.OpenUpdatePasswordScreen -> {
+                rootController.findModalController()
+                    .presentAlertDialog(closeOnBackdropClick = false) {
+                        UpDatePasswordScreen()
+                    }
                 viewModel.obtainEvent(ProfileEvent.OnResetAction)
             }
         }
 
     }
-
 }
 

@@ -53,7 +53,7 @@ fun RegistrationView(state: RegistrationState, eventHandler: (RegistrationEvent)
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth(),
-            isRepeatMode = true,
+            isVisibleHelper = false,
             value = state.password,
             isError = state.isErrorPasswordValidation,
             isEnable = !state.isLoading,

@@ -11,7 +11,7 @@ interface ProfileUserRepository {
 
     suspend fun updateUserAvatar(avatar: Uri)
 
-    suspend fun updatePassword(newPassword: String)
+    suspend fun updatePassword(oldPassword:String,newPassword: String)
 
     suspend fun logOut()
 

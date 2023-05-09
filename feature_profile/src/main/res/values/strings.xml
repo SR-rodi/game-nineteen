@@ -4,5 +4,9 @@
     <string name="profile_name">Имя</string>
     <string name="profile_edit_button">Изменить</string>
     <string name="profile_edit_back">Назад</string>
-    <string name="profile_error">Что то пошло не по плану. Проверте состояние сети и повтоите попытку</string>
+    <string name="profile_reset_password_title">Сменить пароль</string>
+    <string name="profile_new_password">Новый пароль</string>
+    <string name="profile_old_password">Старый пароль</string>
+    <string name="profile_error_old_passwoed">*Не верный пароль</string>
+
 </resources>

@@ -7,7 +7,7 @@ import ru.sr.nineteen.domain.usecase.ChangePasswordUseCase
 class ChangePasswordUseCaseImpl(
     private val repository: ProfileUserRepository
 ): ChangePasswordUseCase {
-    override suspend fun update(newPass: String) {
-        repository.updatePassword(newPass)
+    override suspend fun update(oldPassword:String,newPass: String) {
+        repository.updatePassword(oldPassword,newPass)
     }
 }

@@ -2,10 +2,12 @@ package ru.sr.nineteen.presentation.profile.compose.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -28,9 +30,9 @@ import ru.sr.nineteen.view.AvatarTypeClick
 @Composable
 fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
 
-    Column {
+    Column() {
         ProfileAvatarView(
-            avatar = state.user.avatar ?: state.avatarUri ?: R.drawable.kitekat_4,
+            avatar = state.avatarUri ?: state.user.avatar ?: R.drawable.kitekat_4,
             isVisibilitySaveButton = state.isSaveButtonVisibility,
             isUpLoadImage = state.isUpLoadAvatar
         ) { clickType ->
@@ -40,15 +42,27 @@ fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
                 else ProfileEvent.OnClickSaveAvatar
             )
         }
-        UserInfoCard(title = stringResource(id = R.string.core_ui_Email), value = state.user.email)
-        UserInfoCard(
-            title = stringResource(id = R.string.core_ui_name),
-            value = state.user.name ?: "N/A",
-            isEdit = true
-        ) {
-            eventHandler(ProfileEvent.OnClickUserName)
+        Column(Modifier.padding(16.dp)) {
+
+            UserInfoCard(
+                title = stringResource(id = R.string.core_ui_Email),
+                value = state.user.email
+            )
+            UserInfoCard(
+                title = stringResource(id = R.string.core_ui_name),
+                value = state.user.name ?: "N/A",
+                isEdit = true
+            ) {
+                eventHandler(ProfileEvent.OnClickUserName)
+            }
+            ActionButtonView(
+                padding = PaddingValues(vertical = 8.dp),
+                text = stringResource(id = ru.sr.nineteen.profile.R.string.profile_reset_password_title)
+            ) {
+                eventHandler(ProfileEvent.OnClickUpdatePasswordButton)
+            }
+            ButtonGroup(eventHandler)
         }
-        ButtonGroup(eventHandler)
     }
 }
 
@@ -58,12 +72,25 @@ fun UserInfoCard(title: String, value: String, isEdit: Boolean = false, onClick:
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .padding(vertical = 8.dp)
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+
+            Column(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .weight(1f)
+            ) {
+                Text(
+                    text = title,
+                    style = GameTheme.fonts.p.copy(color = GameTheme.colors.textTitle)
+                )
+                Text(text = value, style = GameTheme.fonts.h3.copy(color = GameTheme.colors.text))
+            }
+            Spacer(modifier = Modifier.size(8.dp))
             if (isEdit) {
                 IconButton(
-                    modifier = Modifier.align(Alignment.TopEnd),
+                    modifier = Modifier.align(Alignment.CenterVertically),
                     onClick = onClick
                 ) {
                     Icon(
@@ -71,17 +98,6 @@ fun UserInfoCard(title: String, value: String, isEdit: Boolean = false, onClick:
                     )
                 }
 
-            }
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = title,
-                    style = GameTheme.fonts.p.copy(color = GameTheme.colors.textTitle)
-                )
-                Text(text = value, style = GameTheme.fonts.h3.copy(color = GameTheme.colors.text))
             }
         }
     }
@@ -92,18 +108,19 @@ fun UserInfoCard(title: String, value: String, isEdit: Boolean = false, onClick:
 @Composable
 fun ButtonGroup(eventHandler: (ProfileEvent) -> Unit) {
 
-    Row(Modifier.padding(horizontal = 16.dp)) {
+    Row {
+        Box(modifier = Modifier.weight(1f)) {
+            ActionButtonView(text = "Удалить", isOutLine = true) {
+                eventHandler(ProfileEvent.OnClickDeleteOutButton)
+            }
+        }
+        Spacer(modifier = Modifier.width(8.dp))
         Box(modifier = Modifier.weight(1f)) {
             ActionButtonView(text = "Выйти") {
                 eventHandler(ProfileEvent.OnClickLogOutButton)
             }
         }
-        Spacer(modifier = Modifier.width(8.dp))
-        Box(modifier = Modifier.weight(1f)) {
-            ActionButtonView(text = "Удалить") {
-                eventHandler(ProfileEvent.OnClickDeleteOutButton)
-            }
-        }
+
 
     }
 

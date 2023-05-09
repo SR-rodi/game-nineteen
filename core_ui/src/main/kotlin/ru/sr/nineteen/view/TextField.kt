@@ -3,7 +3,6 @@ package ru.sr.nineteen.view
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.icons.Icons
@@ -37,7 +36,8 @@ fun PasswordTextField(
     hintId: Int = R.string.core_ui_Password,
     isEnable: Boolean = true,
     isError: Boolean = false,
-    isRepeatMode: Boolean = false,
+    errorMessage:String = stringResource(id = R.string.core_ui_password_helper_error),
+    isVisibleHelper: Boolean = true,
     onValueChange: (String) -> Unit,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = GameTheme.colors.blue_500,
@@ -84,11 +84,11 @@ fun PasswordTextField(
         label = { Text(text = stringResource(id = hintId)) },
         colors = colors,
         supportingText = {
-            if (!isRepeatMode)
                 Column {
                     AnimatedVisibility(visible = isError) {
-                        Text(text = stringResource(id = R.string.core_ui_password_helper_error))
+                        Text(text = errorMessage)
                     }
+                    if (isVisibleHelper)
                     Text(text = stringResource(id = R.string.core_ui_password_helper))
                 }
 

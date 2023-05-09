@@ -20,10 +20,7 @@ class ProfileDeleteWarningViewModel (
     private fun onDeleteProfile()  = scopeLaunch(
     onSuccess = ::onSuccess, onError = ::onError, onLoading = ::onLoading
     ){
-        Log.e("Kart","Start")
         deleteUserUseCase.delete()
-
-        Log.e("Kart","Stop")
     }
 
     private fun popToBackStack() {
