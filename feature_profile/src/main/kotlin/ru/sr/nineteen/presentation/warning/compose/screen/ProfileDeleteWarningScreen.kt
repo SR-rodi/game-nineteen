@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose.screen
+package ru.sr.nineteen.presentation.warning.compose.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,10 +16,10 @@ import org.koin.androidx.compose.koinViewModel
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.core.LaunchFlag
 import ru.sr.nineteen.domain.NavigationTree
-import ru.sr.nineteen.presentation.viewmodel.ProfileDeleteAction
-import ru.sr.nineteen.presentation.viewmodel.ProfileDeleteEvent
-import ru.sr.nineteen.presentation.viewmodel.ProfileDeleteState
-import ru.sr.nineteen.presentation.viewmodel.ProfileDeleteWarningViewModel
+import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteAction
+import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteEvent
+import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteState
+import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteWarningViewModel
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.Screen
@@ -50,7 +50,6 @@ fun ProfileDeleteWarningScreen(viewModel: ProfileDeleteWarningViewModel = koinVi
 
 }
 
-
 @Composable
 fun ProfileDeleteWarningView(
     state: ProfileDeleteState,
@@ -78,7 +77,6 @@ fun ProfileDeleteWarningView(
                     eventHandler(ProfileDeleteEvent.OnClickNoButton)
                 }
             }
-
         }
 
     }

@@ -12,16 +12,19 @@ import ru.sr.nineteen.domain.usecase.ChangePasswordUseCase
 import ru.sr.nineteen.domain.usecase.DeleteProfileUserUseCase
 import ru.sr.nineteen.domain.usecase.GetUserInfoUseCase
 import ru.sr.nineteen.domain.usecase.LogOutUseCase
-import ru.sr.nineteen.domain.usecase.UpdateUserUseCase
+import ru.sr.nineteen.domain.usecase.UpdateUserAvatarUseCase
+import ru.sr.nineteen.domain.usecase.UpdateUserNameUseCase
 import ru.sr.nineteen.domain.usecase.impl.ChangePasswordUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.DeleteUserUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.GetUserInfoUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.LogOutUseCaseImpl
-import ru.sr.nineteen.domain.usecase.impl.UpdateUserUseCaseImpl
+import ru.sr.nineteen.domain.usecase.impl.UpdateUserAvatarCaseImpl
+import ru.sr.nineteen.domain.usecase.impl.UpdateUserNameCaseImpl
 import ru.sr.nineteen.presentation.model.mapper.ProfileUIMapper
 import ru.sr.nineteen.presentation.model.mapper.ProfileUIMapperImpl
-import ru.sr.nineteen.presentation.viewmodel.ProfileDeleteWarningViewModel
-import ru.sr.nineteen.presentation.viewmodel.ProfileViewModel
+import ru.sr.nineteen.presentation.edit.viewmodel.EditUserNameViewModel
+import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteWarningViewModel
+import ru.sr.nineteen.presentation.profile.viewmodel.ProfileViewModel
 
 fun profileModule() =
     listOf(profileViewModelModule(), profileRepositoryModule(), mapperModule(), useCaseModule())
@@ -29,6 +32,7 @@ fun profileModule() =
 fun profileViewModelModule() = module {
     viewModelOf(::ProfileViewModel)
     viewModelOf(::ProfileDeleteWarningViewModel)
+    viewModelOf(::EditUserNameViewModel)
 }
 
 fun profileRepositoryModule() = module {
@@ -44,6 +48,7 @@ fun useCaseModule() = module {
     singleOf(::GetUserInfoUseCaseImpl) { bind<GetUserInfoUseCase>() }
     singleOf(::DeleteUserUseCaseImpl) { bind<DeleteProfileUserUseCase>() }
     singleOf(::LogOutUseCaseImpl) { bind<LogOutUseCase>() }
-    singleOf(::UpdateUserUseCaseImpl) { bind<UpdateUserUseCase>() }
+    singleOf(::UpdateUserNameCaseImpl) { bind<UpdateUserNameUseCase>() }
     singleOf(::ChangePasswordUseCaseImpl) { bind<ChangePasswordUseCase>() }
+    singleOf(::UpdateUserAvatarCaseImpl) { bind<UpdateUserAvatarUseCase>() }
 }

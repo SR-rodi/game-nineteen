@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_edit_name_title">Изменить имя</string>
+    <string name="profile_name">Имя</string>
+    <string name="profile_edit_button">Изменить</string>
+    <string name="profile_edit_back">Назад</string>
+    <string name="profile_error">Что то пошло не по плану. Проверте состояние сети и повтоите попытку</string>
+</resources>

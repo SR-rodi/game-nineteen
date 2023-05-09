@@ -1,14 +1,11 @@
-package ru.sr.mimeteen.remotedatabase
+package ru.sr.mimeteen.remotedatabase.api.impl
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.tasks.await
-import ru.sr.mimeteen.remotedatabase.model.TableRemoteDatabase
+import ru.sr.mimeteen.remotedatabase.api.UserApi
 import ru.sr.mimeteen.remotedatabase.model.UserDto
 import ru.sr.nineteen.data.FirebaseNotAuth
 
@@ -18,6 +15,7 @@ class FirebaseUserApi(
 
     override suspend fun getCurrentUser(): UserDto {
         val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
+        Log.e("Kart","photoUri = ${currentUser.photoUrl}")
         return UserDto(
             email = currentUser.email,
             id = currentUser.uid,
@@ -37,9 +35,9 @@ class FirebaseUserApi(
         currentUser.updateProfile(profileUpdates).await()
     }
 
-    override suspend fun changeUserAvatar(avatar: String) {
+    override suspend fun changeUserAvatar(avatar: Uri) {
         val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
-        val profileUpdates = userProfileChangeRequest { photoUri = Uri.parse(avatar) }
+        val profileUpdates = userProfileChangeRequest { photoUri = avatar }
         currentUser.updateProfile(profileUpdates).await()
     }
 

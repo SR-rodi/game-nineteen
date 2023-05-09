@@ -8,7 +8,7 @@ import ru.sr.nineteen.TrainingScreen
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.MenuScreen
-import ru.sr.nineteen.presentation.compose.screen.ProfileScreen
+import ru.sr.nineteen.presentation.profile.compose.screen.ProfileScreen
 import ru.sr.nineteen.presentation.registration.compose.RegistrationScreen
 import ru.sr.nineteen.presentation.resetpassword.compose.screen.ResetPasswordScreen
 import ru.sr.nineteen.presentation.signin.compose.screen.SignInScreen

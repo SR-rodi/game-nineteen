@@ -8,10 +8,11 @@ interface ProfileUIMapper {
     fun profileDomainToProfileUi(domainModel: ProfileUserDomainModel): ProfileUserUIModel
 }
 
-class ProfileUIMapperImpl() : ProfileUIMapper {
+class ProfileUIMapperImpl : ProfileUIMapper {
     override fun profileDomainToProfileUi(domainModel: ProfileUserDomainModel) = ProfileUserUIModel(
         email = domainModel.email ?: "",
         id = domainModel.id,
-        name = domainModel.name ?: ""
+        name = domainModel.name ?: "",
+        avatar = domainModel.avatar
     )
 }

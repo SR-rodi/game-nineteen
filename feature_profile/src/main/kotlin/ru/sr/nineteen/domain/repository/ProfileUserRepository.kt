@@ -1,5 +1,6 @@
 package ru.sr.nineteen.domain.repository
 
+import android.net.Uri
 import ru.sr.nineteen.domain.model.ProfileUserDomainModel
 
 interface ProfileUserRepository {
@@ -8,11 +9,13 @@ interface ProfileUserRepository {
 
     suspend fun updateUserName(newName: String)
 
-    suspend fun updateUserAvatar(avatar: String)
+    suspend fun updateUserAvatar(avatar: Uri)
 
     suspend fun updatePassword(newPassword: String)
 
     suspend fun logOut()
 
     suspend fun deleteProfile()
+
+    suspend fun uploadAvatar(userId:String,uri: Uri?):Uri
 }

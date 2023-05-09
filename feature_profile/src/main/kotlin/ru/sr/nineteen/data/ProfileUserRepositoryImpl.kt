@@ -1,14 +1,19 @@
 package ru.sr.nineteen.data
 
 
-import ru.sr.mimeteen.remotedatabase.UserApi
+import android.net.Uri
+import ru.sr.mimeteen.remotedatabase.api.UploadApi
+import ru.sr.mimeteen.remotedatabase.api.UserApi
 import ru.sr.nineteen.data.mapper.ProfileDomainMapper
+import ru.sr.nineteen.domain.ByteConvertor
 import ru.sr.nineteen.domain.model.ProfileUserDomainModel
 import ru.sr.nineteen.domain.repository.ProfileUserRepository
 
 class ProfileUserRepositoryImpl(
     private val api: UserApi,
+    private val uploadApi: UploadApi,
     private val domainMapper: ProfileDomainMapper,
+    private val byteConvertor: ByteConvertor,
 ) : ProfileUserRepository {
 
     override suspend fun getCurrentUser(): ProfileUserDomainModel =
@@ -18,7 +23,7 @@ class ProfileUserRepositoryImpl(
         api.changeUserName(newName)
     }
 
-    override suspend fun updateUserAvatar(avatar: String) {
+    override suspend fun updateUserAvatar(avatar: Uri) {
         api.changeUserAvatar(avatar)
     }
 
@@ -32,6 +37,12 @@ class ProfileUserRepositoryImpl(
 
     override suspend fun deleteProfile() {
         api.deleteUser()
+    }
+
+    override suspend fun uploadAvatar(userId: String, uri: Uri?): Uri {
+        if (uri == null) throw NullPointerException("uri не найден")
+
+       return uploadApi.uLoadImage(userId, byteConvertor.fromUri(uri))
     }
 
 

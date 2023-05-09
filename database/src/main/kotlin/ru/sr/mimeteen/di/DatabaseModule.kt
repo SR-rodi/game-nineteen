@@ -2,23 +2,31 @@ package ru.sr.mimeteen.di
 
 import androidx.room.Room
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.sr.mimeteen.database.db.DataBase
-import ru.sr.mimeteen.remotedatabase.FirebaseUserApi
-import ru.sr.mimeteen.remotedatabase.UserApi
+import ru.sr.mimeteen.remotedatabase.api.UploadApi
+import ru.sr.mimeteen.remotedatabase.api.impl.FirebaseUserApi
+import ru.sr.mimeteen.remotedatabase.api.UserApi
+import ru.sr.mimeteen.remotedatabase.api.impl.FireBaseStorageApi
 
 
 fun databaseModule() = listOf(remoteModule(), locationModule())
 
 fun remoteModule() = module {
     val baseUrl = "https://emaillinkregistration-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    val baseUrlStorage = "gs://emaillinkregistration.appspot.com"
 
     single { FirebaseDatabase.getInstance(baseUrl) }
 
+    single { Firebase.storage(baseUrlStorage).reference }
+
     singleOf(::FirebaseUserApi) { bind<UserApi>() }
+    singleOf(::FireBaseStorageApi) { bind<UploadApi>() }
 
 }
 

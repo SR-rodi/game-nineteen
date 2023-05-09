@@ -1,4 +1,4 @@
-package ru.sr.nineteen.presentation.compose.view
+package ru.sr.nineteen.presentation.profile.compose.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,18 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.theme.GameTheme
+import ru.sr.nineteen.view.AvatarTypeClick
 import ru.sr.nineteen.view.AvatarView
 
 
 @Composable
 fun ProfileAvatarView(
+    avatar:Any,
     widthBorder: Dp = 2.dp,
     background: Color = GameTheme.colors.blue_400,
     avatarHeight: Dp = 100.dp,
     borderColor: Color = GameTheme.colors.blue_100,
-    onClickImage: () -> Unit = {},
+    isVisibilitySaveButton:Boolean,
+    isUpLoadImage:Boolean,
+    onClickImage: (AvatarTypeClick) -> Unit = {},
 ) {
 
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
@@ -42,14 +45,17 @@ fun ProfileAvatarView(
                     .background(borderColor)
             )
         }
-
         AvatarView(
-            image = R.drawable.kitekat_2,
+            image = avatar,
             padding = PaddingValues(top = 50.dp),
             widthBorder = widthBorder,
             borderColor = borderColor,
-            size = avatarHeight
-        ) { onClickImage() }
+            size = avatarHeight,
+            isVisibilitySaveButton = isVisibilitySaveButton,
+            isUploadAvatar = isUpLoadImage
+        ) {clickType->
+            onClickImage(clickType)
+        }
     }
 
 }

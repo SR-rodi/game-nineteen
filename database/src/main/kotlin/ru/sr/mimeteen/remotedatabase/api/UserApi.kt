@@ -1,5 +1,6 @@
-package ru.sr.mimeteen.remotedatabase
+package ru.sr.mimeteen.remotedatabase.api
 
+import android.net.Uri
 import ru.sr.mimeteen.remotedatabase.model.UserDto
 
 interface UserApi {
@@ -10,7 +11,7 @@ interface UserApi {
 
     suspend fun changeUserName(name:String)
 
-    suspend fun changeUserAvatar(avatar:String)
+    suspend fun changeUserAvatar(avatar: Uri)
 
     suspend fun updatePassword(newPassword:String)
 

@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.theme.GameTheme
+
 
 @SuppressLint("MissingColorAlphaChannel")
 @Composable
@@ -27,6 +29,8 @@ fun ActionButtonView(
     contentColor: Color = GameTheme.colors.text,
     borderColor: Color = GameTheme.colors.blue_500,
     isOutLine: Boolean = false,
+    style : TextStyle =  GameTheme.fonts.h3
+        .copy(color = if (isOutLine) GameTheme.colors.textTitle else GameTheme.colors.textButton),
     onClick: () -> Unit,
 ) {
 
@@ -35,7 +39,6 @@ fun ActionButtonView(
         containerColor = if (isOutLine) Color(0xFCFCFC) else containerColor,
         contentColor = contentColor,
     )
-
     Button(
         modifier = Modifier
             .padding(padding)
@@ -48,10 +51,7 @@ fun ActionButtonView(
     ) {
         Text(
             text = text,
-            style = GameTheme.fonts.h3
-                .copy(
-                    color = if (isOutLine) GameTheme.colors.textTitle else GameTheme.colors.textButton
-                )
+            style = style
         )
     }
 }
