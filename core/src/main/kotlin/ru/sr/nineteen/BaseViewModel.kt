@@ -28,6 +28,7 @@ abstract class BaseViewModel<State : Any, Action : Any, Event : Any>(initialStat
             _viewStates.value = value
         }
 
+
     fun viewStates() = _viewStates.asStateFlow()
     fun viewActions() = _viewActions.asSharedFlow()
 

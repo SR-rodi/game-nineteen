@@ -4,7 +4,7 @@ import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
 import ru.sr.nineteen.presentation.field.compose.GameScreen
 import ru.sr.nineteen.compose.RatingScreen
-import ru.sr.nineteen.TrainingScreen
+import ru.sr.nineteen.screen.TrainingScreen
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.MenuScreen

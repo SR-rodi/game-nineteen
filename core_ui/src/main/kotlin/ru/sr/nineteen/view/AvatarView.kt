@@ -18,6 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
@@ -47,12 +48,12 @@ fun AvatarView(
         modifier = Modifier
             .padding(padding)
             .clip(shapes)
+            .size(size)
             .background(borderColor),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
-                .size(size)
                 .clip(shapes)
                 .clickable { onClick(AvatarTypeClick.Image) }
                 .border(width = widthBorder, color = borderColor, shapes),
@@ -63,7 +64,8 @@ fun AvatarView(
                 contentScale = ContentScale.Crop,
                 loading = {
                     CircularProgressIndicator(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
                             .align(Alignment.Center)
                             .scale(0.3f),
                         color = GameTheme.colors.blue_500
@@ -71,11 +73,18 @@ fun AvatarView(
 
                 }
             )
-            Icon(
-                modifier = Modifier.align(Alignment.TopEnd),
-                imageVector = Icons.Filled.Edit, contentDescription = "",
-                tint = iconColor
-            )
+            Box(modifier = Modifier
+                .align(Alignment.TopEnd)
+                .clip(shapes)
+                .alpha(0.8f)
+                .background(borderColor)) {
+                Icon(
+                    modifier = Modifier.padding(4.dp),
+                    imageVector = Icons.Filled.Edit, contentDescription = "",
+                    tint = iconColor
+                )
+            }
+
         }
         AnimatedVisibility(
             visible = isVisibilitySaveButton

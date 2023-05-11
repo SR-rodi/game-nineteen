@@ -9,7 +9,6 @@ import ru.sr.nineteen.data.FirebaseNoEmailVerifications
 import ru.sr.nineteen.data.FirebaseNotAuth
 import ru.sr.nineteen.data.mapper.AuthUiMapper
 import ru.sr.nineteen.domain.Validation
-import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInAction
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
@@ -19,7 +18,6 @@ class SignInViewModel(
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
     private val uiMapper: AuthUiMapper,
     private val validation: Validation,
-    private val putTokenUseCase: PutTokenUseCase,
 ) : BaseViewModel<SignInState, SignInAction, SignInEvent>(SignInState()) {
 
     override fun obtainEvent(viewEvent: SignInEvent) {
@@ -84,7 +82,6 @@ class SignInViewModel(
         ) {
             val user = uiMapper
                 .authUserDomainModelToAuthUser(signInWithEmailUseCase.signIn(email, password))
-            putTokenUseCase.putToken(user.token)
             openMenu(user.email)
         }
 

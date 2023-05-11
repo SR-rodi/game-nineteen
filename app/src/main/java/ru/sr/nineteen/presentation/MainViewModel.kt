@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseAuth
 import ru.sr.nineteen.data.FirebaseNotAuth
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.GetTokenUseCase
-import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 
 class MainViewModel(
     private val firebaseAuth: FirebaseAuth,

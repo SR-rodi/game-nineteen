@@ -19,18 +19,16 @@ import ru.sr.nineteen.view.ActionButtonView
 fun MenuView(state: MenuState, eventHandler: (event: MenuEvent) -> Unit) {
 
     LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
-        item {
-            ActionButtonView(text = "Профиль") {
-                eventHandler(MenuEvent.OnClickProfileButton)
-            }
-        }
+
         item {
             ItemMenuView(
                 modifier = Modifier.fillMaxWidth(),
                 title = stringResource(id = ru.sr.nineteen.menu.R.string.menu_next_title),
                 textButton = stringResource(id = ru.sr.nineteen.menu.R.string.menu_game_button),
                 imageID = R.drawable.kitekat_1,
-                isEnable = state.isNextEnable
+                isEnable = state.isNextEnable,
+                avatar = state.userAvatar,
+                onClickAvatar = { eventHandler(MenuEvent.OnClickProfileButton) }
             ) { eventHandler(MenuEvent.OnClickNextButton) }
         }
         item {

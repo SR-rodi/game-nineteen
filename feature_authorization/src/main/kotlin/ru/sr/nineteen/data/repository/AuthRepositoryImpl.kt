@@ -1,29 +1,22 @@
 package ru.sr.nineteen.data.repository
 
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.tasks.await
-import ru.sr.nineteen.data.FirebaseNoEmailVerifications
-import ru.sr.nineteen.data.FirebaseNotAuth
+import ru.sr.mimeteen.remotedatabase.api.AuthApi
 import ru.sr.nineteen.data.mapper.AuthDomainMapper
 import ru.sr.nineteen.domain.model.AuthUserDomainModel
-import ru.sr.nineteen.domain.UserIdProvider
 import ru.sr.nineteen.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
-    private val auth: FirebaseAuth,
+    private val api: AuthApi,
     private val domainMapper: AuthDomainMapper,
-    private val tokenProvider: UserIdProvider,
 ) : AuthRepository {
-    override suspend fun getCurrentUser() = auth.currentUser
+    override suspend fun getCurrentUser() = api.getCurrentUser()
 
     override suspend fun createUserWithEmailAndPassword(
         email: String,
         password: String,
     ): AuthUserDomainModel {
-        val user = auth.createUserWithEmailAndPassword(email, password).await().user
-            ?: throw FirebaseNotAuth()
-        user.sendEmailVerification()
-        return domainMapper.firebaseUserToAuthUserDomainModel(user)
+        val user = api.createUserWithEmailAndPassword(email, password)
+        return domainMapper.userDtoToAuthUserDomainModel(user)
     }
 
     override suspend fun signInWithEmailAndPassword(
@@ -31,22 +24,14 @@ class AuthRepositoryImpl(
         password: String,
     ): AuthUserDomainModel {
 
-        val user = auth.signInWithEmailAndPassword(email, password).await().user
-            ?: throw FirebaseNotAuth()
+        val user = api.signInWithEmailAndPassword(email, password)
 
-        return if (user.isEmailVerified)
-            domainMapper.firebaseUserToAuthUserDomainModel(user)
-        else throw FirebaseNoEmailVerifications()
+        return domainMapper.userDtoToAuthUserDomainModel(user)
     }
 
     override suspend fun resetPassword(email: String) {
-        auth.sendPasswordResetEmail(email).await()
+        api.resetPassword(email)
     }
-
-    override fun setToken(token: String) {
-        tokenProvider.putUserId(token)
-    }
-
 
 }
 

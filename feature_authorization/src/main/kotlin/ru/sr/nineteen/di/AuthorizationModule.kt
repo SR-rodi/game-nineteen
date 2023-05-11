@@ -13,11 +13,9 @@ import ru.sr.nineteen.data.mapper.AuthUiMapperImpl
 import ru.sr.nineteen.data.repository.AuthRepositoryImpl
 import ru.sr.nineteen.domain.repository.AuthRepository
 import ru.sr.nineteen.domain.usecase.CreateUserWithEmailAndPasswordUseCase
-import ru.sr.nineteen.domain.usecase.PutTokenUseCase
 import ru.sr.nineteen.domain.usecase.ResetPasswordUseCase
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
 import ru.sr.nineteen.domain.usecase.impl.CreateUserWithEmailAndPasswordUseCaseImpl
-import ru.sr.nineteen.domain.usecase.impl.PutTokenUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.ResetPasswordUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.SignInWithEmailUseCaseImpl
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationViewModel
@@ -38,7 +36,6 @@ fun networkModule() = module {
 fun useCaseModule() = module {
     singleOf(::CreateUserWithEmailAndPasswordUseCaseImpl) { bind<CreateUserWithEmailAndPasswordUseCase>() }
     singleOf(::SignInWithEmailUseCaseImpl) { bind<SignInWithEmailUseCase>() }
-    singleOf(::PutTokenUseCaseImpl){bind<PutTokenUseCase>()}
     singleOf(::ResetPasswordUseCaseImpl){bind<ResetPasswordUseCase>()}
 }
 

@@ -1,11 +1,13 @@
 package ru.sr.nineteen.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
 import ru.sr.mimeteen.database.repository.GameRepository
+import ru.sr.mimeteen.remotedatabase.UserProvider
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.viewmodel.model.MenuAction
@@ -14,6 +16,7 @@ import ru.sr.nineteen.presentation.viewmodel.model.MenuState
 
 class MenuViewModel(
     private val gameRepository: GameRepository,
+    private val userProvider: UserProvider,
 ) : BaseViewModel<MenuState, MenuAction, MenuEvent>(MenuState()) {
 
     private var localSettings: SettingGame? = null
@@ -58,6 +61,9 @@ class MenuViewModel(
     }
 
     private fun getGameList() {
+        val userAvatar  = userProvider.getUser().photoUri
+        Log.e("Kart","userAvatar = $userAvatar")
+        viewState = viewState.copy(userAvatar = userProvider.getUser().photoUri)
         gameRepository.getGameList().onEach { entity ->
             if (entity != null) {
                 viewState = if (entity.list.isNotEmpty()) {

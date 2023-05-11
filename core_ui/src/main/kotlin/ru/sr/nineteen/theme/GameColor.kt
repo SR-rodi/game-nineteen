@@ -20,7 +20,8 @@ data class GameColor(
     val textTitle:Color,
     val textButton:Color,
     val background:Color,
-    val error: Color
+    val error: Color,
+    val colorTest:Color
 )
 
 val lightPalette = GameColor(
@@ -40,6 +41,7 @@ val lightPalette = GameColor(
     more = Color(0xFF46E8FD),
     background = Color(0xFF9CB9D1),
     error = Color(0xFFC00A0A),
+    colorTest = Color(0xFF2196F3),
 )
 
 

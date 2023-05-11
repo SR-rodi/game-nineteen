@@ -54,5 +54,3 @@ class FirebaseUserApi(
         auth.signOut()
     }
 }
-
-

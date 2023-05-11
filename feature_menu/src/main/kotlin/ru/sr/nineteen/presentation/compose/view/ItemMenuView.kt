@@ -1,6 +1,7 @@
 package ru.sr.nineteen.presentation.compose.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,18 +21,23 @@ import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.presentation.viewmodel.model.MenuState
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
+import ru.sr.nineteen.view.AvatarView
 
 @Composable
 fun ItemMenuView(
     modifier: Modifier = Modifier,
-    isEnable:Boolean = true,
+    isEnable: Boolean = true,
     title: String,
     textButton: String,
     imageID: Int,
+    avatar: Any? = null,
+    onClickAvatar: () -> Unit={},
     onClickButton: () -> Unit,
 ) {
     Box(
-        modifier = Modifier.then(modifier).padding(top = 6.dp),
+        modifier = Modifier
+            .then(modifier)
+            .padding(top = 6.dp),
         contentAlignment = Alignment.TopCenter
     ) {
         Card(
@@ -42,6 +48,7 @@ fun ItemMenuView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(GameTheme.colors.blue_100)
                     .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -53,15 +60,22 @@ fun ItemMenuView(
                 )
                 Spacer(modifier = Modifier.heightIn(10.dp))
 
-                ActionButtonView(padding = PaddingValues(horizontal = 8.dp),
+                ActionButtonView(
+                    padding = PaddingValues(horizontal = 8.dp),
                     text = textButton,
-                    enabled = isEnable) { onClickButton() }
+                    enabled = isEnable
+                ) { onClickButton() }
             }
         }
-        Image(
-            modifier = Modifier.size(125.dp),
-            painter = painterResource(id = imageID),
-            contentDescription = title
-        )
+        if (avatar != null)
+            AvatarView(image = avatar, size = 80.dp) {
+                onClickAvatar()
+            }
+        else
+            Image(
+                modifier = Modifier.size(125.dp),
+                painter = painterResource(id = imageID),
+                contentDescription = title
+            )
     }
 }

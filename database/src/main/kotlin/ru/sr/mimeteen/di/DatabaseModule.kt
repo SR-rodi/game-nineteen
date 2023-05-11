@@ -9,11 +9,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.sr.mimeteen.database.db.DataBase
+import ru.sr.mimeteen.remotedatabase.UserProvider
+import ru.sr.mimeteen.remotedatabase.UserProviderImpl
+import ru.sr.mimeteen.remotedatabase.api.AuthApi
 import ru.sr.mimeteen.remotedatabase.api.UploadApi
-import ru.sr.mimeteen.remotedatabase.api.impl.FirebaseUserApi
 import ru.sr.mimeteen.remotedatabase.api.UserApi
+import ru.sr.mimeteen.remotedatabase.api.impl.FireBaseAuthApi
 import ru.sr.mimeteen.remotedatabase.api.impl.FireBaseStorageApi
-
+import ru.sr.mimeteen.remotedatabase.api.impl.FirebaseUserApi
 
 fun databaseModule() = listOf(remoteModule(), locationModule())
 
@@ -27,6 +30,8 @@ fun remoteModule() = module {
 
     singleOf(::FirebaseUserApi) { bind<UserApi>() }
     singleOf(::FireBaseStorageApi) { bind<UploadApi>() }
+    singleOf(::UserProviderImpl) { bind<UserProvider>() }
+    singleOf(::FireBaseAuthApi) { bind<AuthApi>() }
 
 }
 
