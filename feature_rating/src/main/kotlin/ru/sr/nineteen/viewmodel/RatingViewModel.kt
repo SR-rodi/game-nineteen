@@ -1,12 +1,17 @@
 package ru.sr.nineteen.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.sr.mimeteen.database.repository.RatingRepository
+import ru.sr.mimeteen.remotedatabase.api.RatingApi
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.data.database.entity.RatingEntity
 
 class RatingViewModel(
     private val ratingRepository: RatingRepository,
+    private val ratingApi: RatingApi,
 ) : BaseViewModel<RatingState, RatingAction, RatingEvent>(RatingState()) {
     override fun obtainEvent(viewEvent: RatingEvent) {
 
@@ -22,9 +27,15 @@ class RatingViewModel(
     }
 
     private fun getRating() {
-        scopeLaunch(context = Dispatchers.IO) {
+
+        viewModelScope.launch  {
+            Log.e("Kart","rating = ${  ratingApi.getRatingByUseID("1234")}")
+
+            val test = ratingApi.getAllRating().map {
+                RatingEntity(it.mode, it.time.toInt(), it.step, 125)
+            }
             viewState = viewState
-                .copy(ratingItems = ratingRepository.getRatingList().sortedBy { it.time })
+                .copy(ratingItems = test /*ratingRepository.getRatingList().sortedBy { it.time }*/)
         }
     }
 }

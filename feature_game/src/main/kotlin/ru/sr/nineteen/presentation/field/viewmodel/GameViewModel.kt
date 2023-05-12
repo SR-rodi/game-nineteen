@@ -6,6 +6,8 @@ import kotlinx.coroutines.delay
 import ru.sr.mimeteen.database.entity.GameListEntity
 import ru.sr.mimeteen.database.repository.GameRepository
 import ru.sr.mimeteen.database.repository.RatingRepository
+import ru.sr.mimeteen.database.repository.RemoteRatingRepository
+import ru.sr.mimeteen.remotedatabase.model.RatingDto
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.data.database.entity.RatingEntity
 import ru.sr.nineteen.domain.gameitem.Position
@@ -18,7 +20,9 @@ import ru.sr.nineteen.presentation.field.viewmodel.model.GameState
 class GameViewModel(
     private val gameRepository: GameRepository,
     private val ratingRepository: RatingRepository,
-) : BaseViewModel<GameState, GameAction, GameEvent>(GameState()) {
+    private val remoteRating: RemoteRatingRepository,
+
+    ) : BaseViewModel<GameState, GameAction, GameEvent>(GameState()) {
 
     private val game by lazy { ClassicGameLogic() }
 
@@ -34,7 +38,7 @@ class GameViewModel(
             GameEvent.OnWinOpen -> onSaveAndOpenWinScreen()
             GameEvent.OnDispose -> onDispose()
             GameEvent.OnClickMenuWithDialog -> viewAction = GameAction.GoToBackStack
-            GameEvent.OnClickRatingWithDialog ->  viewAction = GameAction.OpenRating
+            GameEvent.OnClickRatingWithDialog -> viewAction = GameAction.OpenRating
         }
     }
 
@@ -82,10 +86,9 @@ class GameViewModel(
             }
         ) {
             ratingRepository.insertNewRating(
-                RatingEntity(
-                    viewState.mode, viewState.timeCounter, viewState.stepCounter
-                )
+                RatingEntity(viewState.mode, viewState.timeCounter, viewState.stepCounter)
             )
+            remoteRating.insertNewRating(RatingDto("1234588","null",0,0,"classick",null,0L))
             gameRepository.deleteItemList()
         }
     }

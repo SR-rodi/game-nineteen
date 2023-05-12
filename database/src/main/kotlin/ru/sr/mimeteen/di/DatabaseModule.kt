@@ -12,10 +12,12 @@ import ru.sr.mimeteen.database.db.DataBase
 import ru.sr.mimeteen.remotedatabase.UserProvider
 import ru.sr.mimeteen.remotedatabase.UserProviderImpl
 import ru.sr.mimeteen.remotedatabase.api.AuthApi
+import ru.sr.mimeteen.remotedatabase.api.RatingApi
 import ru.sr.mimeteen.remotedatabase.api.UploadApi
 import ru.sr.mimeteen.remotedatabase.api.UserApi
 import ru.sr.mimeteen.remotedatabase.api.impl.FireBaseAuthApi
 import ru.sr.mimeteen.remotedatabase.api.impl.FireBaseStorageApi
+import ru.sr.mimeteen.remotedatabase.api.impl.FirebaseRatingApi
 import ru.sr.mimeteen.remotedatabase.api.impl.FirebaseUserApi
 
 fun databaseModule() = listOf(remoteModule(), locationModule())
@@ -24,6 +26,7 @@ fun remoteModule() = module {
     val baseUrl = "https://emaillinkregistration-default-rtdb.asia-southeast1.firebasedatabase.app/"
     val baseUrlStorage = "gs://emaillinkregistration.appspot.com"
 
+    val a = FirebaseDatabase.getInstance(baseUrl)
     single { FirebaseDatabase.getInstance(baseUrl) }
 
     single { Firebase.storage(baseUrlStorage).reference }
@@ -32,6 +35,7 @@ fun remoteModule() = module {
     singleOf(::FireBaseStorageApi) { bind<UploadApi>() }
     singleOf(::UserProviderImpl) { bind<UserProvider>() }
     singleOf(::FireBaseAuthApi) { bind<AuthApi>() }
+    singleOf(::FirebaseRatingApi) { bind<RatingApi>() }
 
 }
 

@@ -36,7 +36,6 @@ fun RatingScreen(viewModel: RatingViewModel = koinViewModel()) {
             RatingAction.GoToBack -> {
                 navController.popBackStack()
             }
-
             null -> {}
         }
 
