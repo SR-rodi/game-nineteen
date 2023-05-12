@@ -2,43 +2,39 @@ package ru.sr.nineteen.presentation.signin.compose.screen
 
 import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.koinViewModel
-import ru.alexgladkov.odyssey.compose.extensions.push
-import ru.alexgladkov.odyssey.core.LaunchFlag
 import ru.sr.nineteen.domain.NavigationTree
+import ru.sr.nineteen.navgraph.navcomponent.push
 import ru.sr.nineteen.presentation.signin.compose.view.SignInView
 import ru.sr.nineteen.presentation.signin.viewmodel.SignInViewModel
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInAction
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
-import ru.sr.nineteen.utils.presentAlertDialog
 import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.navgraph.navcomponent.LaunchFlag
+import ru.sr.nineteen.presentation.signin.compose.view.WarningNotAuthDialog
 
 @Composable
 fun SignInScreen(viewModel: SignInViewModel = koinViewModel()) {
-    Screen(viewModel = viewModel) { state, action, rootController ->
+    Screen(viewModel = viewModel) { state, action, navController ->
         SignInView(state) { event -> viewModel.obtainEvent(event) }
         when (action) {
             is SignInAction.OpenMenu -> {
-                rootController.push(NavigationTree.Menu.name, launchFlag = LaunchFlag.ClearPrevious)
-                viewModel.obtainEvent(SignInEvent.OnResetAction)
-                viewModel.obtainEvent(SignInEvent.OnResetState)
+                navController.push(NavigationTree.Menu, LaunchFlag.ClearPrevious)
             }
 
             is SignInAction.OpenRegistration -> {
-                rootController.push(NavigationTree.Registration.name, params = action.email)
+                navController.push(route = NavigationTree.Registration, params = action.email)
                 viewModel.obtainEvent(SignInEvent.OnResetAction)
             }
 
             is SignInAction.OpenResetPassword -> {
-                rootController.push(NavigationTree.ResetPassword.name, params = action.email)
+                navController.push(route = NavigationTree.ResetPassword, params = action.email)
                 viewModel.obtainEvent(SignInEvent.OnResetAction)
             }
 
             SignInAction.OpenWarningMessage -> {
-                rootController.findModalController().presentAlertDialog {
-                        WarningNotAuthScreen(rootController = rootController)
-                    }
-                viewModel.obtainEvent(SignInEvent.OnResetAction)
+                WarningNotAuthDialog { event -> viewModel.obtainEvent(event) }
             }
+
             null -> {}
 
         }

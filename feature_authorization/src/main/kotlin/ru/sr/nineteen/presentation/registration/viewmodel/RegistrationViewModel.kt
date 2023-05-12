@@ -22,6 +22,7 @@ class RegistrationViewModel(
             RegistrationEvent.OnRegistrationButtonClick -> onClickRegistrationButton()
             RegistrationEvent.OnClearEmail -> onClearEmail()
             RegistrationEvent.OnResetAction -> RegistrationEvent.OnResetAction
+            RegistrationEvent.OnStartSing -> viewAction = RegistrationAction.OpenStartScreen
         }
     }
 
@@ -90,6 +91,9 @@ class RegistrationViewModel(
 sealed interface RegistrationAction {
     object GoToStack : RegistrationAction
     object OpenSuccessRegistration : RegistrationAction
+    object OpenStartScreen : RegistrationAction {
+
+    }
 }
 
 sealed interface RegistrationEvent {
@@ -97,6 +101,7 @@ sealed interface RegistrationEvent {
     object OnClickBackStackButton : RegistrationEvent
     object OnClearEmail : RegistrationEvent
     object OnResetAction : RegistrationEvent
+    object OnStartSing : RegistrationEvent
     class OnStartScreen(val email: String) : RegistrationEvent
     class OnChangeEmail(val email: String) : RegistrationEvent
     class OnChangePassword(val password: String) : RegistrationEvent

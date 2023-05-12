@@ -1,6 +1,7 @@
 package ru.sr.nineteen.presentation.profile.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import kotlinx.coroutines.delay
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.usecase.GetUserInfoUseCase
@@ -26,12 +27,20 @@ class ProfileViewModel(
             ProfileEvent.OnClickAvatar -> onClickAvatar()
             is ProfileEvent.OnSetNewAvatar -> onSetNewAvatar(viewEvent.uri)
             ProfileEvent.OnClickSaveAvatar -> onClickSaveAvatar()
-            is ProfileEvent.OnChangeName -> viewState =
-                viewState.copy(user = viewState.user.copy(name = viewEvent.newName))
+            is ProfileEvent.OnDismissEditUserNameDialog -> onChangeUserName(viewEvent.newName)
+            ProfileEvent.OnClickUpdatePasswordButton -> viewAction =
+                ProfileAction.OpenUpdatePasswordScreen
 
-            ProfileEvent.OnClickUpdatePasswordButton -> viewAction = ProfileAction.OpenUpdatePasswordScreen
+            ProfileEvent.DismissDeleteDialog -> onResetAction()
+            ProfileEvent.OnSuccessDeleteAccount -> viewAction = ProfileAction.OpenSignInScreen
         }
 
+    }
+
+    private fun onChangeUserName(newName: String?) {
+        if (newName != null)
+            viewState = viewState.copy(user = viewState.user.copy(name = newName))
+        onResetAction()
     }
 
     private fun onClickUserName() {
@@ -98,7 +107,9 @@ sealed interface ProfileAction {
 
 sealed interface ProfileEvent {
     class OnSetNewAvatar(val uri: Uri?) : ProfileEvent
-    class OnChangeName(val newName: String) : ProfileEvent
+
+    // class OnChangeName(val newName: String) : ProfileEvent
+    class OnDismissEditUserNameDialog(val newName: String?) : ProfileEvent
     object OnStartScreen : ProfileEvent
     object OnClickLogOutButton : ProfileEvent
     object OnClickDeleteOutButton : ProfileEvent
@@ -107,6 +118,8 @@ sealed interface ProfileEvent {
     object OnResetAction : ProfileEvent
     object OnClickSaveAvatar : ProfileEvent
     object OnClickUpdatePasswordButton : ProfileEvent
+    object OnSuccessDeleteAccount : ProfileEvent
+    object DismissDeleteDialog : ProfileEvent
 
 }
 

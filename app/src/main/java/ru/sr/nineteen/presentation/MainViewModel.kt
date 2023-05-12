@@ -11,7 +11,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     fun getStartScreen(): String {
-        return if (firebaseAuth.currentUser == null) NavigationTree.SignIn.name else NavigationTree.Menu.name
+        return if (firebaseAuth.currentUser?.isEmailVerified == true) NavigationTree.Menu.name else NavigationTree.SignIn.name
     }
 
 }

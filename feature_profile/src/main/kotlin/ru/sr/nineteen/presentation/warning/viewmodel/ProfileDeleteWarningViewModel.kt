@@ -9,11 +9,15 @@ class ProfileDeleteWarningViewModel (
         ): BaseViewModel<ProfileDeleteState, ProfileDeleteAction, ProfileDeleteEvent>(
     ProfileDeleteState()
 ) {
+    init {
+        Log.e("Kart","StartDialog View Model")
+    }
     override fun obtainEvent(viewEvent: ProfileDeleteEvent) {
         when(viewEvent){
             ProfileDeleteEvent.OnClickNoButton -> popToBackStack()
             ProfileDeleteEvent.OnClickYesButton -> onDeleteProfile()
             ProfileDeleteEvent.OnResetAction -> onResetAction()
+            ProfileDeleteEvent.OnDismiss -> viewAction = ProfileDeleteAction.CloseDialog
         }
     }
 
@@ -44,6 +48,7 @@ class ProfileDeleteWarningViewModel (
 
 sealed interface ProfileDeleteEvent {
             object OnClickNoButton: ProfileDeleteEvent
+            object OnDismiss: ProfileDeleteEvent
             object OnClickYesButton: ProfileDeleteEvent
             object OnResetAction: ProfileDeleteEvent
 }
@@ -51,7 +56,7 @@ sealed interface ProfileDeleteEvent {
 sealed interface ProfileDeleteAction {
     object OpenSignInScreen: ProfileDeleteAction
     object PopToBackStack: ProfileDeleteAction
-
+    object CloseDialog : ProfileDeleteAction
 }
 
 data class ProfileDeleteState(

@@ -19,6 +19,7 @@ class ResetPasswordViewModel(
             ResetPasswordEvent.OnClearEmail -> onChangeEmail("")
             ResetPasswordEvent.OnClickSendPassword -> onClickSendPassword()
             ResetPasswordEvent.OnResetAction -> onResetAction()
+            ResetPasswordEvent.OnStartSignInScreen -> viewAction =ResetPasswordAction.OpenSignInScreen
         }
     }
 
@@ -61,7 +62,7 @@ class ResetPasswordViewModel(
     }
 
     private fun onSuccess() {
-        viewAction = ResetPasswordAction.StartInfoMessage
+        viewAction = ResetPasswordAction.OpenResetDialog
         viewState = viewState.copy(isLoading = false, isError = false, isEmailValidation = true)
     }
 }

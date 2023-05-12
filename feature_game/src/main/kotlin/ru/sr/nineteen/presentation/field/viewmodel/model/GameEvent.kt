@@ -12,4 +12,6 @@ sealed interface GameEvent{
     object OnClickHelpButton : GameEvent
     object OnDispose : GameEvent
     object OnWinOpen : GameEvent
+    object OnClickMenuWithDialog : GameEvent
+    object OnClickRatingWithDialog : GameEvent
 }

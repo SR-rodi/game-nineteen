@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 rootProject.name = "NineTeen"
 include (":app")
 include (":core")
+include (":nav_graph")
 include (":navigation")
 include (":database")
 include (":core_ui")

@@ -28,77 +28,82 @@ import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.BaseProgressIndicator
 import ru.sr.nineteen.view.EmailTextField
+import ru.sr.nineteen.view.GameDialog
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditUserNameView(state: EditNameState, eventHandler: (EditNameEvent) -> Unit) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.profile_edit_name_title),
-            textAlign = TextAlign.Center,
-            style = GameTheme.fonts.h3.copy(color = GameTheme.colors.textTitle)
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = state.userName,
-            enabled = !state.isLoading,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = GameTheme.colors.blue_500,
-                unfocusedBorderColor = GameTheme.colors.blue_500,
-                focusedLabelColor = GameTheme.colors.blue_500,
-                cursorColor = GameTheme.colors.blue_500,
-                selectionColors = TextSelectionColors(
-                    handleColor = GameTheme.colors.blue_500,
-                    backgroundColor = GameTheme.colors.blue_100
-                ),
-            ), onValueChange = { newName -> eventHandler(EditNameEvent.OnChangeName(newName)) })
-
-        if (state.isError) {
+    GameDialog(onDismiss = { eventHandler(EditNameEvent.OnClickBackButton) }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = stringResource(id = ru.sr.nineteen.core_ui.R.string.core_ui_error_network),
+                text = stringResource(id = R.string.profile_edit_name_title),
                 textAlign = TextAlign.Center,
-                style = GameTheme.fonts.p.copy(color = GameTheme.colors.error)
+                style = GameTheme.fonts.h3.copy(color = GameTheme.colors.textTitle)
             )
-        }
 
-        BaseProgressIndicator(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(top = 8.dp),
-            isVisible = state.isLoading
-        )
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = state.userName,
+                enabled = !state.isLoading,
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = GameTheme.colors.blue_500,
+                    unfocusedBorderColor = GameTheme.colors.blue_500,
+                    focusedLabelColor = GameTheme.colors.blue_500,
+                    cursorColor = GameTheme.colors.blue_500,
+                    selectionColors = TextSelectionColors(
+                        handleColor = GameTheme.colors.blue_500,
+                        backgroundColor = GameTheme.colors.blue_100
+                    ),
+                ), onValueChange = { newName -> eventHandler(EditNameEvent.OnChangeName(newName)) })
 
-        Spacer(modifier = Modifier.height(8.dp))
-        Row {
-            Box(modifier = Modifier.weight(1f)) {
-                ActionButtonView(
-                    enabled = !state.isLoading,
-                    text = stringResource(id = R.string.profile_edit_back),
-                    style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton)
-                ) {
-                    eventHandler(EditNameEvent.OnClickBackButton)
-                }
+            if (state.isError) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(id = ru.sr.nineteen.core_ui.R.string.core_ui_error_network),
+                    textAlign = TextAlign.Center,
+                    style = GameTheme.fonts.p.copy(color = GameTheme.colors.error)
+                )
             }
-            Spacer(modifier = Modifier.size(8.dp))
-            Box(modifier = Modifier.weight(1f)) {
-                ActionButtonView(
-                    enabled = !state.isLoading,
-                    text = stringResource(id = R.string.profile_edit_button),
-                    style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton)
-                ) {
-                    eventHandler(EditNameEvent.OnClickSaveButton)
+
+            BaseProgressIndicator(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 8.dp),
+                isVisible = state.isLoading
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Row {
+                Box(modifier = Modifier.weight(1f)) {
+                    ActionButtonView(
+                        enabled = !state.isLoading,
+                        text = stringResource(id = R.string.profile_edit_back),
+                        style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton)
+                    ) {
+                        eventHandler(EditNameEvent.OnClickBackButton)
+                    }
+                }
+                Spacer(modifier = Modifier.size(8.dp))
+                Box(modifier = Modifier.weight(1f)) {
+                    ActionButtonView(
+                        enabled = !state.isLoading,
+                        text = stringResource(id = R.string.profile_edit_button),
+                        style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton)
+                    ) {
+                        eventHandler(EditNameEvent.OnClickSaveButton)
+                    }
                 }
             }
         }
     }
+
+
 }

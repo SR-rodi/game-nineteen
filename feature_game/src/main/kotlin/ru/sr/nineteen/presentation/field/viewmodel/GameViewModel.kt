@@ -33,7 +33,8 @@ class GameViewModel(
             GameEvent.OnClickHelpButton -> onGetHelpItem()
             GameEvent.OnWinOpen -> onSaveAndOpenWinScreen()
             GameEvent.OnDispose -> onDispose()
-
+            GameEvent.OnClickMenuWithDialog -> viewAction = GameAction.GoToBackStack
+            GameEvent.OnClickRatingWithDialog ->  viewAction = GameAction.OpenRating
         }
     }
 

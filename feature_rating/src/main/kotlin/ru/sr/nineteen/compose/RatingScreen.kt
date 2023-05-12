@@ -26,7 +26,7 @@ import ru.sr.nineteen.viewmodel.RatingViewModel
 
 @Composable
 fun RatingScreen(viewModel: RatingViewModel = koinViewModel()) {
-    Screen(viewModel = viewModel) { state, action, rootController ->
+    Screen(viewModel = viewModel) { state, action, navController ->
         LaunchedEffect(key1 = true) {
             viewModel.obtainEvent(RatingEvent.OnStartScreen)
         }
@@ -34,8 +34,7 @@ fun RatingScreen(viewModel: RatingViewModel = koinViewModel()) {
 
         when (action) {
             RatingAction.GoToBack -> {
-                rootController.popBackStack()
-                viewModel.obtainEvent(RatingEvent.OnResetAction)
+                navController.popBackStack()
             }
 
             null -> {}

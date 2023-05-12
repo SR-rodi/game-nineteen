@@ -28,18 +28,22 @@ import ru.sr.nineteen.profile.R
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.view.ActionButtonView
 import ru.sr.nineteen.view.BaseProgressIndicator
+import ru.sr.nineteen.view.GameDialog
 import ru.sr.nineteen.view.PasswordTextField
 import ru.sr.nineteen.view.Screen
 
 @Composable
-fun UpDatePasswordScreen(viewModel: UpDatePasswordViewModel = koinViewModel()) {
+fun UpDatePasswordScreen(
+    viewModel: UpDatePasswordViewModel = koinViewModel(),
+    onDismiss: () -> Unit,
+) {
 
-    Screen(viewModel = viewModel) { state, action, rootController ->
+    Screen(viewModel = viewModel) { state, action, _ ->
         UpDatePasswordView(state) { event -> viewModel.obtainEvent(event) }
 
         when (action) {
             UpdatePasswordAction.OnGoBack -> {
-                rootController.popBackStack()
+                onDismiss()
                 viewModel.obtainEvent(UpdatePasswordEvent.OnResetAction)
             }
 
@@ -51,73 +55,76 @@ fun UpDatePasswordScreen(viewModel: UpDatePasswordViewModel = koinViewModel()) {
 @Composable
 fun UpDatePasswordView(state: UpdatePasswordState, eventHandler: (UpdatePasswordEvent) -> Unit) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = stringResource(id = R.string.profile_reset_password_title))
-        PasswordTextField(
-            value = state.oldPassword,
-            isError = state.isErrorOldPassword,
-            isEnable = !state.isLoading,
-            isVisibleHelper = false,
-            errorMessage = stringResource(id = R.string.profile_error_old_passwoed),
-            hintId = R.string.profile_old_password,
-            onValueChange = { password ->
-                eventHandler(
-                    UpdatePasswordEvent.OnChangeOldPassword(password)
-                )
-            })
-        PasswordTextField(
-            value = state.newPassword,
-            hintId = R.string.profile_new_password,
-            isError = state.isErrorNewPassword,
-            isEnable = !state.isLoading,
-            onValueChange = { password ->
-                eventHandler(
-                    UpdatePasswordEvent.OnChangeNewPassword(password)
-                )
-            })
-        BaseProgressIndicator(isVisible = state.isLoading)
-        AnimatedVisibility(visible = state.isError) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = GameTheme.fonts.p.copy(GameTheme.colors.error),
-                text = stringResource(id = ru.sr.nineteen.core_ui.R.string.core_ui_error_network)
-            )
-        }
-
-        Row(Modifier.fillMaxWidth()) {
-            Box(Modifier.weight(1f)) {
-                ActionButtonView(
-                    enabled = !state.isLoading,
-                    style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton),
-                    text = stringResource(id = R.string.profile_edit_button)
-                ) {
+    GameDialog(onDismiss = { eventHandler(UpdatePasswordEvent.OnClickBackButton) }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = stringResource(id = R.string.profile_reset_password_title))
+            PasswordTextField(
+                value = state.oldPassword,
+                isError = state.isErrorOldPassword,
+                isEnable = !state.isLoading,
+                isVisibleHelper = false,
+                errorMessage = stringResource(id = R.string.profile_error_old_passwoed),
+                hintId = R.string.profile_old_password,
+                onValueChange = { password ->
                     eventHandler(
-                        UpdatePasswordEvent.OnClickUpdatePassword
+                        UpdatePasswordEvent.OnChangeOldPassword(password)
                     )
-                }
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            Box(Modifier.weight(1f)) {
-                ActionButtonView(
-                    enabled = !state.isLoading,
-                    style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton),
-                    text = stringResource(id = R.string.profile_edit_back)
-                ) {
+                })
+            PasswordTextField(
+                value = state.newPassword,
+                hintId = R.string.profile_new_password,
+                isError = state.isErrorNewPassword,
+                isEnable = !state.isLoading,
+                onValueChange = { password ->
                     eventHandler(
-                        UpdatePasswordEvent.OnClickBackButton
+                        UpdatePasswordEvent.OnChangeNewPassword(password)
                     )
-                }
+                })
+            BaseProgressIndicator(isVisible = state.isLoading)
+            AnimatedVisibility(visible = state.isError) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = GameTheme.fonts.p.copy(GameTheme.colors.error),
+                    text = stringResource(id = ru.sr.nineteen.core_ui.R.string.core_ui_error_network)
+                )
             }
 
-        }
+            Row(Modifier.fillMaxWidth()) {
+                Box(Modifier.weight(1f)) {
+                    ActionButtonView(
+                        enabled = !state.isLoading,
+                        style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton),
+                        text = stringResource(id = R.string.profile_edit_button)
+                    ) {
+                        eventHandler(
+                            UpdatePasswordEvent.OnClickUpdatePassword
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.size(8.dp))
+                Box(Modifier.weight(1f)) {
+                    ActionButtonView(
+                        enabled = !state.isLoading,
+                        style = GameTheme.fonts.h4.copy(color = GameTheme.colors.textButton),
+                        text = stringResource(id = R.string.profile_edit_back)
+                    ) {
+                        eventHandler(
+                            UpdatePasswordEvent.OnClickBackButton
+                        )
+                    }
+                }
 
+            }
+
+        }
     }
+
 
 }

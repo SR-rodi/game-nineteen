@@ -4,7 +4,6 @@ import ru.alexgladkov.odyssey.compose.Render
 import ru.alexgladkov.odyssey.compose.controllers.ModalController
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.AlertConfiguration
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 
 fun ModalController.presentAlertDialog(
     maxHeight: Float? = null,

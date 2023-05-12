@@ -4,6 +4,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun GameTheme(
@@ -16,9 +19,14 @@ fun GameTheme(
             LocalColorProvider provides colors,
             LocalFontProvider provides fonts,
             LocalShapeProvider provides shapes,
+            LocalRootController provides rememberNavController(),
             content = content
         )
     }
+}
+
+val LocalRootController = compositionLocalOf<NavHostController> {
+    error("No root controller provider")
 }
 
 object GameTheme {
@@ -31,5 +39,4 @@ object GameTheme {
     val fonts: GameFonts
         @Composable
         get() = LocalFontProvider.current
-
 }
