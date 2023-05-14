@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
@@ -49,13 +50,14 @@ fun AvatarView(
         modifier = Modifier
             .padding(padding)
             .clip(shapes)
-            .size(size)
+
             .background(borderColor),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
                 .clip(shapes)
+                .size(size)
                 .clickable { onClick(AvatarTypeClick.Image) }
                 .border(width = widthBorder, color = borderColor, shapes),
         ) {
@@ -75,19 +77,19 @@ fun AvatarView(
                 }
             )
             if (isEdit)
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .clip(shapes)
-                    .alpha(0.8f)
-                    .background(borderColor)
-            ) {
-                Icon(
-                    modifier = Modifier.padding(4.dp),
-                    imageVector = Icons.Filled.Edit, contentDescription = "",
-                    tint = iconColor
-                )
-            }
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .clip(shapes)
+                        .alpha(0.8f)
+                        .background(borderColor)
+                ) {
+                    Icon(
+                        modifier = Modifier.padding(4.dp),
+                        imageVector = Icons.Filled.Edit, contentDescription = "",
+                        tint = iconColor
+                    )
+                }
 
         }
         AnimatedVisibility(
@@ -122,4 +124,15 @@ fun AvatarView(
 
 enum class AvatarTypeClick {
     Image, SaveButton
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AvatarPreview() {
+    GameTheme {
+        AvatarView(
+            isVisibilitySaveButton = true,
+            image = "https://firebasestorage.googleapis.com/v0/b/emaillinkregistration.appspot.com/o/Avatars%2Favatar_prZbDtjEwSMIwnq6BB8OMBz68xP2.jpg?alt=media&token=f6b55b7c-ef0f-4a0f-8edc-9c3b5069f175"
+        )
+    }
 }

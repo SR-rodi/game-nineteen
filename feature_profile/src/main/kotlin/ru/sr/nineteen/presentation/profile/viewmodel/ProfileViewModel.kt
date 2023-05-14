@@ -107,8 +107,6 @@ sealed interface ProfileAction {
 
 sealed interface ProfileEvent {
     class OnSetNewAvatar(val uri: Uri?) : ProfileEvent
-
-    // class OnChangeName(val newName: String) : ProfileEvent
     class OnDismissEditUserNameDialog(val newName: String?) : ProfileEvent
     object OnStartScreen : ProfileEvent
     object OnClickLogOutButton : ProfileEvent
