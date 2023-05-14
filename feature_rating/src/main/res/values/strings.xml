@@ -5,5 +5,8 @@
     <string name="rating_position_title">позиция</string>
     <string name="rating_mode_title">режим</string>
     <string name="rating_step_title">шаги</string>
+    <string name="rating_show_my_result_button">Показать мой результат</string>
+    <string name="rating_back_button">Назад</string>
+
 
 </resources>

@@ -33,7 +33,7 @@ import ru.sr.nineteen.theme.GameTheme
 
 @Composable
 fun AvatarView(
-    image: Any,
+    image: Any?,
     padding: PaddingValues = PaddingValues(top = 50.dp),
     widthBorder: Dp = 2.dp,
     iconColor: Color = GameTheme.colors.blue_500,
@@ -42,6 +42,7 @@ fun AvatarView(
     shapes: Shape = GameTheme.shapes.large,
     isVisibilitySaveButton: Boolean = false,
     isUploadAvatar: Boolean = false,
+    isEdit: Boolean = true,
     onClick: (AvatarTypeClick) -> Unit = {},
 ) {
     Row(
@@ -73,11 +74,14 @@ fun AvatarView(
 
                 }
             )
-            Box(modifier = Modifier
-                .align(Alignment.TopEnd)
-                .clip(shapes)
-                .alpha(0.8f)
-                .background(borderColor)) {
+            if (isEdit)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .clip(shapes)
+                    .alpha(0.8f)
+                    .background(borderColor)
+            ) {
                 Icon(
                     modifier = Modifier.padding(4.dp),
                     imageVector = Icons.Filled.Edit, contentDescription = "",

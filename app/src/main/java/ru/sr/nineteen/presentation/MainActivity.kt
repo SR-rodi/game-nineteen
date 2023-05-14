@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.compose.NavHost
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.navgraph.navcomponent.setNavigate
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.theme.LocalRootController
@@ -35,20 +36,6 @@ class MainActivity : ComponentActivity() {
                     setNavigate()
                 }
             }
-
-            /*                val configuration = OdysseyConfiguration(
-                                startScreen = StartScreen.Custom(*//*NavigationTree.Profile.name*//*viewModel.getStartScreen()),
-                    canvas = this,
-                    displayType = DisplayType.FullScreen,
-                    backgroundColor = GameTheme.colors.background,
-                )
-
-                setNavigationContent(
-                    onApplicationFinish = { finish() },
-                    configuration = configuration
-                ) {
-                    getNavGraph()
-                }*/
         }
     }
 }

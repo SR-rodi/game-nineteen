@@ -88,7 +88,7 @@ class GameViewModel(
             ratingRepository.insertNewRating(
                 RatingEntity(viewState.mode, viewState.timeCounter, viewState.stepCounter)
             )
-            remoteRating.insertNewRating(RatingDto("1234588","null",0,0,"classick",null,0L))
+            remoteRating.insertNewRating(RatingDto("1234588","null",0,"0","classick",0L,0))
             gameRepository.deleteItemList()
         }
     }

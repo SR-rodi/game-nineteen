@@ -1,40 +1,78 @@
 package ru.sr.mimeteen.remotedatabase.api.impl
 
-import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
 import ru.sr.mimeteen.remotedatabase.api.RatingApi
 import ru.sr.mimeteen.remotedatabase.model.RatingDto
 import ru.sr.mimeteen.remotedatabase.model.TableRemoteDatabase
-import ru.sr.mimeteen.remotedatabase.model.UserDto
+import ru.sr.nineteen.data.FirebaseNotAuth
 
 class FirebaseRatingApi(
     private val database: FirebaseDatabase,
+    private val auth: FirebaseAuth,
 ) : RatingApi {
     override suspend fun setNewRating(rating: RatingDto) {
-        database.reference.child(TableRemoteDatabase.RatingTable.name).child(rating.userId)
-            .setValue(rating)
+        auth.currentUser ?: throw FirebaseNotAuth()
+        database.reference
+            .child(TableRemoteDatabase.RatingTable.name)
+            .child(rating.userId)
+            .setValue(rating).await()
     }
 
-    override suspend fun getAllRating(): List<RatingDto> {
-        return database
-            .reference
+    override suspend fun getTopTenRating(): List<RatingDto> {
+        return database.reference
             .child(TableRemoteDatabase.RatingTable.name)
-            .limitToFirst(10).get()
+            .orderByChild(SORT_BY_STEPS)
+            .limitToFirst(LIMIT_RATING_PAGE)
+            .get()
             .await()
             .children.map { dataSnapshot ->
-              val rating =   dataSnapshot.getValue(RatingDto::class.java)
+                val rating = dataSnapshot.getValue(RatingDto::class.java)
                     ?: throw NullPointerException("Пользователь не имеет резултатов")
-                Log.e("Kart","rating = $rating")
                 rating
             }
     }
 
-    override suspend fun getRatingByUseID(userId: String): RatingDto {
+    override suspend fun getRatingByUseID(): RatingDto {
 
-        return database.reference.child(TableRemoteDatabase.RatingTable.name).child(userId).get()
+        val userId = auth.currentUser?.uid ?: throw FirebaseNotAuth()
+
+        return database.reference
+            .child(TableRemoteDatabase.RatingTable.name)
+            .child(userId)
+            .get()
             .await()
             .getValue(RatingDto::class.java)
             ?: throw NullPointerException("Пользователь не имеет резултатов")
+    }
+
+    override suspend fun showMyRating(): List<RatingDto> {
+        val userId = auth.currentUser?.uid ?: throw FirebaseNotAuth()
+
+        val userRating = database.reference
+            .child(TableRemoteDatabase.RatingTable.name)
+            .child(userId)
+            .get()
+            .await()
+            .getValue(RatingDto::class.java) ?: return emptyList()
+
+        return database.reference
+            .child(TableRemoteDatabase.RatingTable.name)
+            .orderByChild(SORT_BY_STEPS)
+            .endAt(userRating.steps.toDouble())
+            .get()
+            .await()
+            .children.map { dataSnapshot ->
+                val rating = dataSnapshot.getValue(RatingDto::class.java)
+                    ?: throw NullPointerException("Пользователь не имеет резултатов")
+                rating
+            }
+    }
+
+    private companion object {
+        const val LIMIT_RATING_PAGE = 10
+        const val SORT_BY_STEPS = "steps"
+
     }
 }

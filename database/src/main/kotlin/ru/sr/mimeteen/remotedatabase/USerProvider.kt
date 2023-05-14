@@ -20,7 +20,6 @@ class UserProviderImpl(private val auth: FirebaseAuth) : UserProvider {
             photoUri = user?.photoUrl
 
         )
-
     }
 
 }

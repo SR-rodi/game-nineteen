@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import ru.sr.nineteen.compose.RatingScreen
+import ru.sr.nineteen.presentation.compose.RatingScreen
 import ru.sr.nineteen.domain.NavigationTree
 import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.MenuScreen
