@@ -1,6 +1,5 @@
 package ru.sr.nineteen.presentation.edit.compose.view
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -25,10 +23,9 @@ import ru.sr.nineteen.presentation.edit.viewmodel.EditNameEvent
 import ru.sr.nineteen.presentation.edit.viewmodel.EditNameState
 import ru.sr.nineteen.profile.R
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.BaseProgressIndicator
-import ru.sr.nineteen.view.EmailTextField
-import ru.sr.nineteen.view.GameDialog
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.BaseProgressIndicator
+import ru.sr.nineteen.composeview.GameDialog
 
 
 @OptIn(ExperimentalMaterial3Api::class)

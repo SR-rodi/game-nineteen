@@ -1,7 +1,6 @@
 package ru.sr.nineteen.presentation.updatepassword.presentation.compose.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.presentation.updatepassword.presentation.viewmodel.UpDatePasswordViewModel
 import ru.sr.nineteen.presentation.updatepassword.presentation.viewmodel.UpdatePasswordAction
@@ -26,11 +24,11 @@ import ru.sr.nineteen.presentation.updatepassword.presentation.viewmodel.UpdateP
 import ru.sr.nineteen.presentation.updatepassword.presentation.viewmodel.UpdatePasswordState
 import ru.sr.nineteen.profile.R
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.BaseProgressIndicator
-import ru.sr.nineteen.view.GameDialog
-import ru.sr.nineteen.view.PasswordTextField
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.BaseProgressIndicator
+import ru.sr.nineteen.composeview.GameDialog
+import ru.sr.nineteen.composeview.PasswordTextField
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun UpDatePasswordScreen(

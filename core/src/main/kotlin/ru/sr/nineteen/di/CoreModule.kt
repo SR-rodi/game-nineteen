@@ -10,8 +10,8 @@ import ru.sr.nineteen.domain.ByteConvertor
 import ru.sr.nineteen.domain.ByteConvertorImpl
 import ru.sr.nineteen.domain.UserIdProvider
 import ru.sr.nineteen.domain.Validation
-import ru.sr.nineteen.domain.gameitem.GetTokenUseCase
-import ru.sr.nineteen.domain.gameitem.GetTokenUseCaseImpl
+import ru.sr.nineteen.GetTokenUseCase
+import ru.sr.nineteen.GetTokenUseCaseImpl
 
 fun coreModule() = listOf(validationModule(),convectorModule())
 

@@ -8,7 +8,7 @@ import ru.sr.nineteen.presentation.signin.compose.view.SignInView
 import ru.sr.nineteen.presentation.signin.viewmodel.SignInViewModel
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInAction
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.Screen
 import ru.sr.nineteen.navgraph.navcomponent.LaunchFlag
 import ru.sr.nineteen.presentation.signin.compose.view.WarningNotAuthDialog
 

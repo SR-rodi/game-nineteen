@@ -6,18 +6,24 @@ import kotlinx.coroutines.tasks.await
 import ru.sr.mimeteen.remotedatabase.api.RatingApi
 import ru.sr.mimeteen.remotedatabase.model.RatingDto
 import ru.sr.mimeteen.remotedatabase.model.TableRemoteDatabase
-import ru.sr.nineteen.data.FirebaseNotAuth
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 
 class FirebaseRatingApi(
     private val database: FirebaseDatabase,
     private val auth: FirebaseAuth,
 ) : RatingApi {
     override suspend fun setNewRating(rating: RatingDto) {
-        auth.currentUser ?: throw FirebaseNotAuth()
+        val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
         database.reference
             .child(TableRemoteDatabase.RatingTable.name)
             .child(rating.userId)
-            .setValue(rating).await()
+            .setValue(
+                rating.copy(
+                    userName = currentUser.displayName ?: "User_${currentUser.uid}",
+                    userId = currentUser.uid
+                )
+            ).await()
+
     }
 
     override suspend fun getTopTenRating(): List<RatingDto> {
@@ -34,7 +40,7 @@ class FirebaseRatingApi(
             }
     }
 
-    override suspend fun getRatingByUseID(): RatingDto {
+    override suspend fun getRatingByUseID(): RatingDto? {
 
         val userId = auth.currentUser?.uid ?: throw FirebaseNotAuth()
 
@@ -44,7 +50,6 @@ class FirebaseRatingApi(
             .get()
             .await()
             .getValue(RatingDto::class.java)
-            ?: throw NullPointerException("Пользователь не имеет резултатов")
     }
 
     override suspend fun showMyRating(): List<RatingDto> {

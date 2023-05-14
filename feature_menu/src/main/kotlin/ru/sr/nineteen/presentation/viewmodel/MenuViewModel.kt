@@ -6,20 +6,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
-import ru.sr.mimeteen.database.repository.GameRepository
+import ru.sr.mimeteen.database.repository.FieldDBRepository
 import ru.sr.mimeteen.remotedatabase.UserProvider
 import ru.sr.nineteen.BaseViewModel
-import ru.sr.nineteen.domain.gameitem.SettingGame
+import ru.sr.nineteen.gameitem.GameMode
 import ru.sr.nineteen.presentation.viewmodel.model.MenuAction
 import ru.sr.nineteen.presentation.viewmodel.model.MenuEvent
 import ru.sr.nineteen.presentation.viewmodel.model.MenuState
 
 class MenuViewModel(
-    private val gameRepository: GameRepository,
+    private val gameRepository: FieldDBRepository,
     private val userProvider: UserProvider,
 ) : BaseViewModel<MenuState, MenuAction, MenuEvent>(MenuState()) {
 
-    private var localSettings: SettingGame? = null
+    private var localSettings: ru.sr.nineteen.gameitem.SettingGame? = null
 
     init {
         getGameList()
@@ -27,9 +27,9 @@ class MenuViewModel(
 
     override fun obtainEvent(viewEvent: MenuEvent) {
         when (viewEvent) {
-            MenuEvent.OnClickClassicButton -> onStartGame(SettingGame())
-            MenuEvent.OnClickNextButton -> localSettings?.let { settings -> onStartGame(settings) }
-            MenuEvent.OnClickRandomButton -> onStartGame(createRandomList())
+            MenuEvent.OnClickClassicButton -> onStartGame(GameMode.Game.Classic)
+            MenuEvent.OnClickNextButton -> localSettings?.let { onStartGame(GameMode.Game.Next) }
+            MenuEvent.OnClickRandomButton -> onStartGame(GameMode.Game.Random)
             MenuEvent.OnClickRatingButton -> onStartRating()
             MenuEvent.OnClickTrainingButton -> onStartTraining()
             MenuEvent.ResetActions -> onResetAction()
@@ -49,20 +49,12 @@ class MenuViewModel(
         viewAction = MenuAction.OpenRating
     }
 
-    private fun onStartGame(settingGame: SettingGame) {
-        viewAction = MenuAction.OpenGame(settingGame)
+    private fun onStartGame(game: GameMode) {
+        viewAction = MenuAction.OpenGame(game)
     }
 
-    private fun createRandomList(): SettingGame {
-        val settingGame = SettingGame()
-        //settingGame.list = RandomItemList().create()
-        settingGame.gameMode = "random"
-        return settingGame
-    }
 
     private fun getGameList() {
-        val userAvatar  = userProvider.getUser().photoUri
-        Log.e("Kart","userAvatar = $userAvatar")
         viewState = viewState.copy(userAvatar = userProvider.getUser().photoUri)
         gameRepository.getGameList().onEach { entity ->
             if (entity != null) {

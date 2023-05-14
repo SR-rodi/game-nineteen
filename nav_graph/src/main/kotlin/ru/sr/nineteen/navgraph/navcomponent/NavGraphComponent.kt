@@ -6,7 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import ru.sr.nineteen.presentation.compose.RatingScreen
 import ru.sr.nineteen.domain.NavigationTree
-import ru.sr.nineteen.domain.gameitem.SettingGame
+import ru.sr.nineteen.gameitem.GameMode
+import ru.sr.nineteen.gameitem.SettingGame
 import ru.sr.nineteen.presentation.compose.MenuScreen
 import ru.sr.nineteen.presentation.field.compose.GameScreen
 import ru.sr.nineteen.presentation.profile.compose.screen.ProfileScreen
@@ -22,14 +23,12 @@ fun NavGraphBuilder.setNavigate() {
     composable(NavigationTree.SignIn) { SignInScreen() }
     composable<String>(NavigationTree.Registration) { email-> RegistrationScreen(email) }
     composable<String>(NavigationTree.ResetPassword) { email -> ResetPasswordScreen(email) }
-
     composable(NavigationTree.Menu) { MenuScreen() }
-    composable<SettingGame>(NavigationTree.Game) { setting -> GameScreen(settingGame = setting) }
+    composable<GameMode.Game>(NavigationTree.Game) { mode -> GameScreen(gameMode = mode) }
     composable(NavigationTree.Profile) { ProfileScreen() }
     composable(NavigationTree.Training.name) { TrainingScreen() }
     composable(NavigationTree.Rating) { RatingScreen() }
 }
-
 
 fun <T> NavGraphBuilder.composable(
     route: NavigationTree,

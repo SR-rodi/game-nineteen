@@ -1,35 +1,35 @@
 package ru.sr.nineteen.presentation.field.viewmodel
 
-import android.util.Log
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.sr.mimeteen.database.entity.GameListEntity
-import ru.sr.mimeteen.database.repository.GameRepository
-import ru.sr.mimeteen.database.repository.RatingRepository
-import ru.sr.mimeteen.database.repository.RemoteRatingRepository
+import ru.sr.mimeteen.database.repository.FieldDBRepository
 import ru.sr.mimeteen.remotedatabase.model.RatingDto
 import ru.sr.nineteen.BaseViewModel
-import ru.sr.nineteen.data.database.entity.RatingEntity
-import ru.sr.nineteen.domain.gameitem.Position
-import ru.sr.nineteen.domain.gameitem.SettingGame
-import ru.sr.nineteen.domain.logic.ClassicGameLogic
+import ru.sr.nineteen.domain.model.GameRating
+import ru.sr.nineteen.domain.reposytory.RemoteRatingRepository
+import ru.sr.nineteen.engin.GameEngin
+import ru.sr.nineteen.gameitem.GameMode
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameAction
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameState
+import ru.sr.nineteen.gameitem.Position
+import ru.sr.nineteen.gameitem.SettingGame
 
 class GameViewModel(
-    private val gameRepository: GameRepository,
-    private val ratingRepository: RatingRepository,
+    private val fieldDBRepository: FieldDBRepository,
+    private val game: GameEngin,
     private val remoteRating: RemoteRatingRepository,
+) : BaseViewModel<GameState, GameAction, GameEvent>(GameState()) {
 
-    ) : BaseViewModel<GameState, GameAction, GameEvent>(GameState()) {
-
-    private val game by lazy { ClassicGameLogic() }
+    private var userRemoteBestResult: Long? = null
 
     override fun obtainEvent(viewEvent: GameEvent) {
         when (viewEvent) {
 
-            is GameEvent.OnStartGame -> startSetting(viewEvent.settingGame)
+            is GameEvent.OnStartGame -> startSetting(viewEvent.gameMode)
             is GameEvent.OnClickItem -> playGame(viewEvent.position)
             GameEvent.OnClickAddButton -> addList()
             GameEvent.OnResetActions -> onResetAction()
@@ -42,20 +42,28 @@ class GameViewModel(
         }
     }
 
-    private fun startSetting(settingGame: SettingGame) {
+    private fun startSetting(mode: GameMode.Game) {
+        scopeLaunch {
+            userRemoteBestResult = remoteRating.getCurrentRating()?.time
+        }
+        startTimer()
         viewState = viewState.copy(isStartTamer = true)
+
         viewState = viewState.copy(
-            items = settingGame.list,
-            timeCounter = settingGame.time,
-            stepCounter = settingGame.stepCount,
-            mode = settingGame.gameMode
+            items = game.createGameFieldByGameMode(mode),
+            timeCounter = 0,
+            stepCounter = 0,
+            mode = mode
         )
     }
 
     private fun playGame(position: Position) = scopeLaunch {
-        viewState = viewState.copy(items = game.selectItems(viewState.items, position))
+        viewState = viewState.copy(items = game.selectItem(viewState.items, position))
         delay(100)
-        viewState = viewState.copy(items = game.choiceItems(position, viewState.items))
+        val newItems = game.choiceItems(viewState.items, position)
+        val steps =
+            if (newItems == null) viewState.stepCounter else viewState.stepCounter + 1
+        viewState = viewState.copy(items = newItems ?: viewState.items, stepCounter = steps)
         viewState = viewState.copy(items = game.deleteItems(viewState.items))
         if (viewState.items.isEmpty()) viewAction = GameAction.SaveWinIfo
     }
@@ -85,19 +93,34 @@ class GameViewModel(
                 )
             }
         ) {
-            ratingRepository.insertNewRating(
-                RatingEntity(viewState.mode, viewState.timeCounter, viewState.stepCounter)
-            )
-            remoteRating.insertNewRating(RatingDto("1234588","null",0,"0","classick",0L,0))
-            gameRepository.deleteItemList()
+            fieldDBRepository.deleteItemList()
+            if (userRemoteBestResult == null || viewState.timeCounter >= userRemoteBestResult!!)
+                remoteRating.setNewRating(
+                    GameRating(
+                        steps = viewState.stepCounter,
+                        gameMode = viewState.mode.name,
+                        time = viewState.timeCounter
+                    )
+                )
+        }
+    }
+
+    private var timerCounter = 0L
+    private fun startTimer() {
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                timerCounter++
+                delay(1000)
+                viewState = viewState.copy(timeCounter = timerCounter)
+            }
         }
     }
 
     private fun onDispose() {
         scopeLaunch(context = Dispatchers.IO) {
             if (viewState.items.isNotEmpty())
-                gameRepository.deleteItemList()
-            gameRepository.insertItemList(
+                fieldDBRepository.deleteItemList()
+            fieldDBRepository.insertItemList(
                 GameListEntity(
                     viewState.mode,
                     viewState.items,
@@ -106,7 +129,5 @@ class GameViewModel(
                 )
             )
         }
-
     }
-
 }

@@ -5,8 +5,8 @@ import kotlinx.coroutines.tasks.await
 import ru.sr.mimeteen.remotedatabase.api.AuthApi
 import ru.sr.mimeteen.remotedatabase.model.UserDto
 import ru.sr.mimeteen.remotedatabase.model.toUserDto
-import ru.sr.nineteen.data.FirebaseNoEmailVerifications
-import ru.sr.nineteen.data.FirebaseNotAuth
+import ru.sr.mimeteen.remotedatabase.FirebaseNoEmailVerifications
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 
 internal class FireBaseAuthApi(private val auth: FirebaseAuth):AuthApi {
 

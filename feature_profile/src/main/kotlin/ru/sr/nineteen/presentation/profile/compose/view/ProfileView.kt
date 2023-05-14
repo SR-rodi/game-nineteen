@@ -24,8 +24,8 @@ import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileEvent
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileState
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.AvatarTypeClick
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.AvatarTypeClick
 
 @Composable
 fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {

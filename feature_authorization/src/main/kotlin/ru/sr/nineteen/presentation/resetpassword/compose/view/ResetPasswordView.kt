@@ -1,6 +1,5 @@
 package ru.sr.nineteen.presentation.resetpassword.compose.view
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,15 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.authorization.R
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordEvent
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordState
 import ru.sr.nineteen.presentation.root.ErrorMessageView
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.EmailTextField
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.EmailTextField
 
 @Composable
 fun ResetPasswordView(state: ResetPasswordState, eventHandler: (ResetPasswordEvent) -> Unit) {

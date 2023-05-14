@@ -22,6 +22,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":game_engine"))
 
     implementation ("androidx.room:room-runtime:2.5.1")
     implementation ("androidx.room:room-ktx:2.5.1")

@@ -21,9 +21,9 @@ import ru.sr.nineteen.presentation.viewmodel.RatingEvent
 import ru.sr.nineteen.presentation.viewmodel.RatingState
 import ru.sr.nineteen.presentation.viewmodel.RatingViewModel
 import ru.sr.nineteen.rating.R
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.BaseProgressIndicator
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.BaseProgressIndicator
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun RatingScreen(viewModel: RatingViewModel = koinViewModel()) {

@@ -21,12 +21,12 @@ import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteEvent
 import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteState
 import ru.sr.nineteen.presentation.warning.viewmodel.ProfileDeleteWarningViewModel
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.BaseProgressIndicator
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.BaseProgressIndicator
+import ru.sr.nineteen.composeview.Screen
 import ru.sr.nineteen.core_ui.R
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileEvent
-import ru.sr.nineteen.view.GameDialog
+import ru.sr.nineteen.composeview.GameDialog
 
 @Composable
 fun ProfileDeleteWarningDialog(

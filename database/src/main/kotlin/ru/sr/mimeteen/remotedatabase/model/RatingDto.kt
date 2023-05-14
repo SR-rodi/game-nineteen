@@ -1,6 +1,6 @@
 package ru.sr.mimeteen.remotedatabase.model
 
-class RatingDto(
+data class RatingDto(
     val userId: String = "",
     val userName: String? = null,
     val steps: Int = 0,

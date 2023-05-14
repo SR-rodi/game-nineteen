@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.presentation.model.RatingUIModel
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.AvatarView
+import ru.sr.nineteen.composeview.AvatarView
 
 @Composable
 fun RatingItem(item: RatingUIModel,index:Int) {

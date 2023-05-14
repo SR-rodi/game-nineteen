@@ -2,14 +2,13 @@ package ru.sr.nineteen.presentation.edit.compose.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.google.firebase.events.EventHandler
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.presentation.edit.compose.view.EditUserNameView
 import ru.sr.nineteen.presentation.edit.viewmodel.EditNameAction
 import ru.sr.nineteen.presentation.edit.viewmodel.EditNameEvent
 import ru.sr.nineteen.presentation.edit.viewmodel.EditUserNameViewModel
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileEvent
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun EditUserNameDialog(

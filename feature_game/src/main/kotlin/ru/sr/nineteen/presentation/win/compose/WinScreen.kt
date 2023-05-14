@@ -13,17 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.sr.nineteen.domain.gameitem.SettingGame
+import ru.sr.nineteen.gameitem.SettingGame
 import ru.sr.nineteen.game.R
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
 import ru.sr.nineteen.presentation.win.compose.view.WinCardView
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.GameDialog
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.GameDialog
 
 @Composable
 fun WinDialog(
-    settingGame: SettingGame,
+    settingGame: ru.sr.nineteen.gameitem.SettingGame,
     eventHandler: (GameEvent) -> Unit,
 ) {
 

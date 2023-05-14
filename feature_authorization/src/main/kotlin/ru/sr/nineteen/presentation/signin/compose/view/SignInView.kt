@@ -1,6 +1,5 @@
 package ru.sr.nineteen.presentation.signin.compose.view
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,16 +22,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.authorization.R
 import ru.sr.nineteen.presentation.root.ErrorMessageView
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInState
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.EmailTextField
-import ru.sr.nineteen.view.PasswordTextField
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.EmailTextField
+import ru.sr.nineteen.composeview.PasswordTextField
 
 @Composable
 fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {

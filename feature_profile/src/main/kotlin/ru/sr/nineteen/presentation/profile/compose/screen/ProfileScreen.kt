@@ -15,7 +15,7 @@ import ru.sr.nineteen.presentation.profile.viewmodel.ProfileEvent
 import ru.sr.nineteen.presentation.profile.viewmodel.ProfileViewModel
 import ru.sr.nineteen.presentation.updatepassword.presentation.compose.screen.UpDatePasswordScreen
 import ru.sr.nineteen.presentation.warning.compose.screen.ProfileDeleteWarningDialog
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = koinViewModel()) {

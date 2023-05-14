@@ -11,7 +11,7 @@ import ru.sr.nineteen.presentation.registration.compose.view.SuccessRegistration
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationAction
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationEvent
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationViewModel
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun RegistrationScreen(email: String = "", viewModel: RegistrationViewModel = koinViewModel()) {

@@ -5,8 +5,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.Dispatchers
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.authorization.R
-import ru.sr.nineteen.data.FirebaseNoEmailVerifications
-import ru.sr.nineteen.data.FirebaseNotAuth
+import ru.sr.mimeteen.remotedatabase.FirebaseNoEmailVerifications
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.data.mapper.AuthUiMapper
 import ru.sr.nineteen.domain.Validation
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase

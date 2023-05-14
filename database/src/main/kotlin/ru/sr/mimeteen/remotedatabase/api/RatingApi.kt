@@ -8,7 +8,7 @@ interface RatingApi {
 
     suspend fun getTopTenRating():List<RatingDto>
 
-    suspend fun getRatingByUseID():RatingDto
+    suspend fun getRatingByUseID():RatingDto?
 
     suspend fun showMyRating():List<RatingDto>?
 }

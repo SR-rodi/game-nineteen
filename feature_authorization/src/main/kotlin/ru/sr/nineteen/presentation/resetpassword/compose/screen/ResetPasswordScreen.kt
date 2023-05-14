@@ -10,7 +10,7 @@ import ru.sr.nineteen.presentation.resetpassword.compose.view.ResetPasswordView
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.ResetPasswordViewModel
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordAction
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.model.ResetPasswordEvent
-import ru.sr.nineteen.view.Screen
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun ResetPasswordScreen(email: String = "", viewModel: ResetPasswordViewModel = koinViewModel()) {

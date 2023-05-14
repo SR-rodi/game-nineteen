@@ -1,4 +1,8 @@
 package ru.sr.nineteen.screen.view
 
-class TrainingView {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun TrainingView() {
+
 }

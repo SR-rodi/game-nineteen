@@ -21,9 +21,9 @@ import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationEvent
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationState
 import ru.sr.nineteen.presentation.root.ErrorMessageView
 import ru.sr.nineteen.theme.GameTheme
-import ru.sr.nineteen.view.ActionButtonView
-import ru.sr.nineteen.view.EmailTextField
-import ru.sr.nineteen.view.PasswordTextField
+import ru.sr.nineteen.composeview.ActionButtonView
+import ru.sr.nineteen.composeview.EmailTextField
+import ru.sr.nineteen.composeview.PasswordTextField
 
 @Composable
 fun RegistrationView(state: RegistrationState, eventHandler: (RegistrationEvent) -> Unit) {

@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.sr.nineteen.domain.gameitem.SettingGame
+import ru.sr.nineteen.gameitem.SettingGame
 import ru.sr.nineteen.game.R
 import ru.sr.nineteen.theme.GameTheme
 
@@ -28,12 +28,12 @@ fun WinCardView(settingGame: SettingGame) {
             style = GameTheme.fonts.h1.copy(color = GameTheme.colors.textTitle),
             text = stringResource(id = R.string.game_win_message)
         )
-        Text(
+/*        Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = GameTheme.fonts.h3.copy(color = GameTheme.colors.textTitle),
             text = settingGame.gameMode
-        )
+        )*/
         Text(
             text = stringResource(id = R.string.game_win_result),
             color = GameTheme.colors.textTitle

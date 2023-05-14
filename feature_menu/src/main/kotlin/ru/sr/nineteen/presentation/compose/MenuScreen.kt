@@ -1,32 +1,14 @@
 package ru.sr.nineteen.presentation.compose
 
-import android.os.Bundle
-import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
-import androidx.navigation.NavOptionsBuilder
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.domain.NavigationTree
-import ru.sr.nineteen.domain.gameitem.SettingGame
 import ru.sr.nineteen.navgraph.navcomponent.push
 import ru.sr.nineteen.presentation.compose.view.MenuView
 import ru.sr.nineteen.presentation.viewmodel.MenuViewModel
 import ru.sr.nineteen.presentation.viewmodel.model.MenuAction
 import ru.sr.nineteen.presentation.viewmodel.model.MenuEvent
-import ru.sr.nineteen.view.Screen
-
-fun NavController.navigate(
-    route: NavigationTree,
-    params: Pair<String, SettingGame>,
-    builder: NavOptionsBuilder.() -> Unit = {},
-) {
-    this.currentBackStackEntry?.savedStateHandle?.set(
-        key = params.first,
-        value = params.second
-    )
-    navigate(route.name, builder)
-}
+import ru.sr.nineteen.composeview.Screen
 
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
@@ -36,7 +18,7 @@ fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
 
         when (action) {
             is MenuAction.OpenGame -> {
-                navController.push(NavigationTree.Game, action.settingGame)
+                navController.push(NavigationTree.Game, action.gameMode)
                 viewModel.obtainEvent(MenuEvent.ResetActions)
             }
 

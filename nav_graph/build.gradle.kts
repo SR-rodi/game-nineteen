@@ -28,6 +28,9 @@ android {
 
 dependencies {
 
+    implementation(project(":game_engine"))
+
+
     implementation(project(":core"))
     implementation(project(":core_ui"))
     implementation(project(":feature_menu"))

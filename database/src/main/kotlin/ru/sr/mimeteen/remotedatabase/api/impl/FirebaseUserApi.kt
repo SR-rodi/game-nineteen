@@ -8,7 +8,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import kotlinx.coroutines.tasks.await
 import ru.sr.mimeteen.remotedatabase.api.UserApi
 import ru.sr.mimeteen.remotedatabase.model.UserDto
-import ru.sr.nineteen.data.FirebaseNotAuth
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 
 class FirebaseUserApi(
     private val auth: FirebaseAuth,
