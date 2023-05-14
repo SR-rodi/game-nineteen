@@ -16,11 +16,13 @@ class FirebaseRatingApi(
         val currentUser = auth.currentUser ?: throw FirebaseNotAuth()
         database.reference
             .child(TableRemoteDatabase.RatingTable.name)
-            .child(rating.userId)
+
+            .child(currentUser.uid)
             .setValue(
                 rating.copy(
                     userName = currentUser.displayName ?: "User_${currentUser.uid}",
-                    userId = currentUser.uid
+                    userId = currentUser.uid,
+                    userAvatar = currentUser.photoUrl.toString()
                 )
             ).await()
 
