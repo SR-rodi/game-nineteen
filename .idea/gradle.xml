@@ -7,10 +7,23 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core_ui" />
+            <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/feature_authorization" />
+            <option value="$PROJECT_DIR$/feature_game" />
+            <option value="$PROJECT_DIR$/feature_menu" />
+            <option value="$PROJECT_DIR$/feature_profile" />
+            <option value="$PROJECT_DIR$/feature_rating" />
+            <option value="$PROJECT_DIR$/feature_training" />
+            <option value="$PROJECT_DIR$/game_engine" />
+            <option value="$PROJECT_DIR$/nav_graph" />
+            <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>
       </GradleProjectSettings>

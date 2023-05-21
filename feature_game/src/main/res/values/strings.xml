@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="game_counter_steps">Количество ходов : </string>
+    <string name="game_add_button">Добавить</string>
+    <string name="game_help_button">Помощь</string>
+    <string name="game_win_message">Победа</string>
+    <string name="game_win_result">Ваши достижения :</string>
+    <string name="game_time">Затраченное время</string>
+    <string name="game_rating_button">Рейтинг</string>
+    <string name="game_menu_button">Меню</string>
+
+</resources>

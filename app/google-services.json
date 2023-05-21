@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120591601252",
+    "project_id": "emaillinkregistration",
+    "storage_bucket": "emaillinkregistration.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120591601252:android:861dfef630d8d0b9d75971",
+        "android_client_info": {
+          "package_name": "ru.sr.nineteen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120591601252-5t3663vdvqud44msvdhclmd7ds8m2sh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9mnXUUzwAFEjDhR5HWZg25EtjK8MtGo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120591601252-5t3663vdvqud44msvdhclmd7ds8m2sh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

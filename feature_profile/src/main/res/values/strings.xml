@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_edit_name_title">Изменить имя</string>
+    <string name="profile_name">Имя</string>
+    <string name="profile_edit_button">Изменить</string>
+    <string name="profile_edit_back">Назад</string>
+    <string name="profile_reset_password_title">Сменить пароль</string>
+    <string name="profile_new_password">Новый пароль</string>
+    <string name="profile_old_password">Старый пароль</string>
+    <string name="profile_error_old_passwoed">*Не верный пароль</string>
+
+</resources>
