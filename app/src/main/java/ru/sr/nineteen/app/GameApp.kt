@@ -11,6 +11,7 @@ import ru.sr.nineteen.di.menuModule
 import ru.sr.nineteen.di.profileModule
 import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
+import ru.sr.nineteen.trainingModule
 
 class GameApp : Application() {
 
@@ -28,6 +29,7 @@ class GameApp : Application() {
                         + menuModule()
                         + databaseModule()
                         + profileModule()
+                        + trainingModule()
             )
         }
     }

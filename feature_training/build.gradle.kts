@@ -29,6 +29,9 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":core_ui"))
+    implementation(project(":navigation"))
+    implementation(project(":game_engine"))
 
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation(platform("androidx.compose:compose-bom:2022.10.00"))

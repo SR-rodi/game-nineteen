@@ -6,6 +6,7 @@ import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import ru.sr.mimeteen.database.repository.FieldDBRepository
+import ru.sr.nineteen.engin.GameEngin
 import ru.sr.nineteen.presentation.MainViewModel
 
 fun repositoryModule() = module {
@@ -14,4 +15,5 @@ fun repositoryModule() = module {
 
     singleOf(::FieldDBRepository)
     single { Firebase.auth }
+    single { GameEngin.create() }
 }

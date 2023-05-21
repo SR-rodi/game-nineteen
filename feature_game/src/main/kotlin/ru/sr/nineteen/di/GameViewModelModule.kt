@@ -25,7 +25,7 @@ fun gameViewModelModule() = module {
 
 fun repositoryModule() = module {
 
-    single { GameEngin.create() }
+/*    single { GameEngin.create() }*/
 
     singleOf(::GameItemDataMapperImpl) { bind<GameItemDataMapper>() }
     singleOf(::GameRatingMapperImpl) { bind<GameRatingMapper>() }

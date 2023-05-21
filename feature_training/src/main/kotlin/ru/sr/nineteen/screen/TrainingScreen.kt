@@ -1,11 +1,24 @@
 package ru.sr.nineteen.screen
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import org.koin.androidx.compose.koinViewModel
+import ru.sr.nineteen.composeview.Screen
+import ru.sr.nineteen.screen.view.TrainingView
+import ru.sr.nineteen.viewmodel.TrainingAction
+import ru.sr.nineteen.viewmodel.TrainingViewMod
 
 
 @Composable
-fun TrainingScreen() {
+fun TrainingScreen(viewModel: TrainingViewMod = koinViewModel()) {
 
-    Text(text = "TrainingScreen")
+    Screen(viewModel = viewModel) { state, action, navController ->
+        TrainingView(state){trainingEvent -> viewModel.obtainEvent(trainingEvent) }
+
+        when(action){
+            TrainingAction.OpenBack -> navController.popBackStack()
+            null -> {}
+        }
+    }
+
+
 }
