@@ -3,6 +3,7 @@ package ru.sr.nineteen.presentation.profile.viewmodel
 import android.net.Uri
 import android.util.Log
 import kotlinx.coroutines.delay
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.usecase.GetUserInfoUseCase
 import ru.sr.nineteen.domain.usecase.LogOutUseCase
@@ -89,6 +90,7 @@ class ProfileViewModel(
     }
 
     private fun onError(e: Exception) {
+        if (e is FirebaseNotAuth) viewAction = ProfileAction.OpenSignInScreen
         viewState = viewState.copy(isLoading = false, isError = true)
     }
 

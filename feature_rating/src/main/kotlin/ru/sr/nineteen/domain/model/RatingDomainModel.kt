@@ -1,6 +1,6 @@
 package ru.sr.nineteen.domain.model
 
-class RatingDomainModel(
+data class RatingDomainModel(
     val userId: String ,
     val userName: String?,
     val steps: Int,

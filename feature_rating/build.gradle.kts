@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":core_ui"))
     implementation(project(":core"))
     implementation(project(":database"))
+    implementation(project(":navigation"))
 
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation(platform("androidx.compose:compose-bom:2022.10.00"))
@@ -41,7 +42,4 @@ dependencies {
     implementation ("io.insert-koin:koin-core:3.4.0")
     implementation ("io.insert-koin:koin-androidx-compose:3.4.0")
     implementation ("io.insert-koin:koin-android:3.4.0")
-
-    implementation("io.github.alexgladkov:odyssey-core:1.3.1")
-    implementation("io.github.alexgladkov:odyssey-compose:1.3.1")
 }

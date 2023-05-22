@@ -1,5 +1,6 @@
 package ru.sr.nineteen.presentation.compose.view
 
+import android.text.format.DateUtils
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,7 +33,7 @@ import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.composeview.AvatarView
 
 @Composable
-fun RatingItem(item: RatingUIModel,index:Int) {
+fun RatingItem(item: RatingUIModel, index: Int) {
 
     var isExpanded by remember { mutableStateOf(false) }
 
@@ -42,10 +44,13 @@ fun RatingItem(item: RatingUIModel,index:Int) {
             .fillMaxWidth()
             .padding(8.dp)
             .clip(GameTheme.shapes.large)
-            .background(GameTheme.colors.blue_100),) {
+            .background(GameTheme.colors.blue_100),
+    ) {
 
-        Row(Modifier
-            .fillMaxWidth().padding(horizontal = 8.dp),
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically
 
         ) {
@@ -74,10 +79,22 @@ fun RatingItem(item: RatingUIModel,index:Int) {
         }
 
         AnimatedVisibility(visible = isExpanded) {
-            Box(modifier = Modifier
+            Row(modifier = Modifier
                 .fillMaxWidth()
-                .background(GameTheme.colors.select)
-                .height(60.dp))
+                .padding(horizontal = 16.dp)) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = "Время : ${DateUtils.formatElapsedTime(item.time)}",
+                    textAlign = TextAlign.Center
+                )
+
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = "Шаги : ${item.steps}",
+                    textAlign = TextAlign.Center
+
+                )
+            }
         }
     }
 }

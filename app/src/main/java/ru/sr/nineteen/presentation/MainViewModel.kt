@@ -18,13 +18,15 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
-            delay(3000)
+            delay(1_500)
             _isLoading.value = false
         }
     }
 
     fun getStartScreen(): String {
-        return if (firebaseAuth.currentUser?.isEmailVerified == true) NavigationTree.Menu.name else NavigationTree.SignIn.name
+        return if (firebaseAuth.currentUser?.isEmailVerified == true)
+            NavigationTree.Menu.name
+        else NavigationTree.SignIn.name
     }
 
 }

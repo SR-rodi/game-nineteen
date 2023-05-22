@@ -23,7 +23,7 @@ import ru.sr.nineteen.composeview.GameDialog
 
 @Composable
 fun WinDialog(
-    settingGame: ru.sr.nineteen.gameitem.SettingGame,
+    settingGame: SettingGame,
     eventHandler: (GameEvent) -> Unit,
 ) {
 

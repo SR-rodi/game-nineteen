@@ -1,5 +1,6 @@
 package ru.sr.nineteen.presentation.win.compose.view
 
+import android.text.format.DateUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,18 +29,13 @@ fun WinCardView(settingGame: SettingGame) {
             style = GameTheme.fonts.h1.copy(color = GameTheme.colors.textTitle),
             text = stringResource(id = R.string.game_win_message)
         )
-/*        Text(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            style = GameTheme.fonts.h3.copy(color = GameTheme.colors.textTitle),
-            text = settingGame.gameMode
-        )*/
+
         Text(
             text = stringResource(id = R.string.game_win_result),
             color = GameTheme.colors.textTitle
         )
         Text(text = ("${stringResource(id = R.string.game_counter_steps)}  ${settingGame.stepCount}"))
-        Text(text = ("${stringResource(id = R.string.game_time)}  ${settingGame.time}"))
+        Text(text = ("${stringResource(id = R.string.game_time)}  ${DateUtils.formatElapsedTime(settingGame.time)}"))
         Image(
             modifier = Modifier
                 .fillMaxWidth()

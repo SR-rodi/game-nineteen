@@ -2,14 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.NineTeen_2_0" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/ic_new_launcher_background</item>
-        <item name="android:background">@color/ic_new_launcher_background</item>
     </style>
 
     <style name="Theme.NineTeen_2_0.Stating" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/ic_new_launcher_background</item>
 
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_new_launcher_foreground</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
+
         <item name="postSplashScreenTheme">@style/Theme.NineTeen_2_0</item>
 
     </style>

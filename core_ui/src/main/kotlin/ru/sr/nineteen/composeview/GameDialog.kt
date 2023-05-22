@@ -3,6 +3,7 @@ package ru.sr.nineteen.composeview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,7 +22,6 @@ fun GameDialog(
     dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
-
 
     Dialog(
         properties = DialogProperties(dismissOnClickOutside = dismissOnClickOutside),

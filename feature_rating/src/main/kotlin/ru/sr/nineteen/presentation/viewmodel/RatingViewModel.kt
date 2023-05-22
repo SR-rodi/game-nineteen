@@ -1,7 +1,9 @@
 package ru.sr.nineteen.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.data.database.entity.RatingEntity
 import ru.sr.nineteen.data.mapper.RatingUiMapper
@@ -26,11 +28,22 @@ class RatingViewModel(
         scopeLaunch(
             onLoading = { viewState = viewState.copy(isMyResultLoading = true, isError = false) },
             onSuccess = { viewState = viewState.copy(isMyResultLoading = false, isError = false) },
-            onError = { _ -> viewState = viewState.copy(isMyResultLoading = false, isError = true) }
+            onError = ::onError
         ) {
-            ratingRepository.showMyRating()
-        }
+            val listRating = ratingRepository.showMyRating()
+            if (listRating != null) {
+                viewState = viewState.copy(
+                    myRating = ratingUiMapper.ratingDomainToUI(listRating.last()),
+                    myPosition = listRating.lastIndex
+                )
+            }
 
+        }
+    }
+
+    private fun onError(e:Exception){
+        if (e is FirebaseNotAuth) viewAction = RatingAction.OpenSignIn
+        viewState = viewState.copy(isMyResultLoading = false, isError = true)
     }
 
     private fun goToBackStack() {
@@ -54,6 +67,7 @@ class RatingViewModel(
 
 sealed interface RatingAction {
     object GoToBack : RatingAction
+    object OpenSignIn : RatingAction
 
 }
 
@@ -70,4 +84,6 @@ data class RatingState(
     val isMyResultLoading: Boolean = false,
     val isError: Boolean = false,
     val ratingItems: List<RatingUIModel> = emptyList(),
+    val myRating: RatingUIModel? = null,
+    val myPosition: Int? = null,
 )
