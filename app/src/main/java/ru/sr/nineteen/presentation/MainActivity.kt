@@ -4,9 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.domain.NavigationTree
@@ -21,21 +24,24 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen()
+
         setContent {
-            GameTheme(isNightMode = false) {
+                GameTheme(isNightMode = false) {
+                    this@MainActivity.window.statusBarColor = GameTheme.colors.background.toArgb()
 
-                this.window.statusBarColor = GameTheme.colors.background.toArgb()
-
-                NavHost(
-                    modifier = Modifier
-                        .background(GameTheme.colors.background)
-                        .fillMaxSize(),
-                    navController = LocalRootController.current,
-                    startDestination = viewModel.getStartScreen(),
-                ) {
-                    setNavigate()
+                    NavHost(
+                        modifier = Modifier
+                            .background(GameTheme.colors.background)
+                            .fillMaxSize(),
+                        navController = LocalRootController.current,
+                        startDestination = viewModel.getStartScreen(),
+                    ) {
+                        setNavigate()
+                    }
                 }
-            }
+
         }
     }
 }

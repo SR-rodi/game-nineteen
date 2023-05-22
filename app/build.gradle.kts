@@ -58,10 +58,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
 
-    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
-    implementation("io.github.alexgladkov:odyssey-core:1.3.1")
-    implementation("io.github.alexgladkov:odyssey-compose:1.3.1")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
 
     implementation("com.google.code.gson:gson:2.10.1")
 
