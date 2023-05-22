@@ -1,6 +1,5 @@
 package ru.sr.nineteen.theme
 
-import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
@@ -27,9 +26,9 @@ data class GameColor(
 val lightPalette = GameColor(
     gray_100 = Color(0xFF676868),
     notChoice = Color(0xFF35DAF0),
-    choice = Color(0xFF839684),
+    choice = Color(0xFF9FA3A0),
     select = Color(0xFF0B5DA3),
-    help = Color(0xE4D6C572),
+    help = Color(0xFFFF5722),
     blue_100 = Color(0xFFEEF0F6),
     blue_200 = Color(0xFFCEDAEC),
     blue_300 = Color(0xFF9CB9D1),

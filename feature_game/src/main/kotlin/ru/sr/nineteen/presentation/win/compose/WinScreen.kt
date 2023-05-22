@@ -27,7 +27,7 @@ fun WinDialog(
     eventHandler: (GameEvent) -> Unit,
 ) {
 
-    GameDialog() {
+    GameDialog {
         Box(
             modifier = Modifier
                 .padding(vertical = 8.dp, horizontal = 16.dp),
@@ -58,6 +58,5 @@ fun WinDialog(
             }
         }
     }
-
 }
 

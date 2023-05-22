@@ -17,7 +17,6 @@ import ru.sr.nineteen.presentation.signin.compose.screen.SignInScreen
 import ru.sr.nineteen.screen.TrainingScreen
 import ru.sr.nineteen.theme.LocalRootController
 
-
 fun NavGraphBuilder.setNavigate() {
 
     composable(NavigationTree.SignIn) { SignInScreen() }

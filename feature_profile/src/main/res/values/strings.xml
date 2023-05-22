@@ -7,6 +7,6 @@
     <string name="profile_reset_password_title">Сменить пароль</string>
     <string name="profile_new_password">Новый пароль</string>
     <string name="profile_old_password">Старый пароль</string>
-    <string name="profile_error_old_passwoed">*Не верный пароль</string>
+    <string name="profile_error_old_passwoed">*Неверный пароль</string>
 
 </resources>

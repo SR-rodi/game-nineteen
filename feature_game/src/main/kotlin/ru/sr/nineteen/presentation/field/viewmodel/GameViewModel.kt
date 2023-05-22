@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.sr.mimeteen.database.entity.GameListEntity
 import ru.sr.mimeteen.database.repository.FieldDBRepository
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.model.GameRating
 import ru.sr.nineteen.domain.reposytory.RemoteRatingRepository
@@ -94,16 +95,7 @@ class GameViewModel(
 
     private fun onSaveAndOpenWinScreen() {
         scopeLaunch(context = Dispatchers.IO,
-            onFinally = {
-                viewAction = GameAction.OpenWinScreen(
-                    SettingGame(
-                        gameMode = viewState.mode,
-                        list = viewState.items,
-                        time = viewState.timeCounter,
-                        stepCount = viewState.stepCounter
-                    )
-                )
-            }
+            onFinally = ::onFinally, onError = ::onError
         ) {
             fieldDBRepository.deleteItemList()
             if (userRemoteBestResult == null || viewState.timeCounter >= userRemoteBestResult!!)
@@ -115,6 +107,21 @@ class GameViewModel(
                     )
                 )
         }
+    }
+
+    private fun onError(e:Exception){
+        if (e is FirebaseNotAuth) viewAction = GameAction.ShowToastErrorRegistration
+    }
+
+    private fun onFinally(){
+        viewAction = GameAction.OpenWinScreen(
+            SettingGame(
+                gameMode = viewState.mode,
+                list = viewState.items,
+                time = viewState.timeCounter,
+                stepCount = viewState.stepCounter
+            )
+        )
     }
 
     private var timerCounter = 0L

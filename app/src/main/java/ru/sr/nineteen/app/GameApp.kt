@@ -11,7 +11,7 @@ import ru.sr.nineteen.di.menuModule
 import ru.sr.nineteen.di.profileModule
 import ru.sr.nineteen.di.ratingModule
 import ru.sr.nineteen.di.repositoryModule
-import ru.sr.nineteen.trainingModule
+import ru.sr.nineteen.di.trainingModule
 
 class GameApp : Application() {
 
