@@ -1,6 +1,7 @@
 package ru.sr.nineteen.presentation.registration.viewmodel
 
 import android.util.Log
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.authorization.R
@@ -76,10 +77,13 @@ class RegistrationViewModel(
     }
 
     private fun onError(error: Exception) {
-      if (error is FirebaseAuthUserCollisionException){
-          viewState = viewState.copy(errorMessage = R.string.auth_error_internet)
-      }
-        viewState = viewState.copy(isLoading = false, isError = true)
+
+        val errorMessage = if (error is FirebaseTooManyRequestsException)
+            R.string.auth_error_unusual_activity
+        else
+            R.string.auth_error_internet
+
+        viewState = viewState.copy(isLoading = false, isError = true, errorMessage = errorMessage)
     }
 
     private fun onSuccess(): () -> Unit = {

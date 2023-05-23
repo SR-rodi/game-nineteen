@@ -1,5 +1,6 @@
 package ru.sr.nineteen.presentation.resetpassword.viewmodel
 
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.authorization.R
@@ -51,6 +52,7 @@ class ResetPasswordViewModel(
     private fun onError(e: Exception) {
         val messageId = when (e) {
             is FirebaseAuthInvalidUserException -> R.string.auth_error_delete_user
+            is FirebaseTooManyRequestsException -> R.string.auth_error_unusual_activity
             else -> R.string.auth_error_internet
         }
         viewState = viewState.copy(

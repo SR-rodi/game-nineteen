@@ -13,5 +13,7 @@ interface AuthRepository {
 
    suspend fun resetPassword(email: String)
 
+   suspend fun sendEmailVerification()
+
 
 }

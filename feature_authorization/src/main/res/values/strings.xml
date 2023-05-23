@@ -6,8 +6,7 @@
     <string name="auth_send_reset_password_title">Сбросить пароль</string>
     <string name="auth_send_reset_password_success_title">Сообщение отправлено</string>
     <string name="auth_send_reset_password_success_button">Вернуться</string>
-    <string name="auth_send_reset_password_success_message">Проверьте почту, и следуйте инструкции
-    из сообщения</string>
+    <string name="auth_send_reset_password_success_message">Проверьте почту, и следуйте инструкции из сообщения</string>
     <string name="auth_auth_title">Авторизация</string>
     <string name="auth_to_come_in_guest">Войти как гость</string>
     <string name="auth_registration_button">Зарегистрироваться</string>
@@ -21,9 +20,11 @@
     <string name="auth_error_use_email">Адрес электронной почты уже используется другим аккаунтом.</string>
     <string name="auth_error_not_email_verifications">Пользователь не подтвержден. Проверьте почту,
     или нажмите на это сообщение для отправки повторного кода</string>
+    <string name="auth_error_unusual_activity">Мы заблокировали все запросы с этого устройства из-за необычной активности. Попробуйте позже.</string>
     <string name="auth_error_internet">Что-то пошло не так! Проверьте состояние сети
     И повторите попытку</string>
     <string name="auth_warning_not_auth_title">Вы не авторизовались</string>
+
     <string name="auth_warning_not_auth_message">Вы можете ознакомиться с игрой, но тогда вы    не получите доступ к таблице рейтингов. Ваш результат не будет записан</string>
 
 

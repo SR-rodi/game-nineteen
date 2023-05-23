@@ -33,5 +33,9 @@ class AuthRepositoryImpl(
         api.resetPassword(email)
     }
 
+    override suspend fun sendEmailVerification() {
+        api.sendEmailVerification()
+    }
+
 }
 
