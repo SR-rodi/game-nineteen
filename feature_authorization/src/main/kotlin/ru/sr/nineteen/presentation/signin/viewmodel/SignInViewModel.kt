@@ -1,5 +1,7 @@
 package ru.sr.nineteen.presentation.signin.viewmodel
 
+import android.util.Log
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.Dispatchers
@@ -9,6 +11,7 @@ import ru.sr.mimeteen.remotedatabase.FirebaseNoEmailVerifications
 import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.data.mapper.AuthUiMapper
 import ru.sr.nineteen.domain.Validation
+import ru.sr.nineteen.domain.usecase.SendEmailVerificationUseCase
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInAction
 import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInEvent
@@ -16,6 +19,7 @@ import ru.sr.nineteen.presentation.signin.viewmodel.model.SignInState
 
 class SignInViewModel(
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
+    private val sendEmailVerificationUseCase: SendEmailVerificationUseCase,
     private val uiMapper: AuthUiMapper,
     private val validation: Validation,
 ) : BaseViewModel<SignInState, SignInAction, SignInEvent>(SignInState()) {
@@ -25,6 +29,7 @@ class SignInViewModel(
             is SignInEvent.OnClickRegistrationButton -> openRegistrationScreen(viewState.email)
             SignInEvent.OnClickSignInButton ->
                 onClickSignIn(viewState.email, viewState.password)
+
             SignInEvent.OnClickSkipAuthButton -> openMenu()
             is SignInEvent.OnChangeEmail -> onChangeEmail(viewEvent.email)
             is SignInEvent.OnChangePassword -> onChangePassword(viewEvent.password)
@@ -33,11 +38,12 @@ class SignInViewModel(
             SignInEvent.OnOpenWarning -> openWarningMessage()
             SignInEvent.OnResetAction -> onResetAction()
             SignInEvent.OnResetState -> onResetState()
+            SignInEvent.OnClickEmailVerification -> onSendEmailVerification()
         }
     }
 
     private fun onResetState() {
-        viewState = viewState.copy(isLoading = false,isError = false, email = "", password = "")
+        viewState = viewState.copy(isLoading = false, isError = false, email = "", password = "")
     }
 
     private fun onClickSignIn(email: String, password: String) {
@@ -84,8 +90,19 @@ class SignInViewModel(
                 .authUserDomainModelToAuthUser(signInWithEmailUseCase.signIn(email, password))
             openMenu(user.email)
         }
-
     }
+
+    private fun onSendEmailVerification() =
+        scopeLaunch(
+            context = Dispatchers.IO,
+            onError = ::onError,
+            onLoading = ::startLoadingAuth
+        ) {
+            sendEmailVerificationUseCase.send()
+            viewAction = SignInAction.ShowToastSuccessSendEmail
+            viewState = viewState.copy(isLoading = false)
+
+        }
 
     private fun openMenu(email: String? = null) {
         viewAction = SignInAction.OpenMenu(email)
@@ -97,11 +114,14 @@ class SignInViewModel(
 
     private fun onError(error: Exception) {
 
+        Log.e("Kart","Test = $error")
+
         val errorMessage = when (error) {
             is FirebaseAuthInvalidUserException -> R.string.auth_error_delete_user
             is FirebaseAuthInvalidCredentialsException -> R.string.auth_error_not_validation_password
             is FirebaseNotAuth -> R.string.auth_error_not_user
             is FirebaseNoEmailVerifications -> R.string.auth_error_not_email_verifications
+            is FirebaseTooManyRequestsException -> R.string.auth_error_unusual_activity
             else -> R.string.auth_error_internet
         }
         viewState = viewState.copy(isLoading = false, isError = true, errorMessage = errorMessage)

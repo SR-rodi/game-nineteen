@@ -7,7 +7,7 @@ android {
     compileSdk = 33
     namespace = "ru.sr.nineteen.navigation"
     defaultConfig {
-        minSdk = 29
+        minSdk = 24
     }
     buildFeatures {
         compose = true

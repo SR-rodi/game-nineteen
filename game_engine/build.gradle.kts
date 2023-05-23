@@ -9,7 +9,7 @@ android {
     compileSdk = 33
     namespace = "ru.sr.nineteen.game_engine"
     defaultConfig {
-        minSdk = 29
+        minSdk = 24
     }
     buildFeatures {
         compose = true

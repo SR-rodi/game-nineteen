@@ -1,7 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.NineTeen_2_0" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/ic_new_launcher_background</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
     </style>
 
     <style name="Theme.NineTeen_2_0.Stating" parent="Theme.SplashScreen">

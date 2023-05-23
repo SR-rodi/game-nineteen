@@ -8,7 +8,7 @@ import ru.sr.mimeteen.remotedatabase.model.toUserDto
 import ru.sr.mimeteen.remotedatabase.FirebaseNoEmailVerifications
 import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 
-internal class FireBaseAuthApi(private val auth: FirebaseAuth):AuthApi {
+internal class FireBaseAuthApi(private val auth: FirebaseAuth) : AuthApi {
 
     override suspend fun getCurrentUser() = auth.currentUser
 
@@ -37,6 +37,11 @@ internal class FireBaseAuthApi(private val auth: FirebaseAuth):AuthApi {
 
     override suspend fun resetPassword(email: String) {
         auth.sendPasswordResetEmail(email).await()
+    }
+
+    override suspend fun sendEmailVerification() {
+        val user = auth.currentUser ?: throw FirebaseNotAuth()
+        user.sendEmailVerification().await()
     }
 
 }

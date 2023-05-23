@@ -11,4 +11,7 @@ sealed interface SignInEvent {
     object OnOpenWarning : SignInEvent
     object OnResetAction: SignInEvent
     object OnResetState : SignInEvent
+    object OnClickEmailVerification : SignInEvent {
+
+    }
 }

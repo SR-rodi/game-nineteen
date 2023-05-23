@@ -12,5 +12,7 @@ interface AuthApi {
 
     suspend fun resetPassword(email: String)
 
+    suspend fun  sendEmailVerification()
+
 }
 

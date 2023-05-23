@@ -87,8 +87,11 @@ fun SignInView(state: SignInState, eventHandler: (SignInEvent) -> Unit) {
         }
         ErrorMessageView(
             isVisible = state.isError,
-            message = stringResource(id = state.errorMessage)
-        )
+            message = stringResource(id = state.errorMessage),
+            isClickable = state.errorMessage == R.string.auth_error_not_email_verifications
+        ){
+            eventHandler(SignInEvent.OnClickEmailVerification)
+        }
         ActionButtonView(
             text = stringResource(id = R.string.auth_to_come_in),
             enabled = !state.isLoading,

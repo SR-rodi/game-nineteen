@@ -14,9 +14,11 @@ import ru.sr.nineteen.data.repository.AuthRepositoryImpl
 import ru.sr.nineteen.domain.repository.AuthRepository
 import ru.sr.nineteen.domain.usecase.CreateUserWithEmailAndPasswordUseCase
 import ru.sr.nineteen.domain.usecase.ResetPasswordUseCase
+import ru.sr.nineteen.domain.usecase.SendEmailVerificationUseCase
 import ru.sr.nineteen.domain.usecase.SignInWithEmailUseCase
 import ru.sr.nineteen.domain.usecase.impl.CreateUserWithEmailAndPasswordUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.ResetPasswordUseCaseImpl
+import ru.sr.nineteen.domain.usecase.impl.SendEmailVerificationUseCaseImpl
 import ru.sr.nineteen.domain.usecase.impl.SignInWithEmailUseCaseImpl
 import ru.sr.nineteen.presentation.registration.viewmodel.RegistrationViewModel
 import ru.sr.nineteen.presentation.resetpassword.viewmodel.ResetPasswordViewModel
@@ -37,6 +39,7 @@ fun useCaseModule() = module {
     singleOf(::CreateUserWithEmailAndPasswordUseCaseImpl) { bind<CreateUserWithEmailAndPasswordUseCase>() }
     singleOf(::SignInWithEmailUseCaseImpl) { bind<SignInWithEmailUseCase>() }
     singleOf(::ResetPasswordUseCaseImpl){bind<ResetPasswordUseCase>()}
+    singleOf(::SendEmailVerificationUseCaseImpl){bind<SendEmailVerificationUseCase>()}
 }
 
 fun mapperModule() = module {
