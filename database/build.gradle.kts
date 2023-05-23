@@ -9,7 +9,7 @@ android {
     compileSdk = 33
     namespace = "ru.sr.nineteen.database"
     defaultConfig {
-        minSdk = 29
+        minSdk = 24
     }
     compileOptions   {
         sourceCompatibility = JavaVersion.VERSION_17

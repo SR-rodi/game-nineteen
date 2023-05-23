@@ -8,7 +8,7 @@ android {
     compileSdk = 33
     namespace = "ru.sr.nineteen.training"
     defaultConfig {
-        minSdk = 29
+        minSdk = 24
     }
     buildFeatures {
         compose = true

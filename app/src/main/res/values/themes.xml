@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.NineTeen_2_0" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
     </style>
 
