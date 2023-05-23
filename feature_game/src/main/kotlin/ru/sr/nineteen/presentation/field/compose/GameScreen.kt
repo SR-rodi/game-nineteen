@@ -1,8 +1,10 @@
 package ru.sr.nineteen.presentation.field.compose
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.composeview.Screen
@@ -43,6 +45,8 @@ fun GameScreen(gameMode: GameMode.Game, viewModel: GameViewModel = koinViewModel
                 navController.push(NavigationTree.Rating, launchFlag = LaunchFlag.ClearPrevious)
                 viewModel.obtainEvent(GameEvent.OnResetActions)
             }
+
+            GameAction.ShowToastErrorRegistration -> {}
 
             null -> {}
 

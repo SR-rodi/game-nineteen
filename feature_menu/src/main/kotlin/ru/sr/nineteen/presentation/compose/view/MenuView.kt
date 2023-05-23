@@ -27,6 +27,7 @@ fun MenuView(state: MenuState, eventHandler: (event: MenuEvent) -> Unit) {
                 imageID = R.drawable.kitekat_1,
                 isEnable = state.isNextEnable,
                 avatar = state.userAvatar,
+                isAvatar = true,
                 onClickAvatar = { eventHandler(MenuEvent.OnClickProfileButton) }
             ) { eventHandler(MenuEvent.OnClickNextButton) }
         }

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="core_ui_Password">Пароль</string>
-    <string name="core_ui_Email">email</string>
-    <string name="core_ui_name">Имя</string>
-    <string name="core_ui_next_button">Продолжить</string>
-    <string name="core_ui_password_helper_error">* Пустое поле, или не соответствует минимальным требованием </string>
-    <string name="core_ui_password_helper">* Пароль должен быть:\n
-        - не короче 8 символов;\n
-        - содержать хотябы одну латинскую букву и одну цифру
-    </string>
-    <string name="core_ui_email_helper_error">* Пустое поле, или не соответствует минимальным требованием </string>
-    <string name="core_ui_error_network">Что то пошло не по плану. Проверте состояние сети и повтоите попытку</string>
-    <string name="core_ui_yes">Да</string>
+    <string name="core_ui_Password">Пароль</string><string name="core_ui_Email">email</string>
+    <string name="core_ui_name">Имя</string><string name="core_ui_next_button">Продолжить</string>
+    <string name="core_ui_password_helper_error">* Пустое поле, или не соответствует минимальным требованиям! </string><string name="core_ui_password_helper">* Пароль должен быть:\n
+    - не короче 8 символов;\n    - содержать хотя бы одну латинскую букву и одну цифру
+</string><string name="core_ui_email_helper_error">* Пустое поле, или не соответствует минимальным требованиям! </string>
+    <string name="core_ui_error_network">Что-то пошло не по плану. Проверьте  состояние сети и повторите попытку</string><string name="core_ui_yes">Да</string>
     <string name="core_ui_no">Нет</string>
 </resources>

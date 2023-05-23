@@ -1,6 +1,5 @@
 package ru.sr.nineteen.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -19,7 +18,6 @@ class MenuViewModel(
     private val userProvider: UserProvider,
 ) : BaseViewModel<MenuState, MenuAction, MenuEvent>(MenuState()) {
 
-    private var localSettings: ru.sr.nineteen.gameitem.SettingGame? = null
 
     init {
         getGameList()
@@ -28,7 +26,7 @@ class MenuViewModel(
     override fun obtainEvent(viewEvent: MenuEvent) {
         when (viewEvent) {
             MenuEvent.OnClickClassicButton -> onStartGame(GameMode.Game.Classic)
-            MenuEvent.OnClickNextButton -> localSettings?.let { onStartGame(GameMode.Game.Next) }
+            MenuEvent.OnClickNextButton ->  onStartGame(GameMode.Game.Next)
             MenuEvent.OnClickRandomButton -> onStartGame(GameMode.Game.Random)
             MenuEvent.OnClickRatingButton -> onStartRating()
             MenuEvent.OnClickTrainingButton -> onStartTraining()
@@ -59,9 +57,8 @@ class MenuViewModel(
         gameRepository.getGameList().onEach { entity ->
             if (entity != null) {
                 viewState = if (entity.list.isNotEmpty()) {
-                    localSettings = entity.toSettingGame()
                     viewState.copy(isNextEnable = true)
-                } else viewState.copy(isNextEnable = true)
+                } else viewState.copy(isNextEnable = false)
             }
         }.launchIn(viewModelScope + Dispatchers.IO)
     }

@@ -23,11 +23,11 @@ import ru.sr.nineteen.composeview.GameDialog
 
 @Composable
 fun WinDialog(
-    settingGame: ru.sr.nineteen.gameitem.SettingGame,
+    settingGame: SettingGame,
     eventHandler: (GameEvent) -> Unit,
 ) {
 
-    GameDialog() {
+    GameDialog {
         Box(
             modifier = Modifier
                 .padding(vertical = 8.dp, horizontal = 16.dp),
@@ -58,6 +58,5 @@ fun WinDialog(
             }
         }
     }
-
 }
 

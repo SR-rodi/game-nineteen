@@ -5,28 +5,26 @@
     <string name="auth_to_come_in">Войти</string>
     <string name="auth_send_reset_password_title">Сбросить пароль</string>
     <string name="auth_send_reset_password_success_title">Сообщение отправлено</string>
-    <string name="auth_send_reset_password_success_button">Вернутся</string>
+    <string name="auth_send_reset_password_success_button">Вернуться</string>
     <string name="auth_send_reset_password_success_message">Проверьте почту, и следуйте инструкции
-        из сообщения</string>
+    из сообщения</string>
     <string name="auth_auth_title">Авторизация</string>
     <string name="auth_to_come_in_guest">Войти как гость</string>
-    <string name="auth_registration_button">Зарегестрироваться</string>
+    <string name="auth_registration_button">Зарегистрироваться</string>
     <string name="auth_registration_title">Регистрация</string>
     <string name="auth_registration_success_title">Успешная регистрация</string>
-    <string name="auth_registration_success_message">Для потдверждения email, на почту было высланно сообщение. Следуйте инструкциям из письма</string>
+    <string name="auth_registration_success_message">Для подтверждения email, на почту было выслано сообщение. Следуйте инструкциям из письма</string>
     <string name="auth_registration_success_Button">Авторизоваться</string>
-    <string name="auth_error_delete_user">Нет записи пользователя, соответствующей этому
-        идентификатору. Возможно, пользователь был удален.</string>
-    <string name="auth_error_not_validation_password">Пароль недействителен</string>
+    <string name="auth_error_delete_user">Нет записи пользователя, соответствующей этому    идентификатору. Возможно, пользователь был удален.</string>
+    <string name="auth_error_not_validation_password">Пароль не действителен</string>
     <string name="auth_error_not_user">Пользователь не найден</string>
     <string name="auth_error_use_email">Адрес электронной почты уже используется другим аккаунтом.</string>
-    <string name="auth_error_not_email_verifications">Пользователь не потвержден. Проверьте почту,
-        или нажмите на это сообщение для отправки повтороного кода</string>
+    <string name="auth_error_not_email_verifications">Пользователь не подтвержден. Проверьте почту,
+    или нажмите на это сообщение для отправки повторного кода</string>
     <string name="auth_error_internet">Что-то пошло не так! Проверьте состояние сети
-        И повторите попытку</string>
+    И повторите попытку</string>
     <string name="auth_warning_not_auth_title">Вы не авторизовались</string>
-    <string name="auth_warning_not_auth_message">Вы можете ознакомится с игрой, но тогда вы
-        не получите доступ к таблице рейтингов. Ваш результат не будет записан</string>
+    <string name="auth_warning_not_auth_message">Вы можете ознакомиться с игрой, но тогда вы    не получите доступ к таблице рейтингов. Ваш результат не будет записан</string>
 
 
 </resources>

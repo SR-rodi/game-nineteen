@@ -62,6 +62,5 @@ fun LeaderTableView(
             style = textStyle,
             text = tableName,
         )
-
     }
 }

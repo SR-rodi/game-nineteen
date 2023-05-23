@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
@@ -13,7 +14,7 @@ fun GameTheme(
     isNightMode: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    MaterialTheme() {
+    MaterialTheme(colorScheme = MaterialTheme.colorScheme.copy(onPrimaryContainer = Color(0xFF9CB9D1))) {
         val colors = if (isNightMode) darkPalette else lightPalette
         CompositionLocalProvider(
             LocalColorProvider provides colors,

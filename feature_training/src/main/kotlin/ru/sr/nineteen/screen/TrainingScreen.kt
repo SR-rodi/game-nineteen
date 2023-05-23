@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.koinViewModel
 import ru.sr.nineteen.composeview.Screen
 import ru.sr.nineteen.screen.view.TrainingView
-import ru.sr.nineteen.viewmodel.TrainingAction
+import ru.sr.nineteen.viewmodel.model.TrainingAction
 import ru.sr.nineteen.viewmodel.TrainingViewMod
 
 
@@ -19,6 +19,4 @@ fun TrainingScreen(viewModel: TrainingViewMod = koinViewModel()) {
             null -> {}
         }
     }
-
-
 }

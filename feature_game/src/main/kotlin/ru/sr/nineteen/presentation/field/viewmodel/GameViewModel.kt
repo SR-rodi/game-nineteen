@@ -3,20 +3,22 @@ package ru.sr.nineteen.presentation.field.viewmodel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.sr.mimeteen.database.entity.GameListEntity
 import ru.sr.mimeteen.database.repository.FieldDBRepository
-import ru.sr.mimeteen.remotedatabase.model.RatingDto
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.BaseViewModel
 import ru.sr.nineteen.domain.model.GameRating
 import ru.sr.nineteen.domain.reposytory.RemoteRatingRepository
 import ru.sr.nineteen.engin.GameEngin
 import ru.sr.nineteen.gameitem.GameMode
+import ru.sr.nineteen.gameitem.Position
+import ru.sr.nineteen.gameitem.SettingGame
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameAction
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameEvent
 import ru.sr.nineteen.presentation.field.viewmodel.model.GameState
-import ru.sr.nineteen.gameitem.Position
-import ru.sr.nineteen.gameitem.SettingGame
 
 class GameViewModel(
     private val fieldDBRepository: FieldDBRepository,
@@ -49,12 +51,23 @@ class GameViewModel(
         startTimer()
         viewState = viewState.copy(isStartTamer = true)
 
-        viewState = viewState.copy(
-            items = game.createGameFieldByGameMode(mode),
-            timeCounter = 0,
-            stepCounter = 0,
-            mode = mode
-        )
+        if (mode == GameMode.Game.Next) {
+            fieldDBRepository.getGameList().onEach {
+                if (it !=null)
+                    viewState = viewState.copy(
+                    items = it.list,
+                    timeCounter = it.time,
+                    stepCounter = it.stepCount,
+                    mode = it.gameMode
+                )
+            }.launchIn(viewModelScope)
+        } else
+            viewState = viewState.copy(
+                items = game.createGameFieldByGameMode(mode),
+                timeCounter = 0,
+                stepCounter = 0,
+                mode = mode
+            )
     }
 
     private fun playGame(position: Position) = scopeLaunch {
@@ -82,16 +95,7 @@ class GameViewModel(
 
     private fun onSaveAndOpenWinScreen() {
         scopeLaunch(context = Dispatchers.IO,
-            onFinally = {
-                viewAction = GameAction.OpenWinScreen(
-                    SettingGame(
-                        gameMode = viewState.mode,
-                        list = viewState.items,
-                        time = viewState.timeCounter,
-                        stepCount = viewState.stepCounter
-                    )
-                )
-            }
+            onFinally = ::onFinally, onError = ::onError
         ) {
             fieldDBRepository.deleteItemList()
             if (userRemoteBestResult == null || viewState.timeCounter >= userRemoteBestResult!!)
@@ -103,6 +107,21 @@ class GameViewModel(
                     )
                 )
         }
+    }
+
+    private fun onError(e:Exception){
+        if (e is FirebaseNotAuth) viewAction = GameAction.ShowToastErrorRegistration
+    }
+
+    private fun onFinally(){
+        viewAction = GameAction.OpenWinScreen(
+            SettingGame(
+                gameMode = viewState.mode,
+                list = viewState.items,
+                time = viewState.timeCounter,
+                stepCount = viewState.stepCounter
+            )
+        )
     }
 
     private var timerCounter = 0L

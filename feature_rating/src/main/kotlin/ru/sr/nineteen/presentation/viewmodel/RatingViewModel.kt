@@ -1,12 +1,12 @@
 package ru.sr.nineteen.presentation.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import ru.sr.mimeteen.remotedatabase.FirebaseNotAuth
 import ru.sr.nineteen.BaseViewModel
-import ru.sr.nineteen.data.database.entity.RatingEntity
 import ru.sr.nineteen.data.mapper.RatingUiMapper
 import ru.sr.nineteen.domain.repositoty.RatingRemoteRepository
-import ru.sr.nineteen.presentation.model.RatingUIModel
+import ru.sr.nineteen.presentation.viewmodel.model.RatingAction
+import ru.sr.nineteen.presentation.viewmodel.model.RatingEvent
+import ru.sr.nineteen.presentation.viewmodel.model.RatingState
 
 class RatingViewModel(
     private val ratingRepository: RatingRemoteRepository,
@@ -26,11 +26,21 @@ class RatingViewModel(
         scopeLaunch(
             onLoading = { viewState = viewState.copy(isMyResultLoading = true, isError = false) },
             onSuccess = { viewState = viewState.copy(isMyResultLoading = false, isError = false) },
-            onError = { _ -> viewState = viewState.copy(isMyResultLoading = false, isError = true) }
+            onError = ::onError
         ) {
-            ratingRepository.showMyRating()
+            val listRating = ratingRepository.showMyRating()
+            if (listRating != null) {
+                viewState = viewState.copy(
+                    myRating = ratingUiMapper.ratingDomainToUI(listRating.last()),
+                    myPosition = listRating.lastIndex
+                )
+            }
         }
+    }
 
+    private fun onError(e: Exception) {
+        if (e is FirebaseNotAuth) viewAction = RatingAction.OpenSignIn
+        viewState = viewState.copy(isMyResultLoading = false, isError = true)
     }
 
     private fun goToBackStack() {
@@ -41,7 +51,7 @@ class RatingViewModel(
         scopeLaunch(
             onLoading = { viewState = viewState.copy(isLoading = true, isError = false) },
             onSuccess = { viewState = viewState.copy(isLoading = false, isError = false) },
-            onError = { _ -> viewState = viewState.copy(isLoading = false, isError = true) }
+            onError = {viewState = viewState.copy(isLoading = false, isError = true) }
         ) {
             val rating = ratingRepository.getTopTenRating().map { rating ->
                 ratingUiMapper.ratingDomainToUI(rating)
@@ -50,24 +60,3 @@ class RatingViewModel(
         }
     }
 }
-
-
-sealed interface RatingAction {
-    object GoToBack : RatingAction
-
-}
-
-sealed interface RatingEvent {
-    object OnStartScreen : RatingEvent
-    object OnClickBackStack : RatingEvent
-    object OnResetAction : RatingEvent
-    object OnClickShowMyResultButton : RatingEvent
-
-}
-
-data class RatingState(
-    val isLoading: Boolean = false,
-    val isMyResultLoading: Boolean = false,
-    val isError: Boolean = false,
-    val ratingItems: List<RatingUIModel> = emptyList(),
-)

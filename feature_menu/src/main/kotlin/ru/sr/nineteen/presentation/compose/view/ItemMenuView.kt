@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import ru.sr.nineteen.theme.GameTheme
 import ru.sr.nineteen.composeview.ActionButtonView
 import ru.sr.nineteen.composeview.AvatarView
+import ru.sr.nineteen.menu.R
 
 @Composable
 fun ItemMenuView(
@@ -30,7 +31,8 @@ fun ItemMenuView(
     textButton: String,
     imageID: Int,
     avatar: Any? = null,
-    onClickAvatar: () -> Unit={},
+    isAvatar: Boolean = false,
+    onClickAvatar: () -> Unit = {},
     onClickButton: () -> Unit,
 ) {
     Box(
@@ -66,8 +68,11 @@ fun ItemMenuView(
                 ) { onClickButton() }
             }
         }
-        if (avatar != null)
-            AvatarView(image = avatar, size = 80.dp) {
+        if (isAvatar)
+            AvatarView(
+                image = avatar ?: ru.sr.nineteen.core_ui.R.drawable.kitekat_2,
+                size = 80.dp
+            ) {
                 onClickAvatar()
             }
         else
