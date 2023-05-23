@@ -11,6 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.sr.nineteen.domain.NavigationTree
@@ -37,6 +39,8 @@ class MainActivity : ComponentActivity() {
 
                 this@MainActivity.window.statusBarColor = GameTheme.colors.blue_400.toArgb()
                 this@MainActivity.window.navigationBarColor = GameTheme.colors.background.toArgb()
+                this@MainActivity.window.navigationBarDividerColor = GameTheme.colors.blue_400.toArgb()
+
                 NavHost(
                     modifier = Modifier
                         .background(GameTheme.colors.background)
