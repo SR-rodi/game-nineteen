@@ -13,7 +13,7 @@
 - Kotlin Corutines
 - Room Datadase
 - Navigation component 
-- Hilt
+- Koin
 - MVVM
 - Firebase
 
